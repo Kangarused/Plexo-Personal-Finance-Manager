@@ -20,7 +20,7 @@
 
         $scope.login = function () {
             authService.login($scope.loginData).then(function (response) {
-                $location.path("/home");
+                $location.path("/dashboard");
             },
             function (error) {
                 $scope.message = error.error_description;

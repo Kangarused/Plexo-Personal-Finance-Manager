@@ -1,0 +1,36 @@
+﻿<header>
+    <h1>Accounts</h1>
+</header>
+<div class="row">
+    <div class="col-md-5">
+        <h3>Add New Account</h3>
+        <form class="form-inline" role="form" novalidate>
+            <input type="text" class="form-control" placeholder="Account Name" required />
+            <button type="submit" class="btn btn-info">+&nbsp;&nbsp;Add Account</button>
+        </form>
+    </div>
+</div>
+<br />
+<table class="table table-striped">
+    <tr>
+        <th></th>
+        <th><h5>Account</h5></th>
+        <th><h5>Balance</h5></th>
+        <th><h5>Reconciled</h5></th>
+    </tr>
+    <tr ng-repeat="account in accounts">
+        <td>
+            <div class="btn-group-xs">
+                <button type="button" class="btn btn-info">
+                    <i class="glyphicon glyphicon-edit"></i>
+                </button>
+                <button type="button" class="btn btn-danger">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </button>
+            </div>
+        </td>
+        <td>{{account.name}}</td>
+        <td>{{account.balance | currency}}</td>
+        <td>{{account.reconciled | currency}}</td>
+    </tr>
+</table>

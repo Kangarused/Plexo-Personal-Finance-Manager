@@ -20,6 +20,16 @@
                 templateUrl: '/app/views/signup.html'
             })
 
+            .when('/dashboard', {
+                controller: 'dashboardController',
+                templateUrl: '/app/views/dashboard.html'
+            })
+
+            .when('/accounts', {
+                controller: 'accountsController',
+                templateUrl: '/app/views/accounts.html'
+            })
+
             .otherwise({ redirectTo: '/home' });
     });
 
@@ -30,4 +40,4 @@
     app.run(["authService", function (authService) {
         authService.fillAuthData();
     }]);
-}());
+}())
