@@ -34,7 +34,9 @@ namespace PersonalFinance.API
         {
             User user = new User
             {
-                UserName = model.UserName
+                UserName = model.UserName,
+                Email = model.Email,
+                Name = model.FirstName + " " + model.LastName
             };
 
             var result = await UserManager.CreateAsync(user, model.Password);

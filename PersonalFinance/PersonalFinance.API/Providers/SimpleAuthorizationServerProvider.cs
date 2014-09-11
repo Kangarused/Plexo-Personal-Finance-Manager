@@ -22,7 +22,7 @@ namespace PersonalFinance.API.Providers
             /* Allow CORS (Cross-Origin-Resource-Sharing) on the token middleware provider.
              * If not included, generating the token will fail when you try to call it from the browser.
              */
-            context.OwinContext.Request.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
 
             using (AuthRepository repo = new AuthRepository())
             {
