@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    var app = angular.module("PersonalFinance", ['ngRoute', 'LocalStorageModule', 'angular-loading-bar']);
+    var app = angular.module("PersonalFinance", ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', 'ui.bootstrap']);
 
     app.config(function ($routeProvider) {
         $routeProvider
@@ -28,6 +28,11 @@
             .when('/accounts', {
                 controller: 'accountsController',
                 templateUrl: '/app/views/accounts.html'
+            })
+
+            .when('/accounts/:accountName', {
+                controller: 'accountDetailController',
+                templateUrl: '/app/views/accountDetail.html'
             })
 
             .otherwise({ redirectTo: '/home' });

@@ -60,3 +60,16 @@ body {
     border-top-right-radius: 0;
 }
 
+.account-detail article {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 0 10px 0 10px;
+}
+
+.account-detail .account-detail-balance {
+    border-right: 1px solid #ddd;
+}
+
+.account-detail .account-detail-reconciled {
+    border-left: 1px solid #ddd;
+}

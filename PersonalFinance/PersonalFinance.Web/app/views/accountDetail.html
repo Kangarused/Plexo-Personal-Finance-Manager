@@ -1,0 +1,150 @@
+﻿<header class="clearfix">
+    <section class="pull-left">
+        <h1>
+            {{account.name}} Account
+        </h1>
+    </section>
+    <section class="pull-right account-detail">
+        <article class="account-detail-balance">
+            <h5>Balance</h5>
+            <h4>{{account.balance | currency}}</h4>
+        </article><!--
+     --><article class="account-detail-reconciled">
+            <h5>Reconciled</h5>
+            <h4>{{account.reconciled | currency}}</h4>
+        </article>
+    </section>
+</header>
+<div class="row">
+    <div class="col-md-3">
+        <section> <!-- Edit Transaction -->
+            <h4 ng-click="editIsCollapsed = !editIsCollapsed"><i class="glyphicon glyphicon-edit"></i> Edit Transaction</h4>
+            <div collapse="editIsCollapsed">
+                <form role="form" novalidate>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input ng-model="transactionData.description" type="text" class="form-control input-sm" name="description" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="amount">Amount</label>
+                        <div class="input-group">
+                            <div class="input-group-addon input-sm">$</div>
+                            <input ng-model="transactionData.amount" type="number" class="form-control input-sm" name="amount" required />
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-success btn-sm" ng-show="deposit" ng-click="deposit = !deposit">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm" ng-hide="deposit" ng-click="deposit = !deposit">
+                                    <i class="glyphicon glyphicon-minus"></i>
+                                </button>
+                            </div>
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-info btn-sm">
+                                    <i class="glyphicon glyphicon-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reconciled">Reconciled Amount</label>
+                        <div class="input-group">
+                            <div class="input-group-addon input-sm">$</div>
+                            <input ng-model="transactionData.reconciled" type="number" class="form-control input-sm" name="reconciled" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <input ng-model="transactionData.category" type="text" class="form-control input-sm" name="category" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" datepicker-popup="shortDate" ng-model="transactionData.date" is-open="opened" name="date" ng-required="true" />
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-info btn-sm" ng-click="open($event)">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success btn-sm">
+                                <i class="glyphicon glyphicon-floppy-disk"></i>
+                            </button>
+                            <button ng-click="resetEditTransactionForm()" type="button" class="btn btn-info btn-sm">
+                                <i class="glyphicon glyphicon-repeat"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section> <!-- Search Transactions -->
+            <h4 ng-click="searchIsCollapsed = !searchIsCollapsed"><i class="glyphicon glyphicon-search"></i> Search Transactions</h4>
+            <div collapse="searchIsCollapsed">
+                <form role="form" novalidate>
+                    <div class="input-group">
+                        <input type="text" class="form-control input-sm" required />
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-info btn-sm">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+    <div class="col-md-8">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Edit/Delete</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Reconciled</th>
+                    <th>Updated By</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="transaction in transactions">
+                    <td>
+                        <div class="btn-group">
+                            <button ng-click="editTransaction($index)" type="button" class="btn btn-info btn-sm">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </button>
+                            <button ng-click="deleteTransaction($index)" type="button" class="btn btn-danger btn-sm">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                    <td>
+                        {{transaction.date}}
+                    </td>
+                    <td>
+                        {{transaction.description}}
+                    </td>
+                    <td>
+                        {{transaction.category}}
+                    </td>
+                    <td>
+                        {{transaction.amount}}
+                    </td>
+                    <td>
+                        {{transaction.reconciled}}
+                    </td>
+                    <td>
+                        {{transaction.updatedBy}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

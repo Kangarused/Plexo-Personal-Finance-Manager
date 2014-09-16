@@ -19,8 +19,9 @@
             </div>
             <div class="collapse navbar-collapse" data-collapse="!navbarExpanded">
                 <ul class="nav navbar-nav navbar-right">
-                    <li ng-hide="!authentication.isAuth"><a href="#/">Welcome {{authentication.userName}}</a></li>
+                    <li ng-hide="!authentication.isAuth"><a href="">Welcome {{authentication.userName}}!</a></li>
                     <li ng-hide="!authentication.isAuth"><a href="#/dashboard">Dashboard</a></li>
+                    <li ng-hide="!authentication.isAuth"><a href="#/accounts">My Accounts</a></li>
                     <li ng-hide="!authentication.isAuth"><a href="" ng-click="logout()">Logout</a></li>
                     <li ng-hide="authentication.isAuth"> <a href="#/login">Login</a></li>
                     <li ng-hide="authentication.isAuth"> <a href="#/signup">Sign Up</a></li>
@@ -46,6 +47,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="scripts/angular.min.js"></script>
     <script src="scripts/angular-route.min.js"></script>
+    <script src="scripts/ui-bootstrap-tpls.min.js"></script>
     <script src="scripts/angular-local-storage.min.js"></script>
     <script src="scripts/loading-bar.js"></script>
 
@@ -65,5 +67,6 @@
     <script src="app/controllers/homeController.js"></script>
     <script src="app/controllers/dashboardController.js"></script>
     <script src="app/controllers/accountsController.js"></script>
+    <script src="app/controllers/accountDetailController.js"></script>
 </body>
 </html>

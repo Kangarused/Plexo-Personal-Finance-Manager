@@ -2,11 +2,17 @@
     <h1>Accounts</h1>
 </header>
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-3">
         <h3>Add New Account</h3>
-        <form class="form-inline" role="form" novalidate>
-            <input type="text" class="form-control" placeholder="Account Name" required />
-            <button type="submit" class="btn btn-info">+&nbsp;&nbsp;Add Account</button>
+        <form role="form" novalidate>
+            <div class="input-group">
+                <input type="text" class="form-control input-sm" placeholder="Account Name" ng-model="accountName" required />
+                <div class="input-group-btn">
+                    <button type="submit" class="btn btn-success btn-sm" ng-click="addAccount(accountName)">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </button>
+                </div>
+            </div>
         </form>
     </div>
 </div>
@@ -20,13 +26,13 @@
     </tr>
     <tr ng-repeat="account in accounts">
         <td>
-            <div class="btn-group-xs">
-                <button type="button" class="btn btn-info">
+            <div class="btn-group">
+                <a href="#/accounts/{{account.name}}" class="btn btn-info btn-sm">
                     <i class="glyphicon glyphicon-edit"></i>
-                </button>
-                <button type="button" class="btn btn-danger">
+                </a>
+                <a class="btn btn-danger btn-sm" ng-click="removeAccount(account.name)">
                     <i class="glyphicon glyphicon-trash"></i>
-                </button>
+                </a>
             </div>
         </td>
         <td>{{account.name}}</td>

@@ -1,4 +1,6 @@
 ﻿(function () {
+    'use strict';
+
     var app = angular.module("PersonalFinance");
 
     app.factory("accountService", [

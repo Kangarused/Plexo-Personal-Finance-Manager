@@ -24,10 +24,7 @@ namespace PersonalFinance.API
 
             ConfigureOAuth(app);
 
-            HttpConfiguration config = new HttpConfiguration();
-            WebApiConfig.Register(config); // Register the Routes
-            app.UseCors(CorsOptions.AllowAll);
-            app.UseWebApi(config);
+            ConfigureWebAPI(app);
         }
 
         void ConfigureOAuth(IAppBuilder app)
@@ -42,6 +39,14 @@ namespace PersonalFinance.API
 
             app.UseOAuthAuthorizationServer(options);
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+        }
+
+        void ConfigureWebAPI(IAppBuilder app)
+        {
+            HttpConfiguration config = new HttpConfiguration();
+            WebApiConfig.Register(config); // Register the Routes
+            app.UseCors(CorsOptions.AllowAll);
+            app.UseWebApi(config);
         }
     }
 }
