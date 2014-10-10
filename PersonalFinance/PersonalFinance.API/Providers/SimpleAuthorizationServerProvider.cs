@@ -5,6 +5,9 @@ using System.Web;
 using Microsoft.Owin.Security.OAuth;
 using System.Threading.Tasks;
 using System.Security.Claims;
+using Microsoft.Owin.Security;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace PersonalFinance.API.Providers
 {
@@ -32,14 +35,28 @@ namespace PersonalFinance.API.Providers
                     context.SetError("invalid_grant", "The username or password is incorrect.");
                     return;
                 }
+
+                //var identity = new ClaimsIdentity(context.Options.AuthenticationType);
+                //identity.AddClaim(new Claim("sub", context.UserName));
+                //identity.AddClaim(new Claim("role", "user"));
+                // Token generation happens behind the scenes here!!!
+                //context.Validated(identity);
+
+                ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(repo.UserManager, OAuthDefaults.AuthenticationType);
+                AuthenticationProperties properties = CreateProperties(oAuthIdentity);
+                AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
+                context.Validated(ticket);
             }
+        }
 
-            var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-            identity.AddClaim(new Claim("sub", context.UserName));
-            identity.AddClaim(new Claim("role", "user"));
+        private AuthenticationProperties CreateProperties(ClaimsIdentity oAuthIdentity)
+        {
+            IDictionary<string, string> data = new Dictionary<string, string>
+            {
+                { "claims", JsonConvert.SerializeObject(oAuthIdentity.Claims.Select(x => new { ClaimType = x.Type, ClaimValue = x.Value }), new KeyValuePairConverter() )}
+            };
 
-            // Token generation happens behind the scenes here!!!
-            context.Validated(identity);
+            return new AuthenticationProperties(data);
         }
     }
 }

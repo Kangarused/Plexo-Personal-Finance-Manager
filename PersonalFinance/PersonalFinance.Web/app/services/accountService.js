@@ -4,55 +4,35 @@
     var app = angular.module("PersonalFinance");
 
     app.factory("accountService", [
+        '$http',
+        '$q',
         accountService
     ]);
 
-    function accountService() {
+    function accountService($http, $q) {
         var serviceBase = "http://localhost:62733/";
 
-        var _accounts = [
-            {
-                name: "Checking",
-                balance: -10,
-                reconciled: 23
-            },
-            {
-                name: "Savings",
-                balance: 5000,
-                reconciled: 4967
-            }
-        ];
-
-        var _addAccount = function (accountName) {
-            _accounts.push({
-                name: accountName,
-                balance: 0,
-                reconciled: 0
-            });
+        var _getAccounts = function () {
+            return $http.get(serviceBase + "api/accounts");
         };
 
-        var _removeAccount = function (accountName) {
-            var index = -1;
-
-            for (var i = 0; i < _accounts.length; i++) {
-                if (_accounts[i].name == accountName) {
-                    index = i;
-                }
-            }
-
-            if (index == -1) {
-               console.log("account doesn't exist!")
-            }
-
-            _accounts.splice(index, 1);
-            console.log("account delete!");
+        var _getAccountById = function (accountId) {
+            return $http.get(serviceBase + "api/accounts/" + accountId.toString());
         };
 
+        var _createAccount = function (accountData) {
+            return $http.post(serviceBase + "api/accounts/new", accountData);
+        };
+
+        var _deleteAccount = function (accountId) {
+            return $http.delete(serviceBase + "api/accounts/" + accountId.toString());
+        };
 
         return {
-            accounts: _accounts,
-            addAccount: _addAccount,
-            removeAccount: _removeAccount
+            getAccounts: _getAccounts,
+            getAccountById: _getAccountById,
+            createAccount: _createAccount,
+            deleteAccount: _deleteAccount
         };
     }
 }())

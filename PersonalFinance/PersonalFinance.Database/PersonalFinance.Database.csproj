@@ -70,6 +70,52 @@
     <EmbeddedResource Include="Tables\UserRoles.sql" />
     <EmbeddedResource Include="Tables\Users.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Accounts.sql" />
+    <EmbeddedResource Include="Tables\BudgetItemCategories.sql" />
+    <EmbeddedResource Include="Tables\BudgetItems.sql" />
+    <EmbeddedResource Include="Tables\Budgets.sql" />
+    <EmbeddedResource Include="Tables\Categories.sql" />
+    <EmbeddedResource Include="Tables\TransactionCategories.sql" />
+    <EmbeddedResource Include="Tables\Transactions.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Invites.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="StoredProcedures\GetAccountsByHousehold.sql" />
+    <EmbeddedResource Include="StoredProcedures\InsertAccount.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Functions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="StoredProcedures\DeleteAccount.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="StoredProcedures\GetAccountById.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="StoredProcedures\GetTransactionsByAccountId.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="StoredProcedures\GetCategories.sql" />
+    <EmbeddedResource Include="StoredProcedures\InsertCategory.sql" />
+    <EmbeddedResource Include="StoredProcedures\InsertTransaction.sql" />
+    <EmbeddedResource Include="StoredProcedures\InsertTransactionCategory.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="StoredProcedures\UpdateTransaction.sql" />
+    <EmbeddedResource Include="StoredProcedures\UpdateTransactionCategory.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="StoredProcedures\DeleteTransaction.sql" />
+    <EmbeddedResource Include="StoredProcedures\DeleteTransactionCategory.sql" />
+    <EmbeddedResource Include="StoredProcedures\GetCategoryByName.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="StoredProcedures\GetBudgetItemsByHousehold.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

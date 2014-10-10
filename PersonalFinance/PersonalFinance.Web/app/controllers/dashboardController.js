@@ -9,8 +9,11 @@
     ]);
 
     function dashboardController($scope, accountService, transactionService) {
+        accountService.getAccounts().success(function (data) {
+            $scope.accounts = data;
+        });
+
         $scope.message = "";
-        $scope.accounts = accountService.accounts;
         $scope.recentTransactions = [];
     }
 }())

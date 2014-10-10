@@ -21,6 +21,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-hide="!authentication.isAuth"><a href="">Welcome {{authentication.userName}}!</a></li>
                     <li ng-hide="!authentication.isAuth"><a href="#/dashboard">Dashboard</a></li>
+                    <li ng-hide="!authentication.isAuth"><a href="#/budget">My Budget</a></li>
+                    <li ng-hide="!authentication.isAuth"><a href="#/household">My Household</a></li>
                     <li ng-hide="!authentication.isAuth"><a href="#/accounts">My Accounts</a></li>
                     <li ng-hide="!authentication.isAuth"><a href="" ng-click="logout()">Logout</a></li>
                     <li ng-hide="authentication.isAuth"> <a href="#/login">Login</a></li>
@@ -59,6 +61,7 @@
     <script src="app/services/authService.js"></script>
     <script src="app/services/accountService.js"></script>
     <script src="app/services/transactionService.js"></script>
+    <script src="app/services/categoryService.js"></script>
     
     <!-- Controllers -->
     <script src="app/controllers/indexController.js"></script>
@@ -68,5 +71,7 @@
     <script src="app/controllers/dashboardController.js"></script>
     <script src="app/controllers/accountsController.js"></script>
     <script src="app/controllers/accountDetailController.js"></script>
+    <script src="app/controllers/householdController.js"></script>
+    <script src="app/controllers/budgetController.js"></script>
 </body>
 </html>

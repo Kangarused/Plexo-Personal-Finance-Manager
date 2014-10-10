@@ -21,7 +21,7 @@
         var _register = function (registrationData) {
             _logout();
 
-            return $http.post(serviceBase + '/api/account/register', registrationData).then(function (response) {
+            return $http.post(serviceBase + 'api/useraccount/register', registrationData).then(function (response) {
                 return response;
             });
         };
@@ -37,7 +37,6 @@
                 }
             })
             .success(function (response) {
-
                 // store OAuth Bearer token in Local Storage
                 localStorageService.set('authorizationData', {
                     token: response.access_token,

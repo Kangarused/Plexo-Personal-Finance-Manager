@@ -1,83 +1,93 @@
-﻿using Microsoft.AspNet.Identity;
-using PersonalFinance.API.Models;
+﻿using PersonalFinance.API.Repositories;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
+using PersonalFinance.API.Models;
+using System.Threading.Tasks;
+using System.Security.Principal;
 
 namespace PersonalFinance.API.Controllers
 {
-    [RoutePrefix("api/Account")]
+    [Authorize]
+    [RoutePrefix("api/accounts")]
     public class AccountController : ApiController
     {
-        private AuthRepository _repo = null;
+        private AccountManager _accountManager;
 
-        public AccountController()
+        // Manager class for interacting with account data from the database
+        public AccountManager AccountManager
         {
-            _repo = new AuthRepository();
+            get
+            {
+                return _accountManager = _accountManager ?? HttpContext.Current.GetOwinContext().Get<AccountManager>();
+            }
+            private set
+            {
+                _accountManager = value;
+            }
         }
 
-        [AllowAnonymous]
-        [Route("Register")]
-        public async Task<IHttpActionResult> Register(RegisterUserViewModel model)
+        [HttpGet]
+        [Route]
+        public async Task<IList<AccountDetailViewModel>> GetAccounts()
+        {
+            // Retrieve Account data per user id from database
+            IList<AccountDetailViewModel> accounts = await AccountManager.GetAccounts();
+            if (accounts == null)
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+
+            return accounts;
+        }
+
+        [HttpGet]
+        [Route("{accountId:int}")]
+        public async Task<AccountDetailViewModel> GetAccountById(int accountId)
+        {
+            AccountDetailViewModel account = await AccountManager.GetAccountById(accountId);
+            if (account == null)
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+
+            return account;
+        }
+
+        [HttpPost]
+        [Route("new")]
+        public async Task<IList<AccountDetailViewModel>> Create(NewAccountViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                throw new HttpResponseException(HttpStatusCode.BadRequest); // HTTP STATUS CODE: 400
             }
 
-            IdentityResult result = await _repo.RegisterUser(model);
+            bool result = await AccountManager.CreateAccount(model);
+            if (!result)
+                throw new HttpResponseException(HttpStatusCode.InternalServerError);
 
-            IHttpActionResult errorResult = GetErrorResult(result);
-            if (errorResult != null)
-            {
-                return errorResult;
-            }
+            IList<AccountDetailViewModel> accounts = await AccountManager.GetAccounts();
+            if (accounts == null)
+                throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            return Ok();
+            return accounts;
         }
 
-        protected override void Dispose(bool disposing)
+        [HttpDelete]
+        [Route("{accountId:int}")]
+        public async Task<IList<AccountDetailViewModel>> Delete(int accountId)
         {
-            if (disposing)
-            {
-                _repo.Dispose();
-            }
+            bool result = await AccountManager.DeleteAccount(accountId);
+            if (!result)
+                throw new HttpResponseException(HttpStatusCode.InternalServerError);
 
-            base.Dispose(disposing);
-        }
+            IList<AccountDetailViewModel> accounts = await AccountManager.GetAccounts();
+            if (accounts == null)
+                throw new HttpResponseException(HttpStatusCode.NotFound);
 
-        private IHttpActionResult GetErrorResult(IdentityResult result)
-        {
-            if (result == null)
-            {
-                return InternalServerError();
-            }
-
-            if (!result.Succeeded)
-            {
-                if (result.Errors != null)
-                {
-                    foreach (string error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error);
-                    }
-                }
-
-                if (ModelState.IsValid)
-                {
-                    // No ModelState errors to send, so send a Bad Request
-                    return BadRequest();
-                }
-
-                // Return the errors
-                return BadRequest(ModelState);
-            }
-            
-            return null;
+            return accounts;
         }
     }
 }

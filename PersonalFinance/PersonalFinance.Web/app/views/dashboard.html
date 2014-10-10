@@ -7,7 +7,7 @@
             <h3>Accounts</h3>
             <hr />
             <article ng-repeat="account in accounts">
-                <a href="#/accounts/{{account.name}}">{{account.name}}</a>
+                <a href="#/accounts/{{account.name}}/{{account.id}}">{{account.name}}</a>
                 &nbsp;
                 <span ng-class="(account.balance > 0) ? 'alert-success' : 'alert-danger'">{{account.balance | currency}}</span>
             </article>

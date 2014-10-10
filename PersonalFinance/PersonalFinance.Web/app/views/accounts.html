@@ -6,9 +6,9 @@
         <h3>Add New Account</h3>
         <form role="form" novalidate>
             <div class="input-group">
-                <input type="text" class="form-control input-sm" placeholder="Account Name" ng-model="accountName" required />
+                <input type="text" class="form-control input-sm" placeholder="Account Name" ng-model="accountData.name" required />
                 <div class="input-group-btn">
-                    <button type="submit" class="btn btn-success btn-sm" ng-click="addAccount(accountName)">
+                    <button type="submit" class="btn btn-success btn-sm" ng-click="createAccount(accountData)">
                         <i class="glyphicon glyphicon-plus"></i>
                     </button>
                 </div>
@@ -27,10 +27,10 @@
     <tr ng-repeat="account in accounts">
         <td>
             <div class="btn-group">
-                <a href="#/accounts/{{account.name}}" class="btn btn-info btn-sm">
+                <a href="#/accounts/{{account.name}}/{{account.id}}" class="btn btn-info btn-sm">
                     <i class="glyphicon glyphicon-edit"></i>
                 </a>
-                <a class="btn btn-danger btn-sm" ng-click="removeAccount(account.name)">
+                <a class="btn btn-danger btn-sm" ng-click="deleteAccount(account.id)">
                     <i class="glyphicon glyphicon-trash"></i>
                 </a>
             </div>

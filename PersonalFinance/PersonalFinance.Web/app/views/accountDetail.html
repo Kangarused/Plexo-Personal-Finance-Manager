@@ -17,10 +17,10 @@
 </header>
 <div class="row">
     <div class="col-md-3">
-        <section> <!-- Edit Transaction -->
-            <h4 ng-click="editIsCollapsed = !editIsCollapsed"><i class="glyphicon glyphicon-edit"></i> Edit Transaction</h4>
-            <div collapse="editIsCollapsed">
-                <form role="form" novalidate>
+        <section> <!-- Create Transaction -->
+            <h4 ng-click="createIsCollapsed = !createIsCollapsed"><i class="glyphicon glyphicon-plus"></i> Create Transaction</h4>
+            <div collapse="createIsCollapsed">
+                <form role="form" ng-submit="createTransaction(transactionData)" novalidate>
                     <div class="form-group">
                         <label for="description">Description</label>
                         <input ng-model="transactionData.description" type="text" class="form-control input-sm" name="description" required />
@@ -40,7 +40,7 @@
                                 </button>
                             </div>
                             <div class="input-group-btn">
-                                <button type="button" class="btn btn-info btn-sm">
+                                <button type="button" class="btn btn-info btn-sm" ng-click="transactionData.reconciled = transactionData.amount">
                                     <i class="glyphicon glyphicon-check"></i>
                                 </button>
                             </div>
@@ -57,15 +57,15 @@
 
                     <div class="form-group">
                         <label for="category">Category</label>
-                        <input ng-model="transactionData.category" type="text" class="form-control input-sm" name="category" required />
+                        <input type="text" ng-model="transactionData.category" typeahead="category for category in getCategories($viewValue)" class="form-control input-sm" name="category" required />
                     </div>
 
                     <div class="form-group">
                         <label for="date">Date</label>
                         <div class="input-group">
-                            <input type="text" class="form-control input-sm" datepicker-popup="shortDate" ng-model="transactionData.date" is-open="opened" name="date" ng-required="true" />
+                            <input type="text" class="form-control input-sm" datepicker-popup="shortDate" ng-model="transactionData.transactionDate" is-open="calendar.createTransactionOpened" name="date" ng-required="true" />
                             <div class="input-group-btn">
-                                <button type="button" class="btn btn-info btn-sm" ng-click="open($event)">
+                                <button type="button" class="btn btn-info btn-sm" ng-click="open($event, 'createTransactionOpened')">
                                     <i class="glyphicon glyphicon-calendar"></i>
                                 </button>
                             </div>
@@ -73,7 +73,7 @@
                     </div>
                     <div class="form-group">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-success btn-sm">
+                            <button type="submit" class="btn btn-success btn-sm">
                                 <i class="glyphicon glyphicon-floppy-disk"></i>
                             </button>
                             <button ng-click="resetEditTransactionForm()" type="button" class="btn btn-info btn-sm">
@@ -87,46 +87,196 @@
         <section> <!-- Search Transactions -->
             <h4 ng-click="searchIsCollapsed = !searchIsCollapsed"><i class="glyphicon glyphicon-search"></i> Search Transactions</h4>
             <div collapse="searchIsCollapsed">
-                <form role="form" novalidate>
-                    <div class="input-group">
-                        <input type="text" class="form-control input-sm" required />
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-info btn-sm">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
+                <form role="form" ng-submit="searchForTransaction(searchTransaction)" novalidate>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" ng-model="searchTransaction.description.searchBy" />&nbsp;&nbsp;Description
+                        </label>
+                        <div collapse="!searchTransaction.description.searchBy">
+                            <input type="text" class="form-control input-sm" id="description" name="description" ng-model="searchTransaction.description.value" />
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" ng-model="searchTransaction.minAmount.searchBy" />&nbsp;&nbsp;Minimum Amount
+                        </label>
+                        <div collapse="!searchTransaction.minAmount.searchBy">
+                            <div class="input-group">
+                                <div class="input-group-addon input-sm">$</div>
+                                <input type="number" class="form-control input-sm" id="minimumAmount" name="minimumAmount" ng-model="searchTransaction.minAmount.value" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" ng-model="searchTransaction.maxAmount.searchBy" />&nbsp;&nbsp;Maximum Amount
+                        </label>
+                        <div collapse="!searchTransaction.maxAmount.searchBy">
+                            <div class="input-group">
+                                <div class="input-group-addon input-sm">$</div>
+                                <input type="number" class="form-control input-sm" id="maximumAmount" name="maximumAmount" ng-model="searchTransaction.maxAmount.value" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" ng-model="searchTransaction.isReconciled.searchBy" /> Reconciled
+                        </label>
+                        <div collapse="!searchTransaction.isReconciled.searchBy">
+                            <label>
+                                <input type="radio" ng-model="searchTransaction.isReconciled.value"  ng-value="true" /> Reconciled
+                            </label>
+                            &nbsp;&nbsp;
+                            <label>
+                                <input type="radio" ng-model="searchTransaction.isReconciled.value" ng-value="false" /> Not Reconciled
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" ng-model="searchTransaction.category.searchBy" /> Category
+                        </label>
+                        <div collapse="!searchTransaction.category.searchBy">
+                            <input type="text" class="form-control input-sm" ng-model="searchTransaction.category.value" typeahead="category for category in getCategories($viewValue)" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" ng-model="searchTransaction.minDate.searchBy" /> Minimum Date
+                        </label>
+                        <div collapse="!searchTransaction.minDate.searchBy">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" ng-model="searchTransaction.minDate.value" datepicker-popup="shortDate" is-open="calendar.minDateSearchOpened" />
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-info btn-sm" ng-click="open($event, 'minDateSearchOpened')">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" ng-model="searchTransaction.maxDate.searchBy" /> Maximum Date
+                        </label>
+                        <div collapse="!searchTransaction.maxDate.searchBy">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" ng-model="searchTransaction.maxDate.value" datepicker-popup="shortDate" is-open="calendar.maxDateSearchOpened" />
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-info btn-sm" ng-click="open($event, 'maxDateSearchOpened')">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-info btn-sm">Search</button>
+                        <button type="button" class="btn btn-success btn-sm" ng-click="clearSearch(searchTransaction)">Clear</button>
                     </div>
                 </form>
             </div>
         </section>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-9">
+        <br />
+        <div class="row">
+            <div class="col-md-2 col-md-offset-10">
+                <select id="transactionNumberSelectList" class="form-control input-sm" ng-model="pagingInfo.itemsPerPage" ng-change="pageChanged()">
+                    <option>5</option>
+                    <option>10</option>
+                    <option>20</option>
+                </select>
+            </div>
+        </div>
+
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Edit/Delete</th>
-                    <th>Date</th>
-                    <th>Description</th>
-                    <th>Category</th>
-                    <th>Amount</th>
-                    <th>Reconciled</th>
-                    <th>Updated By</th>
+                    <th>Action&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th ng-class="sortClass('TransactionDate')">
+                        <a href="" ng-click="sort('TransactionDate')">Date</a>
+                        &nbsp;
+                        <span ng-class="sortIcon('TransactionDate')"></span>
+                    </th>
+                    <th ng-class="sortClass('Description')">
+                        <a href="" ng-click="sort('Description')">Description</a>
+                        &nbsp;
+                        <span ng-class="sortIcon('Description')"></span>
+                    </th>
+                    <th ng-class="sortClass('Category')">
+                        <a href="" ng-click="sort('Category')">Category</a>
+                        &nbsp;
+                        <span ng-class="sortIcon('Category')"></span>
+                    </th>
+                    <th ng-class="sortClass('Amount')">
+                        <a href="" ng-click="sort('Amount')">Amount</a>
+                        &nbsp;
+                        <span ng-class="sortIcon('Amount')"></span>
+                    </th>
+                    <th ng-class="sortClass('Reconciled')">
+                        <a href="" ng-click="sort('Reconciled')">Reconciled</a>
+                        &nbsp;
+                        <span ng-class="sortIcon('Reconciled')"
+                    </th>
+                    <th ng-class="sortClass('UpdatedBy')">
+                        <a href="" ng-click="sort('UpdatedBy')">Updated By</a>
+                        &nbsp;
+                        <span ng-class="sortIcon('UpdatedBy')"></span>
+                    </th>
                 </tr>
             </thead>
-            <tbody>
-                <tr ng-repeat="transaction in transactions">
+            <tbody ng-repeat="transaction in transactions" ng-switch="row.edit" ng-init="row={}">
+                <tr ng-switch-when="true">
                     <td>
                         <div class="btn-group">
-                            <button ng-click="editTransaction($index)" type="button" class="btn btn-info btn-sm">
+                            <button ng-click="updateTransaction(transaction)" type="button" class="btn btn-success btn-xs">
+                                <i class="glyphicon glyphicon-floppy-disk"></i>
+                            </button>
+                            <button ng-click="row.edit=false" type="button" class="btn btn-info btn-xs">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </button>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control input-sm" ng-model="transaction.transactionDate" datepicker-popup="shortDate" is-open="opened" ng-required="true" disabled />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control input-sm" ng-model="transaction.description" ng-required="true" />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control input-sm" ng-model="transaction.category" typeahead="category for category in getCategories($viewValue)" ng-required="true" />
+                    </td>
+                    <td>
+                        <input type="number" class="form-control input-sm" ng-model="transaction.amount" ng-required="true" />
+                    </td>
+                    <td>
+                        <input type="number" class="form-control input-sm" ng-model="transaction.reconciled" ng-required="true" />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control input-sm" ng-model="transaction.updatedBy" disabled />
+                    </td>
+                </tr>
+                <tr ng-switch-default>
+                    <td>
+                        <div class="btn-group">
+                            <button ng-click="row.edit=true" type="button" class="btn btn-info btn-xs">
                                 <i class="glyphicon glyphicon-edit"></i>
                             </button>
-                            <button ng-click="deleteTransaction($index)" type="button" class="btn btn-danger btn-sm">
+                            <button ng-click="deleteTransaction(transaction)" type="button" class="btn btn-danger btn-xs">
                                 <i class="glyphicon glyphicon-trash"></i>
                             </button>
                         </div>
                     </td>
                     <td>
-                        {{transaction.date}}
+                        {{transaction.transactionDate | date:'MM/dd/yyyy'}}
                     </td>
                     <td>
                         {{transaction.description}}
@@ -135,10 +285,10 @@
                         {{transaction.category}}
                     </td>
                     <td>
-                        {{transaction.amount}}
+                        {{transaction.amount | currency }}
                     </td>
                     <td>
-                        {{transaction.reconciled}}
+                        {{transaction.reconciled | currency }}
                     </td>
                     <td>
                         {{transaction.updatedBy}}
@@ -146,5 +296,17 @@
                 </tr>
             </tbody>
         </table>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <pagination total-items="pagingInfo.totalItems"
+                            items-per-page="pagingInfo.itemsPerPage"
+                            ng-model="pagingInfo.page"
+                            ng-change="pageChanged()"
+                            rotate="false"
+                            class="pagination">
+                </pagination>
+            </div>
+        </div>
     </div>
 </div>

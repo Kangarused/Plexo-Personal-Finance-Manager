@@ -3,6 +3,7 @@ using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using PersonalFinance.API.Providers;
+using PersonalFinance.API.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -21,6 +22,7 @@ namespace PersonalFinance.API
             var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             app.CreatePerOwinContext<SqlConnection>(() => new SqlConnection(connectionString));
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+            app.CreatePerOwinContext<AccountManager>(AccountManager.Create);
 
             ConfigureOAuth(app);
 

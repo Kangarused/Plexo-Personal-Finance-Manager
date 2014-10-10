@@ -10,22 +10,29 @@
     ]);
 
     function accountsController($scope, accountService) {
-        $scope.accountName = "";
-        $scope.accounts = accountService.accounts;
+        // Fetch account data for current user household.
+        accountService.getAccounts().success(function (data) {
+            $scope.accounts = data;
+        });
 
-        $scope.removeAccount = function (accountName) {
-            accountService.removeAccount(accountName);
-            accountName = "";
-        }
+        $scope.accountData = {
+            name: ""
+        };
 
-        $scope.addAccount = function (accountName) {
-            if (accountName) {
-                accountService.addAccount(accountName);
-                $scope.accountName = "";
-            }
-            else {
-                alert("Must provide an account name!");
-            }
+
+        $scope.createAccount = function (accountData) {
+            accountService.createAccount(accountData).success(function (data) {
+                // On success, reassign accounts to updated account list returned from server.
+                $scope.accounts = data;
+                $scope.accountData.name = "";
+            });
+        };
+
+        $scope.deleteAccount = function (accountId) {
+            accountService.deleteAccount(accountId).success(function (data) {
+                // On success, reassign accounts to updated account list returned from server.
+                $scope.accounts = data;
+            });
         }
     }
 }())

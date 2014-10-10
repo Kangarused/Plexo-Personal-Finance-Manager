@@ -73,3 +73,19 @@ body {
 .account-detail .account-detail-reconciled {
     border-left: 1px solid #ddd;
 }
+
+.grey {
+    background-color: #efefef;
+}
+
+.transactionTableHeader {
+    background-color: #fefefe;
+}
+
+.transactionTableHeader:hover {
+    background-color: #efefef;
+}
+
+th a:hover {
+    text-decoration: none;
+}

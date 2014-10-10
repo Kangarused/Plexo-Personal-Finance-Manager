@@ -30,9 +30,19 @@
                 templateUrl: '/app/views/accounts.html'
             })
 
-            .when('/accounts/:accountName', {
+            .when('/accounts/:accountName/:accountId', {
                 controller: 'accountDetailController',
                 templateUrl: '/app/views/accountDetail.html'
+            })
+
+            .when('/household', {
+                controller: 'householdController',
+                templateUrl: '/app/views/household.html'
+            })
+
+            .when('/budget', {
+                controller: 'budgetController',
+                templateUrl: '/app/views/budget.html'
             })
 
             .otherwise({ redirectTo: '/home' });

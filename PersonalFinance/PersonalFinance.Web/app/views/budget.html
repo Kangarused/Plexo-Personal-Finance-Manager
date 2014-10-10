@@ -1,0 +1,127 @@
+﻿<header>
+    <h1>My Budget</h1>
+</header>
+<div class="row">
+    <div class="col-md-6">
+        <section id="income">
+            <h3>Income</h3>
+            <table class="table table-striped" ng-show="incomes.length > 0">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Annual Frequency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="income in incomes">
+                        <td>
+                            <button class="btn btn-danger btn-xs">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                        </td>
+                        <td>
+                            {{income.description}}
+                        </td>
+                        <td>
+                            {{income.category}}
+                        </td>
+                        <td>
+                            {{income.amount | currency}}
+                        </td>
+                        <td>
+                            {{income.annualFrequency}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section id="expenses">
+            <h3>Expenses</h3>
+            <table class="table table-striped" ng-show="expenses.length > 0">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Annual Frequency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="expense in expenses">
+                        <td>
+                            <button class="btn btn-danger btn-xs">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                        </td>
+                        <td>
+                            {{expense.description}}
+                        </td>
+                        <td>
+                            {{expense.category}}
+                        </td>
+                        <td>
+                            {{expense.amount | currency}}
+                        </td>
+                        <td>
+                            {{expense.annualFrequency}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+    <div class="col-md-6">
+        <section id="budget-form">
+            <h3>Add Income / Expense</h3>
+            <form class="form-horizontal" role="form">
+       
+                <div class="radio">
+                    <label class="radio-inline">
+                        <input type="radio" name="budgetItemOptions" ng-model="budgetItemData.type" value="Expense" /> Expense
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="budgetItemOptions" ng-model="budgetItemData.type" value="Income" /> Income
+                    </label>
+                </div>
+
+                <br>
+
+                <div class="form-group">
+                    <label for="category" class="col-sm-3">Category</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control input-sm" id="category" ng-model="budgetItemData.category" typeahead="category for category in getCategories($viewValue)" ng-required="true" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="col-sm-3">Description</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control input-sm" id="description"  ng-model="budgetItemData.description" ng-required="true" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="amount" class="col-sm-3">Amount</label>
+                    <div class="col-sm-9">
+                        <input type="number" class="form-control input-sm" id="amount" ng-model="budgetItemData.amount" ng-required="true" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="annualFrequency" class="col-sm-3">Annual Frequency</label>
+                    <div class="col-sm-9">
+                        <input type="number" id="annualFrequency" class="form-control input-sm" ng-model="budgetItemData.annualFrequency" ng-requird="true" />
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-success btn-sm">Save</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
