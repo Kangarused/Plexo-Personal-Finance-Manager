@@ -1,8 +1,6 @@
-#Plexo 
-##<sub>~ the personal finance manager ~</sub>
-
-================
-
+#Plexo
+=======
+###Summary
 Plexo is an ASP.NET website using Angular and Bootstrap built using the WebAPI framework with a RESTful architecture. 
 
 ###Features
