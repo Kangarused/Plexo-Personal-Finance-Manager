@@ -1,6 +1,176 @@
 ﻿<header>
-    <h1>My Budget</h1>
+    <h3>
+        My Budget
+        <small><show-when-loading></show-when-loading></small>
+    </h3>
+    <errors-display></errors-display>
 </header>
+<hr/>
+<div class="container">
+    <div class="">
+        <h4>Recent Budget Snapshot <small>- {{vm.recentBudget.budget.name}}</small></h4>
+        <div ng-show="vm.recentBudget == null">
+            No budgets
+        </div>
+        <div ng-show="vm.recentBudget != null">
+            <table st-table="vm.recentBudget.items" class="table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th st-sort="type">Action</th>
+                    <th st-sort="name">Name</th>
+                    <th>Description</th>
+                    <th st-sort="amount">Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="row in vm.recentBudget.items" ng-class="{expense: row.type == 'Expense', income: row.type == 'Income'}">
+                    <td ng-show="row.type == 'Income'"><i class="fa fa-plus-circle"></i></td>
+                    <td ng-show="row.type == 'Expense'"><i class="fa fa-minus-circle"></i></td>
+                    <td>{{row.type}}</td>
+                    <td>{{row.name}}</td>
+                    <td>{{row.description}}</td>
+                    <td>{{row.amount | currency}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="container">
+    <div class="">
+        <h4>Budgets</h4>
+        <div ng-show="vm.budgets == null">
+            No budgets
+        </div>
+        <div ng-show="vm.budgets != null">
+            <table st-table="vm.budgets" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th st-sort="type">Type</th>
+                        <th st-sort="name">Name</th>
+                        <th st-sort="allocatedAmount">Allocated Amount</th>
+                        <th st-sort="balance">Balance</th>
+                        <th>Remaining</th>
+                        <th><a data-toggle="modal" data-target="#addBudgetModal"><i class="fa fa-plus"></i></a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in vm.budgets">
+                        <td>{{row.type}}</td>
+                        <td>{{row.name}}</td>
+                        <td>{{row.allocatedAmount | currency}}</td>
+                        <td>{{row.balance | currency}}</td>
+                        <td>{{row.allocatedAmount - row.balance | currency}}</td>
+                        <td><a data-toggle="modal" data-target="#confirmDeleteModal" ng-click="vm.setWaitingDelete(row)"><i class="fa fa-trash"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<hr />
+
+<!-- Add Budget Modal -->
+<div class="modal fade" name="addBudgetModal" id="addBudgetModal" tabindex="-1" role="dialog" aria-labelledby="addBudgetModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="addBudgetModalLabel">Add Budget</h4>
+                <div class="alert alert-warning" ng-show="vm.modalError != null">
+                    <p>{{vm.modalError}}</p>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form name="addBudgetForm" role="form" validation-schema schema="AddBudget" track-changes>
+                    <div class="form-horizontal">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 mandatory-field">
+                                        Budget Type
+                                    </label>
+                                    <div class="col-md-9">
+                                        <label class="checkbox-inline" ng-repeat="(key,label) in vm.budgetTypes">
+                                            <input type="radio" name="budgetType" ng-model="vm.newBudget.type" message-id="inBudgetType" value="{{key}}"> {{enumDescriptions.get('BudgetType',key) }}
+                                        </label>
+                                        <div id="inBudgetType"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 mandatory-field">
+                                        Budget Name
+                                    </label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="name" id="txtName" ng-model="vm.newBudget.name"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 mandatory-field">
+                                                Budget Amount
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" name="allocatedAmount" id="txtAllocatedAmount" ng-model="vm.newBudget.allocatedAmount"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" ng-click="vm.addBudget(addBudgetForm)">Add Budget</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Confirm Delete Modal -->
+<div id="confirmDeleteModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Are you sure?</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this budget?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.deleteBudget()"><i class="fa fa-trash"></i> Delete</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
 <div class="row">
     <div class="col-md-6">
         <section id="income">

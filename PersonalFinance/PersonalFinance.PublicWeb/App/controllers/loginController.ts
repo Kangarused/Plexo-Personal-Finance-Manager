@@ -5,7 +5,7 @@
         loginData: Models.ILoginRequest;
          
         constructor(
-            private $scope: INtaScope,
+            private $scope: IScope,
             private $state: ng.ui.IStateService,
             private $validation,
             private authService: Services.IAuthService,

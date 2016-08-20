@@ -17,7 +17,7 @@
         propertiesToSearchBy = {};
 
         constructor(
-            private $scope: INtaScope,
+            private $scope: IScope,
             private $stateParams,
             private accountDataService: Services.IAccountDataService,
             private transactionDataService: Services.ITransactionDataService,

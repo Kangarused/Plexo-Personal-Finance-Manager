@@ -12,12 +12,24 @@ var PersonalFinance;
             AnonymousOverPrivateApi: "AnonymousOverPrivateApi",
             SystemAdministrator: "SystemAdministrator",
         };
+        Models.BudgetType = {
+            Savings: "Savings",
+            Spendings: "Spendings",
+        };
+        Models.BudgetItemType = {
+            Expense: "Expense",
+            Income: "Income",
+        };
         Models.EnumLabelDictionary = {
             "RolePublicUser": "PublicUser",
             "RoleHouseholdMember": "HouseholdMember",
             "RoleHouseholdAdmin": "HouseholdAdmin",
             "RoleAnonymousOverPrivateApi": "AnonymousOverPrivateApi",
             "RoleSystemAdministrator": "SystemAdministrator",
+            "BudgetTypeSavings": "Savings",
+            "BudgetTypeSpendings": "Spendings",
+            "BudgetItemTypeExpense": "Expense",
+            "BudgetItemTypeIncome": "Income",
             get: function (type, key) {
                 return this[type + key];
             }

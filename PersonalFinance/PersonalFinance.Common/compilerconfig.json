@@ -2,5 +2,9 @@
   {
     "outputFile": "Content/styles/personal-finance-common.css",
     "inputFile": "Content/styles/personal-finance-common.scss"
+  },
+  {
+    "outputFile": "Content/styles/theme/_variables.css",
+    "inputFile": "Content/styles/theme/_variables.scss"
   }
 ]

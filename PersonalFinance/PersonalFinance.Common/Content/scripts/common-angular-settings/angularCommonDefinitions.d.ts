@@ -37,7 +37,7 @@ declare module PersonalFinance {
         get(enumType:string, key:string):string;
     }
 
-    export interface INtaScope extends ng.IScope {
+    export interface IScope extends ng.IScope {
         vm: any;
         enumDescriptions: IEnumDescripitons;
     }

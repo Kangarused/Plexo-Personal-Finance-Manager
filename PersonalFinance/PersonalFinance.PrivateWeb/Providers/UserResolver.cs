@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Principal;
+using System.Text.RegularExpressions;
+using System.Web;
 using PersonalFinance.Common.IocAttributes;
 using PersonalFinance.Common.Model;
 using PersonalFinance.Common.Utils.Extensions;
@@ -40,6 +43,7 @@ namespace PersonalFinance.PrivateWeb.Providers
                     Id = caller.Id
                 };
             }
+
             throw new UnauthorizedAccessException("Attempting access through the private side is not allowed");
         }
     }

@@ -334,10 +334,10 @@
     <TypeScriptCompile Include="App\appValidationSchemas.ts" />
     <TypeScriptCompile Include="App\controllers\accountDetailsController.ts" />
     <TypeScriptCompile Include="App\controllers\accountsController.ts" />
+    <TypeScriptCompile Include="App\controllers\budgetsController.ts" />
     <TypeScriptCompile Include="App\controllers\dashboardController.ts" />
     <TypeScriptCompile Include="App\controllers\homeController.ts" />
     <TypeScriptCompile Include="App\controllers\loginController.ts" />
-    <TypeScriptCompile Include="App\controllers\navigationController.ts" />
     <TypeScriptCompile Include="App\controllers\signupController.ts" />
     <TypeScriptCompile Include="App\directives\navigation-display.ts" />
     <TypeScriptCompile Include="App\directives\error-utils.ts" />

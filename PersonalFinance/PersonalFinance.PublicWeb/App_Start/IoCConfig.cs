@@ -9,7 +9,7 @@ namespace PersonalFinance.PublicWeb
         public static void ConfigureIoc(ContainerBuilder builder)
         {
             builder.Register(c => new ConfigurationManagerProvider("")).As<IConfigurationManagerProvider>().SingleInstance();
-            builder.Register(c => new LoggingProvider("Skilled Migration Public")).As<ILoggingProvider>().SingleInstance();
+            builder.Register(c => new LoggingProvider("Personal Finance Public")).As<ILoggingProvider>().SingleInstance();
         }
     }
 }

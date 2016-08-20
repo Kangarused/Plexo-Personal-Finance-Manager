@@ -16,7 +16,7 @@ namespace PersonalFinance.PrivateWeb
         {
             builder.Register(c => new ConfigurationManagerProvider("PersonalFinanceConnectionString")).As<IConfigurationManagerProvider>().SingleInstance();
 
-            builder.Register(c => new LoggingProvider("Skilled Migration Private")).As<ILoggingProvider>().SingleInstance();
+            builder.Register(c => new LoggingProvider("Personal Finance Private")).As<ILoggingProvider>().SingleInstance();
 
 
             builder.Register(c => new WebApiDecodeFilter(c.Resolve<ICryptoProvider>()))

@@ -6,7 +6,7 @@
         newAccount: Models.IAccount;
          
         constructor(
-            private $scope: INtaScope,
+            private $scope: IScope,
             private accountDataService: Services.IAccountDataService
         ) {
             this.loadAccounts();

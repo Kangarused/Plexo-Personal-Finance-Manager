@@ -48,6 +48,8 @@
     <Compile Include="Migrations\20160808113620_InitialMigration.cs" />
     <Compile Include="Extensions\MigratorExtensions.cs" />
     <Compile Include="Profiles\DevelopmentProfile.cs" />
+    <Compile Include="Profiles\MockData\MockAudit.cs" />
+    <Compile Include="Profiles\MockData\MockBudget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

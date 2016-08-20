@@ -20,9 +20,9 @@ namespace PersonalFinance.PrivateWeb.Database.Repositories
     [PerRequest]
     public class AccountRepository : AbstractRepository<Account>, IAccountRepository
     {
-        public AccountRepository(IUnitOfWork unitOfWork, IDateResolver dateResolver, IAuditProvider auditProvider) : base(unitOfWork, dateResolver, auditProvider)
-        {
-        }
+        public AccountRepository(IUnitOfWork unitOfWork, 
+            IDateResolver dateResolver, 
+            IAuditProvider auditProvider) : base(unitOfWork, dateResolver, auditProvider){}
 
         public async Task<List<Account>> GetAccountsForUser(int userId)
         {

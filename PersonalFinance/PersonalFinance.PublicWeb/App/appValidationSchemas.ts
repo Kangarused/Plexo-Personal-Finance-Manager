@@ -27,9 +27,20 @@ var userAccount = {
    }
 }
 
-
+var addBudget = {
+    budgetType: {
+        'validations' : 'required'
+    },
+    name: {
+        'validations' : 'required'
+    },
+    allocatedAmount: {
+        'validations' : 'required'
+    }
+}
 
 angularApplication.config(['validationSchemaProvider', validationSchemaProvider => {
     validationSchemaProvider.set("UserAccount", userAccount);
     validationSchemaProvider.set("Login", login);
+    validationSchemaProvider.set("AddBudget", addBudget);
 }]);

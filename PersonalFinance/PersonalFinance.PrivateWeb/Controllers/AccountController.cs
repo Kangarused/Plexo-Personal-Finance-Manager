@@ -54,12 +54,21 @@ namespace PersonalFinance.PrivateWeb.Controllers
             var currentUser = _userResolver.GetUser();
             
             //todo: add validation
-            await _accountRepository.InsertAsync(newAccount);
+            if (currentUser.Id == newAccount.UserId)
+            {
+                await _accountRepository.InsertAsync(newAccount);
+
+                return new ActionResponseGeneric<string>()
+                {
+                    Succeed = true,
+                    Response = "Account created successfully"
+                };
+            }
 
             return new ActionResponseGeneric<string>()
             {
-                Succeed = true,
-                Response = "Account created successfully"
+                Succeed = false,
+                Response = "Account creation failed"
             };
         }
 

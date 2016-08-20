@@ -37,6 +37,11 @@ declare module PersonalFinance.Models {
         userName: string;
         password: string;
     }
+    /** Generated from PersonalFinance.Common.Dtos.RecentBudgetResponse **/
+    export interface IRecentBudgetResponse {
+        budget: PersonalFinance.Models.IBudget;
+        items: PersonalFinance.Models.IBudgetItem[];
+    }
     /** Generated from PersonalFinance.Common.Model.Account **/
     export interface IAccount {
     }
@@ -100,6 +105,9 @@ declare module PersonalFinance.Models {
         userId: number;
         householdId: number;
         name: string;
+        type: string;
+        allocatedAmount: number;
+        balance: number;
         createdBy: string;
         createdTime: string;
         modifiedBy: string;

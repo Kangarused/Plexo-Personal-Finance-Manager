@@ -144,9 +144,6 @@ namespace PersonalFinance.PublicWeb.Providers
                     {
                         errorMessage = body;
                     }
-                     
-                    
-
                 }
                 if (response.StatusCode == HttpStatusCode.NotFound)
                 {

@@ -13,3 +13,43 @@
 .centered {
     margin: 0 auto;
 }
+
+.expense {
+    background-color: #ffcccc;
+}
+ 
+.expense td i {
+    color: #990000 !important; 
+}
+
+.income {
+    background-color: #ccffcc;
+}
+
+.income td i {
+    color: #009900 !important;
+}
+
+.fa-plus:hover, .fa-trash:hover {
+    color: red;
+}
+
+//Position modals in vertical center of screen
+.modal {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) { 
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}

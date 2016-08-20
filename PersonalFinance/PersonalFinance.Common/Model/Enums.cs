@@ -17,4 +17,18 @@ namespace PersonalFinance.Common.Model
         AnonymousOverPrivateApi,
         SystemAdministrator
     }
+
+    [TypescriptEnum]
+    public enum BudgetType
+    {
+        Savings,
+        Spendings
+    }
+
+    [TypescriptEnum]
+    public enum BudgetItemType
+    {
+        Expense,
+        Income
+    }
 }

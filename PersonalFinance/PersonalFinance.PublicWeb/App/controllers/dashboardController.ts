@@ -7,7 +7,7 @@
         recentTransactions: Models.ITransaction[]; 
 
         constructor(
-            private $scope: INtaScope,
+            private $scope: IScope,
             private accountDataService: Services.IAccountDataService,
             private transactionDataService: Services.ITransactionDataService
         ) {

@@ -3,7 +3,7 @@ using System.Web.SessionState;
 
 namespace PersonalFinance.PrivateWeb
 {
-    public class Global : System.Web.HttpApplication
+    public class Global : HttpApplication
     {
         protected void Application_PostAuthorizeRequest()
         {

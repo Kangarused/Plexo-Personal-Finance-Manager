@@ -61,15 +61,15 @@ var angularApplication = angular.module('personalFinance',
             });
 
             $stateProvider.state('households', {
-                url: '/household',
+                url: '/households',
                 templateUrl: "App/views/households/household.html",
-                controller: "householdController"
+                controller: "householdsController"
             });
 
-            $stateProvider.state('budget', {
-                url: '/budget',
+            $stateProvider.state('budgets', {
+                url: '/budgets',
                 templateUrl: "App/views/budgets/budget.html",
-                controller: "budgetController"
+                controller: "budgetsController"
             });
         }
     ])
@@ -86,7 +86,7 @@ var angularApplication = angular.module('personalFinance',
     .service('browserStorageService', PersonalFinance.Services.BrowserStorageService)
     .service('budgetDataService', PersonalFinance.Services.BudgetDataService)
 
-    .controller('navigationController', PersonalFinance.Controllers.NavigationController)
+    .controller('budgetsController', PersonalFinance.Controllers.BudgetsController)
     .controller('accountDetailsController', PersonalFinance.Controllers.AccountDetailsController)
     .controller('accountsController', PersonalFinance.Controllers.AccountsController)
     .controller('dashboardController', PersonalFinance.Controllers.DashboardController)

@@ -224,7 +224,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\ApplicationStartup.cs" />
-    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\IoCConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -242,6 +241,8 @@
     <Compile Include="Database\OrmLiteInfrastructure\UnitOfWork.cs" />
     <Compile Include="Database\Repositories\AccountRepository.cs" />
     <Compile Include="Database\Repositories\AuthClientRepository.cs" />
+    <Compile Include="Database\Repositories\BudgetItemRepository.cs" />
+    <Compile Include="Database\Repositories\BudgetRepository.cs" />
     <Compile Include="Database\Repositories\UserRepository.cs" />
     <Compile Include="Database\Repositories\UserRoleRepository.cs" />
     <Compile Include="Global.asax.cs">

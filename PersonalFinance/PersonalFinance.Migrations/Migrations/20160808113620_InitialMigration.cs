@@ -64,6 +64,9 @@ namespace PersonalFinance.Migrations.Migrations
                 .WithColumn("UserId").AsInt32().ForeignKey("Users", "Id").Nullable()
                 .WithColumn("HouseholdId").AsInt32().ForeignKey("Households", "Id").Nullable()
                 .WithColumn("Name").AsString().NotNullable()
+                .WithColumn("Type").AsString().NotNullable()
+                .WithColumn("AllocatedAmount").AsCurrency().NotNullable()
+                .WithColumn("Balance").AsCurrency().NotNullable()
                 .WithAuditInfo();
 
             Create.Table("BudgetItems")

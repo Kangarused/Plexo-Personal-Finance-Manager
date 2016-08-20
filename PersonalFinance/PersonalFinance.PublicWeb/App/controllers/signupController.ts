@@ -6,8 +6,8 @@
         newUserAccount: Models.IUserAccount;
 
         constructor(
-            private $scope: INtaScope, 
-            private errorService: PersonalFinance.Modules.ErrorDisplay.ErrorService,
+            private $scope: IScope, 
+            private errorService: Modules.ErrorDisplay.ErrorService,
             private $state: ng.ui.IStateService,
             private $validation,
             private $timeout: ng.ITimeoutService,

@@ -1,52 +1,52 @@
-﻿//using PersonalFinance.Web.Repositories;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Net;
-//using System.Net.Http;
-//using System.Threading.Tasks;
-//using System.Web;
-//using System.Web.Http;
-//using Microsoft.AspNet.Identity.Owin;
-//using PersonalFinance.Web.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Http;
+using PersonalFinance.Common.Dtos;
+using PersonalFinance.Common.Model;
+using PersonalFinance.PublicWeb.Providers;
 
-//namespace PersonalFinance.PublicWeb.Controllers
-//{
-//    [Authorize]
-//    [RoutePrefix("api/budget")]
-//    public class BudgetController : ApiController
-//    {
-//        private AccountManager _accountManager;
+namespace PersonalFinance.PublicWeb.Controllers
+{
+    public class BudgetController : ApiController
+    {
+        private readonly IPrivateApiProvider _privateApiProvider;
 
-//        public AccountManager AccountManager
-//        {
-//            get
-//            {
-//                return _accountManager = _accountManager ?? HttpContext.Current.GetOwinContext().Get<AccountManager>();
-//            }
-//            private set
-//            {
-//                _accountManager = value;
-//            }
-//        }
+        public BudgetController(IPrivateApiProvider privateApiProvider)
+        {
+            _privateApiProvider = privateApiProvider;
+        }
 
-//        [HttpGet]
-//        [Route("budgetItems")]
-//        public async Task<IHttpActionResult> GetBudgetItems()
-//        {
+        [AcceptVerbs("GET")]
+        public Task<List<Budget>> GetBudgetsForUser()
+        {
+            return _privateApiProvider.InvokeGetAsync<List<Budget>>("Budget", "GetBudgetsForUser");
+        }
 
-//            IList<BudgetItemViewModel> budgetItems = await AccountManager.GetBudgetItems();
+        [AcceptVerbs("GET")]
+        public Task<List<BudgetItem>> GetBudgetItemsForBudget(int param)
+        {
+            return _privateApiProvider.InvokeGetAsync<List<BudgetItem>>("Budget", "GetBudgetItemsForBudget", param);
+        }
 
-//            var incomes = budgetItems.Where(x => x.Type == "Income");
-//            var expenses = budgetItems.Where(x => x.Type == "Expense");
+        [AcceptVerbs("GET")]
+        public Task<RecentBudgetResponse> GetRecentBudgetItems()
+        {
+            return _privateApiProvider.InvokeGetAsync<RecentBudgetResponse>("Budget", "GetRecentBudgetItems");
+        }
 
-//            var json = new
-//            {
-//                Incomes = incomes,
-//                Expenses = expenses
-//            };
+        [AcceptVerbs("POST")]
+        public Task<ActionResponseGeneric<string>> AddBudget(Budget request)
+        {
+            return _privateApiProvider.InvokePostAsync<ActionResponseGeneric<string>>("Budget", "AddBudget", request);
+        }
 
-//            return Ok(json);
-//        }
-//    }
-//}
+        [AcceptVerbs("POST")]
+        public Task<ActionResponseGeneric<string>> DeleteBudgetById(Budget request)
+        {
+            return _privateApiProvider.InvokePostAsync<ActionResponseGeneric<string>>("Budget", "DeleteBudgetById", request);
+        }
+    }
+}
