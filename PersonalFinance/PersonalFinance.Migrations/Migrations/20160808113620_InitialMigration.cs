@@ -156,6 +156,7 @@ namespace PersonalFinance.Migrations.Migrations
             Execute.DropTableIfExists("Budgets");
             Execute.DropTableIfExists("HouseholdMembers");
             Execute.DropTableIfExists("Households");
+            Execute.DropTableIfExists("Audit");
             Execute.DropTableIfExists("UserLogin");
             Execute.DropTableIfExists("UserRoles");
             Execute.DropTableIfExists("Users");
