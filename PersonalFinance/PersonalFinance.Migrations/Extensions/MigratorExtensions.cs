@@ -2,7 +2,7 @@
 using FluentMigrator.Builders.Create.Table;
 using FluentMigrator.Builders.Execute;
 
-namespace DOB.SkilledMigration.Migrations
+namespace PersonalFinance.Migrations.Extensions
 {
     public static class MigratorExtensions
     {
@@ -16,9 +16,11 @@ namespace DOB.SkilledMigration.Migrations
                 .WithColumn("ModifiedTime").AsDateTime().NotNullable();
         }
 
+        
+
         public static void DropViewIfExists(this IExecuteExpressionRoot execute, string viewName)
         {
-            execute.Sql(string.Format("IF EXISTS(select * FROM sys.views where name = '{0}') DROP VIEW [dbo].[{0}]", viewName));
+            execute.Sql(string.Format("IF EXISTS(select * FROM sys.views where name = '{0}') DROP VIEW [{0}]", viewName));
         }
 
         public static void DropTableIfExists(this IExecuteExpressionRoot execute, string tableName)

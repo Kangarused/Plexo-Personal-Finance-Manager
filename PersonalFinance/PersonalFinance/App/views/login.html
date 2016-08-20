@@ -1,9 +1,0 @@
-﻿<form class="form-login" role="form" novalidate>
-    <h2 class="form-login-heading">Login</h2>
-    <input type="text" class="form-control" placeholder="Username" ng-model="loginData.userName" required autofocus />
-    <input type="password" class="form-control" placeholder="Password" ng-model="loginData.password" required />
-    <button type="submit" class="btn btn-lg btn-info btn-block" ng-click="login()">Login</button>
-    <div ng-hide="message == ''" class="alert alert-danger">
-        {{ message }}
-    </div>
-</form>

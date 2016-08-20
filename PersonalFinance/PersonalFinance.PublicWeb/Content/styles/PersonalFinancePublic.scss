@@ -1,0 +1,15 @@
+﻿@import "../../../PersonalFinance.Common/Content/styles/bootstrap/bootstrap.scss";
+@import "../../../PersonalFinance.Common/Content/styles/theme/_bootswatch.scss"; 
+@import "../../../PersonalFinance.Common/Content/styles/personal-finance-common.scss";
+
+.vresize {
+    resize: vertical;
+}
+ 
+.hresize {
+    resize: horizontal;
+}
+
+.centered {
+    margin: 0 auto;
+}

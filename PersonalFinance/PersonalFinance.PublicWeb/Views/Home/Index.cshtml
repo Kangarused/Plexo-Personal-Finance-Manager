@@ -1,0 +1,80 @@
+﻿@using System.Web.Optimization
+@using PersonalFinance.Common
+@using PersonalFinance.PublicWeb
+@using Newtonsoft.Json
+@using Newtonsoft.Json.Serialization
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plexo - Personal Financing</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Robert Jackson" />
+    <meta name="description" content="Personal Financing Website" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit" async defer></script>
+    <script type="text/javascript">
+        @{ var settings = JsonConvert.SerializeObject(
+               ViewBag.ConfigSettings,
+               Formatting.None,
+               new JsonSerializerSettings {ContractResolver = new CamelCasePropertyNamesContractResolver()}
+               ); }
+
+        var personalFinanceSettings = function () { return @Html.Raw(settings); }();
+
+    </script>
+
+    @Styles.Render(CommonBundleConfig.SiteCommonStyles)
+    @Styles.Render(BundleConfig.SiteStyles)
+
+    @Scripts.Render(CommonBundleConfig.SiteCommonScripts)
+    @Scripts.Render(BundleConfig.SiteScripts)
+    @Scripts.Render(CommonBundleConfig.SiteCommonAngularSettings)
+    @Scripts.Render(BundleConfig.SitePartials)
+</head>
+<body ng-app="personalFinance">
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container" ng-controller="navigationController">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#financeNavbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" style="cursor: pointer;" ui-sref="dashboard">
+                    <span class="fa fa-usd"></span> Plexo
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="financeNavbar">
+                <p clas="navbar-text">
+                    <navigation-display></navigation-display>
+                </p>
+                
+            </div>
+            
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div ui-view>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+        </div>
+    </footer>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+</body>
+
+</html>

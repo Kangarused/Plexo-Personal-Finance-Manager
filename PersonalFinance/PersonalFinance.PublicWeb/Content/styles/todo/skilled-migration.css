@@ -1,0 +1,321 @@
+﻿/* Less colours */
+/* for fixed-bottom footer */
+html {
+  position: relative;
+  height: 100%; }
+
+/* Add space for header and nav */
+body {
+  padding-top: 162px;
+  padding-bottom: 30px;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  color: #333333; }
+
+/* Main app title */
+#site-heading {
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  white-space: nowrap;
+  color: #FFFFFF;
+  font-size: 36px; }
+  #site-heading > span {
+    vertical-align: bottom; }
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: #2F838B;
+  font-family: Arial, sans-serif; }
+
+h1, .h1 {
+  font-size: 24px;
+  font-weight: bold; }
+
+h2, .h2 {
+  font-size: 22px; }
+
+h3, .h3 {
+  font-size: 20px; }
+
+h4, .h4 {
+  font-size: 18px; }
+
+h5, .h5 {
+  font-size: 14px; }
+
+h6, .h6 {
+  font-size: 12px; }
+
+/* bootstrap defaults for comparison */
+/*h1,.h1 {
+  font-size: 36px;
+}
+h2,.h2 {
+  font-size: 30px;
+}
+h3,.h3 {
+  font-size: 24px;
+}
+h4,.h4 {
+  font-size: 18px;
+}
+h5,.h5 {
+  font-size: 14px;
+}
+h6,.h6 {
+  font-size: 12px;
+}*/
+/* Hyperlinks */
+a {
+  text-decoration: underline; }
+
+a:visited {
+  color: purple; }
+
+/* but not for navs, pils, tabs or a-buttons! */
+.nav a, .btn a {
+  text-decoration: none; }
+
+a:visited.btn, a:visited.btn {
+  color: white !important; }
+
+/* navigation bar */
+.navbar {
+  background-color: #242424;
+  color: #FFFFFF; }
+
+.navbar-nav > li > a {
+  color: #FFFFFF !important; }
+  .navbar-nav > li > a:focus {
+    /* stop grey backgrounds on clicked nav links */
+    background-color: #242424; }
+  .navbar-nav > li > a:hover {
+    background-color: black; }
+
+/* images in nav links are not always going to look the same - you should make sure
+    the size and position lines up with text. */
+.navbar-nav > li > a > img {
+  vertical-align: baseline;
+  position: relative;
+  z-index: 1;
+  top: -5px;
+  left: -3px;
+  float: left; }
+
+.navbar-nav .active > a {
+  background-color: #509BA2 !important; }
+
+.nav .open > a {
+  background-color: #509BA2 !important;
+  /*border-bottom: 1px transparent !important;*/ }
+
+/* nav tabs */
+.nav-tabs > li > a {
+  color: #337AB7; }
+
+/* Dropdown menus have to change colour when menu is collapsed, since the whole dropdown is now in the nav background */
+@media (max-width: 767px) {
+  body {
+    padding-top: 60px; }
+  .navbar-nav .open .dropdown-menu > li > a {
+    color: #FFFFFF;
+    border-bottom: 1px transparent !important; }
+  .navbar-nav .open .dropdown-menu > li > a:hover {
+    background-color: #242424;
+    border-bottom: 1px solid #FFFFFF !important; } }
+
+/* class="ntg-navbar-top" for top nav bar */
+.ntg-navbar-top, .ntg-navbar-bottom, .ntg-panel-nav {
+  font-family: Arial, sans-serif;
+  font-size: 13px; }
+
+.ntg-navbar-bottom .navbar-toggle, .ntg-navbar-bottom, footer, .ntg-navbar-top .navbar-toggle:hover,
+.ntg-header-row {
+  background-color: #167a81; }
+
+.ntg-navbar-top {
+  border-bottom: 0; }
+
+.ntg-navbar-top:after {
+  content: "";
+  min-height: 10px;
+  display: block;
+  background-color: #509BA2; }
+
+.ntg-navbar-top .navbar-toggle {
+  border-color: #FFFFFF;
+  background-color: black; }
+
+.ntg-navbar-top .navbar-toggle .icon-bar {
+  background-color: #FFFFFF; }
+
+footer {
+  color: #FFFFFF;
+  width: 100%;
+  position: relative; }
+
+.ntg-navbar-bottom {
+  margin: 0;
+  border: 0;
+  color: #FFFFFF; }
+
+.ntg-navbar-bottom .navbar-toggle .icon-bar {
+  background-color: #FFFFFF; }
+
+/* Overwrite header, footer & navbar for internal pages by adding the "internal" class to the body element */
+body.internal .navbar {
+  background-color: #167a81; }
+
+body.internal .ntg-navbar-bottom .navbar-toggle, body.internal .ntg-navbar-bottom, body.internal footer, body.internal .ntg-navbar-top .navbar-toggle:hover,
+body.internal .ntg-header-row {
+  background-color: #242424; }
+
+body.internal .navbar-nav > li > a:focus {
+  /* stop grey backgrounds on clicked nav links */
+  background-color: #167a81; }
+
+body.internal .navbar-nav > li > a:hover {
+  background-color: black; }
+
+.ntg-navbar-bottom .navbar-nav > li > a {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  min-height: 20px;
+  border-bottom: none !important; }
+
+.ntg-navbar-bottom.navbar {
+  min-height: 0; }
+
+/* Three-panel navigation.  This may need to be customised depending on the size of your content.
+    This is designed to give you freedom to use bootstrap columns of any size - just add ntg-panel-container
+    class to the bootstrap container class, and add ntg-panel-part to every column */
+.ntg-panel-container {
+  /*display: table;*/
+  height: 100%;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0; }
+
+.ntg-panel-row {
+  height: 100%;
+  width: 100%;
+  /*display: table-row;*/ }
+
+.ntg-panel-part {
+  height: 100%;
+  padding-top: 10px;
+  /*float: none;
+    display: table-cell;*/ }
+
+/* The ntg-panel-nav column gets special styling for the LHS */
+.ntg-panel-container .ntg-panel-nav {
+  padding-left: 0;
+  padding-right: 0;
+  background-color: #242424;
+  color: #FFFFFF; }
+  .ntg-panel-container .ntg-panel-nav .ntg-panel-title {
+    padding-left: 19px;
+    /* bootstrap's a padding of 15px plus 4px hover left-border */
+    padding-bottom: 15px; }
+  .ntg-panel-container .ntg-panel-nav .nav li {
+    border-bottom: 1px #333333 solid; }
+    .ntg-panel-container .ntg-panel-nav .nav li a {
+      color: #FFFFFF;
+      border-left: 4px #242424 solid; }
+      .ntg-panel-container .ntg-panel-nav .nav li a:focus {
+        /* stop grey backgrounds on clicked nav links */
+        background-color: #242424; }
+      .ntg-panel-container .ntg-panel-nav .nav li a:hover {
+        color: #FFFFFF;
+        border-left: 4px #167a81 solid;
+        background-color: black !important; }
+
+.ntg-panel-container .ntg-panel-feed {
+  background-color: #F0F0F0;
+  padding-top: 10px; }
+
+/* Page elements */
+input {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #555;
+  background-color: #FFFFFF; }
+
+.control-label {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #333333; }
+
+/* Buttons */
+.btn-primary {
+  color: white;
+  background-color: #167a81;
+  border-color: #01484F; }
+  .btn-primary:hover {
+    color: white;
+    background-color: #01484F;
+    border-color: #001a1d; }
+  .btn-primary:focus {
+    color: white;
+    background-color: #01484F;
+    border-color: black; }
+
+.btn-default {
+  color: white;
+  background-color: #242424;
+  border-color: #0b0b0b; }
+  .btn-default:hover {
+    color: white;
+    background-color: #0b0b0b;
+    border-color: black; }
+  .btn-default:focus {
+    color: white;
+    background-color: #0b0b0b;
+    border-color: black; }
+
+.btn-danger {
+  color: white;
+  background-color: #E62E00;
+  border-color: #b32400; }
+  .btn-danger:hover {
+    color: white;
+    background-color: #b32400;
+    border-color: #801a00; }
+  .btn-danger:focus {
+    color: white;
+    background-color: #b32400;
+    border-color: #4d0f00; }
+
+/* Tables */
+.table > thead > tr > th {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  color: #01484F;
+  background-color: white; }
+
+.table > tbody > tr {
+  background-color: white; }
+
+.table .glyphicon {
+  color: #01484F; }
+
+.table-hover > tbody > tr:hover > td {
+  background-color: #F5F5F5 !important; }
+
+.table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
+  background-color: white; }
+
+.table-striped > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(even) > th {
+  background-color: #FAE0DD; }
+
+/* Toast messages */
+.ntg-toast.alert-danger {
+  background-color: #167a81;
+  color: #FFFFFF; }
+
+#header-ntg-logo {
+  height: 50px !important;
+  margin: 0 20px 5px 20px; }
+

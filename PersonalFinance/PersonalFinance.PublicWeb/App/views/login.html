@@ -1,0 +1,22 @@
+﻿<div class="col-md-4 col-md-offset-4">
+    <h4>Login to Plexo</h4>
+    <errors-display></errors-display>
+    <hr/>
+    <div class="form">
+        <form name="loginForm" role="form" validation-schema schema="Login" track-changes>
+            <div class="form-group">
+                <input class="form-control" name="username" type="text" placeholder="Email / Username" ng-model="vm.loginData.userName"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" name="password" type="password" placeholder="Password" ng-model="vm.loginData.password"/>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-large btn-block btn-normal" ng-click="vm.login(loginForm)">login <show-when-loading small></show-when-loading></button>
+            </div>
+            <hr />
+            <p class="form-group">
+                Not registered? <a ui-sref="signup">Create an account</a>
+            </p>
+        </form>
+    </div>
+</div>
