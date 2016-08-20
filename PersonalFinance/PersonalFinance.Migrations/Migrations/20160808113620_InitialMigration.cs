@@ -25,9 +25,9 @@ namespace PersonalFinance.Migrations.Migrations
                 .WithColumn("Name").AsString().NotNullable()
                 .WithColumn("Email").AsString().NotNullable()
                 .WithColumn("PhoneNumber").AsString().Nullable()
-                .WithColumn("PasswordHash").AsMaxString().Nullable()
-                .WithColumn("EmailConfirmed").AsBoolean().WithDefaultValue(0).NotNullable().WithAuditInfo();
+                .WithColumn("PasswordHash").AsMaxString().Nullable().WithAuditInfo();
 
+            Create.Index("UQ_Users_UserName").OnTable("Users").OnColumn("UserName").Unique();
             Create.Index("UQ_Users_Email").OnTable("Users").OnColumn("Email").Unique();
 
             Create.Table("UserRoles")
@@ -36,14 +36,6 @@ namespace PersonalFinance.Migrations.Migrations
                 .WithColumn("Role").AsString().NotNullable();
 
             Create.UniqueConstraint("UQ_UserRoles").OnTable("UserRoles").Columns("UserId", "Role");
-
-            Create.Table("UserLogin")
-                .WithId()
-                .WithColumn("UserId").AsInt32().ForeignKey("FK_UserLogins_User", "Users", "Id").NotNullable()
-                .WithColumn("LoginProvider").AsString().NotNullable()
-                .WithColumn("ProviderKey").AsString().NotNullable();
-
-            Create.UniqueConstraint("UQ_UserLogin").OnTable("UserLogin").Columns("UserId", "LoginProvider");
 
             Create.Table("Audit")
                 .WithId()
@@ -157,7 +149,6 @@ namespace PersonalFinance.Migrations.Migrations
             Execute.DropTableIfExists("HouseholdMembers");
             Execute.DropTableIfExists("Households");
             Execute.DropTableIfExists("Audit");
-            Execute.DropTableIfExists("UserLogin");
             Execute.DropTableIfExists("UserRoles");
             Execute.DropTableIfExists("Users");
             Execute.DropTableIfExists("AuthClient");

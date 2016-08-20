@@ -17,7 +17,6 @@ namespace PersonalFinance.PublicWeb.Repositories
         Task<User> GetUserByEmail(string email);
         Task<User> GetUserByUsername(string userName);
         Task<ActionResponseGeneric<int>> AddUser(User user);
-        Task<ActionResponse> AddUserLogin(UserLogin userLogin);
         Task<ActionResponse> AddUserRole(UserRole userRole);
         Task<User> GetUserByUserLogin(UserLoginInfo userLoginInfo);
         Task<ActionResponse> ConfirmEmailForUser(int userId);
@@ -68,17 +67,10 @@ namespace PersonalFinance.PublicWeb.Repositories
             return _privateApiProvider.InvokePostAsync<ActionResponseGeneric<int>>("UserAccount", "AddUser", user);
         }
 
-        public Task<ActionResponse> AddUserLogin(UserLogin userLogin)
-        {
-            return _privateApiProvider.InvokePostAsync<ActionResponse>("UserAccount", "AddUserLogin", userLogin);
-        }
-
-
         public Task<ActionResponse> AddUserRole(UserRole userRole)
         {
             return _privateApiProvider.InvokePostAsync<ActionResponse>("UserAccount", "AddUserRole", userRole);
         }
-
         
         public async Task<User> GetUserByUserLogin(UserLoginInfo userLoginInfo)
         {

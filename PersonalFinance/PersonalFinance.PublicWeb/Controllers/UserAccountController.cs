@@ -56,7 +56,6 @@ namespace PersonalFinance.PublicWeb.Controllers
                 UserName = model.UserName,
                 Name = model.Name,
                 Email = model.Email,
-                EmailConfirmed = false,
                 PasswordHash = model.Provider.IsNullOrWhiteSpace() ? _cryptoProvider.GetHash(model.Password) : null
             };
 
@@ -71,15 +70,6 @@ namespace PersonalFinance.PublicWeb.Controllers
             };
 
             await _authRepository.AddUserRole(userRole);
-
-
-            //send email to User with Email verification
-
-            //var ownerEmail = _emailService.Render("ConfirmEmail", new { Title = "Personal Finance - Confirm Email", Name = model.Name, Link = GetEmailConfirmationLink(newUserId) });
-            //ownerEmail.Subject = "Personal Finance - Confirm Email";
-
-            //ownerEmail.To.Add(new MailAddress(model.Email, model.Name));
-            //_emailService.SendEmail(ownerEmail);
 
             return new ActionResponse
             {

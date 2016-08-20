@@ -4,17 +4,11 @@
 ****************************************************************************/
 
 declare module PersonalFinance.Models {
-    /** Generated from PersonalFinance.PublicWeb.Models.RegisterExternalSettings **/
-    export interface IRegisterExternalSettings {
-        provider: string;
-        externalAccessToken: string;
-    }
     /** Generated from PersonalFinance.PublicWeb.Models.PublicSettings **/
     export interface IPublicSettings {
         buildVersion: string;
         environment: string;
         authClientId: string;
-        recaptchaPublicKey: string;
     }
     /** Generated from PersonalFinance.PublicWeb.Models.UserAccount **/
     export interface IUserAccount {
@@ -27,12 +21,6 @@ declare module PersonalFinance.Models {
         confirmPassword: string;
         role: any;
     }
-    /** Generated from PersonalFinance.PrivateWeb.Models.PrivateSettings **/
-    export interface IPrivateSettings {
-        currentUser: PersonalFinance.Models.IUserDetails;
-        buildVersion: string;
-        environment: string;
-    }
     /** Generated from PersonalFinance.PrivateWeb.Models.UserDetails **/
     export interface IUserDetails {
         id: number;
@@ -44,51 +32,10 @@ declare module PersonalFinance.Models {
         ipAddress: string;
         isSystemAdmin: boolean;
     }
-    /** Generated from PersonalFinance.Common.Dtos.ActionErrorReport **/
-    export interface IActionErrorReport {
-        error: string;
-        description: string;
-        errorList: string[];
-    }
-    /** Generated from PersonalFinance.Common.Dtos.ApplicationAssigneeRequest **/
-    export interface IApplicationAssigneeRequest {
-        name: string;
-        userId: number;
-        applicantName: string;
-        applicantId: number;
-        agentName: string;
-        agentId: number;
-        applicationId: number;
-        status: string;
-    }
-    /** Generated from PersonalFinance.Common.Dtos.ClientsByAgentRequest **/
-    export interface IClientsByAgentRequest extends PersonalFinance.Models.IPagingFilter {
-        agentUserId: number;
-    }
     /** Generated from PersonalFinance.Common.Dtos.LoginRequest **/
     export interface ILoginRequest {
         userName: string;
         password: string;
-    }
-    /** Generated from PersonalFinance.Common.Dtos.MessagesByAgentClientRequest **/
-    export interface IMessagesByAgentClientRequest extends PersonalFinance.Models.IPagingFilter {
-        clientId: number;
-    }
-    /** Generated from PersonalFinance.Common.Dtos.MessagesByApplicationRequest **/
-    export interface IMessagesByApplicationRequest extends PersonalFinance.Models.IPagingFilter {
-        userId: number;
-        applicationId: number;
-    }
-    /** Generated from PersonalFinance.Common.Dtos.MessagesByUserRequest **/
-    export interface IMessagesByUserRequest extends PersonalFinance.Models.IPagingFilter {
-        userId: number;
-    }
-    /** Generated from PersonalFinance.Common.Dtos.SaveClientRequest **/
-    export interface ISaveClientRequest {
-        id: number;
-        agentUserId: number;
-        name: string;
-        email: string;
     }
     /** Generated from PersonalFinance.Common.Model.Account **/
     export interface IAccount {
@@ -202,13 +149,6 @@ declare module PersonalFinance.Models {
         modifiedBy: string;
         modifiedTime: string;
     }
-    /** Generated from PersonalFinance.Common.Model.UserLogin **/
-    export interface IUserLogin {
-        id: number;
-        userId: number;
-        loginProvider: string;
-        providerKey: string;
-    }
     /** Generated from PersonalFinance.Common.Model.UserRole **/
     export interface IUserRole {
         id: number;
@@ -223,7 +163,6 @@ declare module PersonalFinance.Models {
         email: string;
         phoneNumber: string;
         passwordHash: string;
-        emailConfirmed: boolean;
         createdBy: string;
         createdTime: string;
         modifiedBy: string;
@@ -253,10 +192,6 @@ declare module PersonalFinance.Models {
     /** Generated from PersonalFinance.Common.Model.User **/
     export interface IUser {
         userRoles: PersonalFinance.Models.IUserRole[];
-        userLogins: PersonalFinance.Models.IUserLogin[];
-    }
-    /** Generated from PersonalFinance.Common.Model.UserLogin **/
-    export interface IUserLogin {
     }
     /** Generated from PersonalFinance.Common.Model.UserRole **/
     export interface IUserRole {

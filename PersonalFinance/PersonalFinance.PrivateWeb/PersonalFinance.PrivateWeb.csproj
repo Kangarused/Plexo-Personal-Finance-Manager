@@ -242,7 +242,6 @@
     <Compile Include="Database\OrmLiteInfrastructure\UnitOfWork.cs" />
     <Compile Include="Database\Repositories\AccountRepository.cs" />
     <Compile Include="Database\Repositories\AuthClientRepository.cs" />
-    <Compile Include="Database\Repositories\UserLoginRepository.cs" />
     <Compile Include="Database\Repositories\UserRepository.cs" />
     <Compile Include="Database\Repositories\UserRoleRepository.cs" />
     <Compile Include="Global.asax.cs">

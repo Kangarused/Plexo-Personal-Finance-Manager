@@ -11,7 +11,6 @@ namespace PersonalFinance.Tests.PrivateWeb_Tests
     public class UserAccountControllerTests
     {
         private IUserRepository _userRepository;
-        private IUserLoginRepository _userLoginRepository;
         private IUserRoleRepository _userRoleRepository;
 
         private UserAccountController _userAccountController;
@@ -34,11 +33,10 @@ namespace PersonalFinance.Tests.PrivateWeb_Tests
         {
             //Create substituted repos
             _userRoleRepository = Substitute.For<IUserRoleRepository>();
-            _userLoginRepository = Substitute.For<IUserLoginRepository>();
             _userRepository = Substitute.For<IUserRepository>();
 
             //Create new account controller with substituted repos
-            _userAccountController = new UserAccountController(_userRepository, _userLoginRepository, _userRoleRepository);
+            _userAccountController = new UserAccountController(_userRepository, _userRoleRepository);
         }
 
         [Test]

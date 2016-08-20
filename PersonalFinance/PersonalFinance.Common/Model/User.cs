@@ -10,7 +10,5 @@ namespace PersonalFinance.Common.Model
         [Reference]
         public List<UserRole> UserRoles { get; set; }
 
-        [Reference]
-        public List<UserLogin> UserLogins { get; set; }
     }
 }

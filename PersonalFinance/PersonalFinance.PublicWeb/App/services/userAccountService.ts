@@ -2,7 +2,6 @@
 
     export interface IUserAccountService {
         register(userAccount: Models.IUserAccount): ng.IPromise<Models.IResponseObject<Models.IActionResponseGeneric<Models.ILocalAccessToken>>>;
-        getTokenExternalProvider(settings: Models.IRegisterExternalSettings): ng.IPromise<Models.IResponseObject<Models.IActionResponseGeneric<Models.ILocalAccessToken>>>;
         getLocalToken(username: string, password: string): ng.IPromise<Models.IResponseObject<Models.ILocalAccessToken>>;
     } 
 
@@ -15,12 +14,6 @@
 
         register(userAccount: Models.IUserAccount): ng.IPromise<Models.IResponseObject<Models.IActionResponseGeneric<Models.ILocalAccessToken>>> {
             return this.$http.post("/api/UserAccount/Register", userAccount);
-        }
-
-        getTokenExternalProvider(registerExternalSettings: Models.IRegisterExternalSettings):
-            ng.IPromise<Models.IResponseObject<Models.IActionResponseGeneric<Models.ILocalAccessToken>>> {
-
-            return this.$http.post("/api/UserAccount/ObtainLocalAccessToken", registerExternalSettings);
         }
 
         getLocalToken(username: string, password: string): ng.IPromise<Models.IResponseObject<Models.ILocalAccessToken>> {

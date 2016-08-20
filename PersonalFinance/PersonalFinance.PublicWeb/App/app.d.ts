@@ -5,13 +5,6 @@ declare var personalFinanceSettings: PersonalFinance.Models.IPublicSettings;
 
 declare module PersonalFinance.Models {
 
-    export interface IExternalAuthData {
-        haslocalaccount: boolean;
-        provider: string;
-        external_user_name: string;
-        external_access_token: string;
-    }
-
     export interface ICurrentUser {
         name: string;
         role: string;

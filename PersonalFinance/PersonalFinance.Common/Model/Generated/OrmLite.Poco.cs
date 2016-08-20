@@ -265,20 +265,6 @@ namespace PersonalFinance.Common.Model
         public DateTime ModifiedTime { get; set;}
     }
 
-[Alias("UserLogin")]
-    public partial class UserLogin : IHasId<int> 
-    {
-        [Alias("Id")]
-        [AutoIncrement]
-        public int Id { get; set;}
-        [Required]
-        public int UserId { get; set;}
-        [Required]
-        public string LoginProvider { get; set;}
-        [Required]
-        public string ProviderKey { get; set;}
-    }
-
 [Alias("UserRoles")]
     public partial class UserRole : IHasId<int> 
     {
@@ -305,8 +291,6 @@ namespace PersonalFinance.Common.Model
         public string Email { get; set;}
         public string PhoneNumber { get; set;}
         public string PasswordHash { get; set;}
-        [Required]
-        public bool EmailConfirmed { get; set;}
         [Required]
         public string CreatedBy { get; set;}
         [Required]

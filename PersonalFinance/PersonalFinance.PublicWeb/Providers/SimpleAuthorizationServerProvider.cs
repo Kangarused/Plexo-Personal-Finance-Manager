@@ -102,19 +102,11 @@ namespace PersonalFinance.PublicWeb.Providers
                 return;
             }
 
-            if (!user.EmailConfirmed)
-            {
-                context.SetError("invalid_grant", "Email address is not confirmed, please check your emails and confirm your email address.");
-                return;
-            }
-
-
             if (user.UserRoles == null || user.UserRoles.Count==0)
             {
                 context.SetError("invalid_grant", "The user does not have any role.");
                 return;
             }
-
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
             identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));

@@ -1,6 +1,5 @@
 ﻿module PersonalFinance.Services {
     export interface IAuthService {
-        externalAuthData: Models.IExternalAuthData,
         authExternalProvider(provider: string, controllerReference): void;
         setAuthData(authData: Models.ILocalAccessToken): void;
         getCurrentUser(): Models.ICurrentUser;
@@ -11,15 +10,14 @@
     export class AuthService implements IAuthService {
         static $inject = ['settings', 'browserStorageService'];
 
+        private userInfo: Models.ICurrentUser = null;
+
         constructor(
             public settings: Models.IPublicSettings,
             private browserStorageService: Services.IBrowserStorageService
         ) {
             this.initAuth();
         }
-
-        externalAuthData: Models.IExternalAuthData; //used to store data temporarily while we navigate to the create accoutn controller from login
-        private userInfo: Models.ICurrentUser = null;
 
         public isUserAuth() {
             return this.userInfo != null;
@@ -58,7 +56,6 @@
         }
 
         logOut() {
-            //remove cookie
             this.browserStorageService.clear();
             this.userInfo = null;
         }
