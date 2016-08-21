@@ -31,7 +31,5 @@ namespace PersonalFinance.PrivateWeb.Database.Repositories
             var results = await Db.SelectAsync(query);
             return results.SingleOrDefault();
         }
-
-
     }
 }

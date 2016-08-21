@@ -42,11 +42,6 @@ namespace PersonalFinance.Common.Providers
             return Convert.ToBoolean(value);
         }
 
-        /// <summary>
-        /// Get Connection string from web.config
-        /// </summary>
-        /// <param name="name">Optionally pass name as parameter if null then first connectionstring is obtained, if name is not specified then default is used.</param>
-        /// <returns></returns>
         public string GetConnectionString(string name = null)
         {
             return string.IsNullOrEmpty(name)

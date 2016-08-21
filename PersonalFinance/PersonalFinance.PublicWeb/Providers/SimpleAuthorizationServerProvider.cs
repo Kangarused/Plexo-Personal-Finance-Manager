@@ -15,18 +15,18 @@ namespace PersonalFinance.PublicWeb.Providers
 {
     public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
-        private Func<IAuthRepository> _autRepositoryFunc;
+        private readonly Func<IAuthRepository> _autRepositoryFunc;
         private IAuthRepository AuthRepository
         {
-            get { return _autRepositoryFunc.Invoke(); } //Per instance 
+            get { return _autRepositoryFunc.Invoke(); }
         }
         
-        private ICryptoProvider _cryptoProvider;
+        private readonly ICryptoProvider _cryptoProvider;
 
         public SimpleAuthorizationServerProvider(Func<IAuthRepository> authRepositoryFactory, Func<ICryptoProvider> cryptoFactory)
         {
-            this._autRepositoryFunc = authRepositoryFactory;
-            this._cryptoProvider = cryptoFactory.Invoke(); //Singleton
+            _autRepositoryFunc = authRepositoryFactory;
+            _cryptoProvider = cryptoFactory.Invoke();
         }
 
         public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
@@ -43,14 +43,11 @@ namespace PersonalFinance.PublicWeb.Providers
 
             if (context.ClientId == null)
             {
-                //Remove the comments from the below line context.SetError, and invalidate context 
-                //if you want to force sending clientId/secrects once obtain access tokens. 
                 context.Validated();
                 //context.SetError("invalid_clientId", "ClientId should be sent.");
                 return;
             }
 
-           
             client = await AuthRepository.GetAuthClient(context.ClientId);
             
 
@@ -66,10 +63,9 @@ namespace PersonalFinance.PublicWeb.Providers
                 return;
             }
 
-            context.OwinContext.Set<string>("as:clientAllowedOrigin", client.AllowedOrigin);
+            context.OwinContext.Set("as:clientAllowedOrigin", client.AllowedOrigin);
 
             context.Validated();
-            return;
         }
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
@@ -119,7 +115,7 @@ namespace PersonalFinance.PublicWeb.Providers
             var props = new AuthenticationProperties(new Dictionary<string, string>
                 {
                     { 
-                        "as:client_id", (context.ClientId == null) ? string.Empty : context.ClientId
+                        "as:client_id", context.ClientId ?? string.Empty
                     },
                     { 
                         "userName", context.UserName
@@ -153,7 +149,7 @@ namespace PersonalFinance.PublicWeb.Providers
             // Change auth ticket for refresh token requests
             var newIdentity = new ClaimsIdentity(context.Ticket.Identity);
             
-            var newClaim = newIdentity.Claims.Where(c => c.Type == "newClaim").FirstOrDefault();
+            var newClaim = newIdentity.Claims.FirstOrDefault(c => c.Type == "newClaim");
             if (newClaim != null)
             {
                 newIdentity.RemoveClaim(newClaim);

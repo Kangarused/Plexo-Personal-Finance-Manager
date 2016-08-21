@@ -15,12 +15,9 @@ namespace PersonalFinance.Common
     {
         public static ContainerBuilder InitIoc(Assembly webAssembly, IEnumerable<Assembly> otherAssemblies)
         {
-            
-
             var builder = new ContainerBuilder();
             var list = otherAssemblies.ToList();
             list.Add(webAssembly);
-
 
             builder.Register(c => new WebAssemblyResolver(webAssembly)).As<IWebAssemblyResolver>().SingleInstance();
 
@@ -39,8 +36,6 @@ namespace PersonalFinance.Common
                .PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies)
                .AsImplementedInterfaces().InstancePerLifetimeScope();
 
-           
-
             return builder;
         }
 
@@ -54,7 +49,6 @@ namespace PersonalFinance.Common
 
             var container = builder.Build();
 
-           
             var resolver = new AutofacWebApiDependencyResolver(container);
             config.DependencyResolver = resolver;
 

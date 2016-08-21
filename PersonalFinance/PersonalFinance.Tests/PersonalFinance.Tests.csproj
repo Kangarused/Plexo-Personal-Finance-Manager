@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PrivateWeb Tests\AccountsControllerTests.cs" />
+    <Compile Include="PrivateWeb Tests\BudgetControllerTests.cs" />
     <Compile Include="PrivateWeb Tests\UserAccountControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
