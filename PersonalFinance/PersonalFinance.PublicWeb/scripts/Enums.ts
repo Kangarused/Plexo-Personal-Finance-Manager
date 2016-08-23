@@ -8,6 +8,7 @@ module PersonalFinance.Models {
 	 export type IRole = "PublicUser" | "HouseholdMember" | "HouseholdAdmin" | "AnonymousOverPrivateApi" | "SystemAdministrator";
 	 export type IBudgetType = "Savings" | "Spendings";
 	 export type IBudgetItemType = "Expense" | "Income";
+	 export type IPaymentFrequency = "Daily" | "Weekly" | "Fortnightly" | "Monthly" | "Yearly";
 
 
 	 export const Role = {
@@ -25,6 +26,13 @@ module PersonalFinance.Models {
 		 Expense: "Expense" as IBudgetItemType,
 		 Income: "Income" as IBudgetItemType,
 	 }
+	 export const PaymentFrequency = {
+		 Daily: "Daily" as IPaymentFrequency,
+		 Weekly: "Weekly" as IPaymentFrequency,
+		 Fortnightly: "Fortnightly" as IPaymentFrequency,
+		 Monthly: "Monthly" as IPaymentFrequency,
+		 Yearly: "Yearly" as IPaymentFrequency,
+	 }
 	export const EnumLabelDictionary = {
 		"RolePublicUser":"PublicUser",
 		"RoleHouseholdMember":"HouseholdMember",
@@ -35,6 +43,11 @@ module PersonalFinance.Models {
 		"BudgetTypeSpendings":"Spendings",
 		"BudgetItemTypeExpense":"Expense",
 		"BudgetItemTypeIncome":"Income",
+		"PaymentFrequencyDaily":"Daily",
+		"PaymentFrequencyWeekly":"Weekly",
+		"PaymentFrequencyFortnightly":"Fortnightly",
+		"PaymentFrequencyMonthly":"Monthly",
+		"PaymentFrequencyYearly":"Yearly",
 		get: function(type, key) {
 			return this[type + key];
 		}

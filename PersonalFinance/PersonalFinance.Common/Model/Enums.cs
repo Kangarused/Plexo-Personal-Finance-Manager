@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using PersonalFinance.Common.Utils;
+using T4TS;
 
 namespace PersonalFinance.Common.Model
 {
@@ -30,5 +26,15 @@ namespace PersonalFinance.Common.Model
     {
         Expense,
         Income
+    }
+
+    [TypescriptEnum]
+    public enum PaymentFrequency
+    {
+        Daily,
+        Weekly,
+        Fortnightly,
+        Monthly,
+        Yearly
     }
 }

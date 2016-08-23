@@ -32,6 +32,11 @@ declare module PersonalFinance.Models {
         ipAddress: string;
         isSystemAdmin: boolean;
     }
+    /** Generated from PersonalFinance.Common.Dtos.BudgetDetailsResponse **/
+    export interface IBudgetDetailsResponse {
+        budget: PersonalFinance.Models.IBudget;
+        budgetItems: PersonalFinance.Models.IBudgetItem[];
+    }
     /** Generated from PersonalFinance.Common.Dtos.LoginRequest **/
     export interface ILoginRequest {
         userName: string;
@@ -97,7 +102,7 @@ declare module PersonalFinance.Models {
         name: string;
         description: string;
         amount: number;
-        annualFrequency: number;
+        paymentFrequency: string;
     }
     /** Generated from PersonalFinance.Common.Model.Budget **/
     export interface IBudget {

@@ -20,6 +20,18 @@ namespace PersonalFinance.PublicWeb.Controllers
         }
 
         [AcceptVerbs("GET")]
+        public Task<Budget> GetBudgetById(int param)
+        {
+            return _privateApiProvider.InvokeGetAsync<Budget>("Budget", "GetBudgetById", param);
+        }
+
+        [AcceptVerbs("GET")]
+        public Task<BudgetDetailsResponse> GetBudgetDetailsById(int param)
+        {
+            return _privateApiProvider.InvokeGetAsync<BudgetDetailsResponse>("Budget", "GetBudgetDetailsById", param);
+        }
+
+        [AcceptVerbs("GET")]
         public Task<List<Budget>> GetBudgetsForUser()
         {
             return _privateApiProvider.InvokeGetAsync<List<Budget>>("Budget", "GetBudgetsForUser");
@@ -47,6 +59,18 @@ namespace PersonalFinance.PublicWeb.Controllers
         public Task<ActionResponseGeneric<string>> DeleteBudgetById(Budget request)
         {
             return _privateApiProvider.InvokePostAsync<ActionResponseGeneric<string>>("Budget", "DeleteBudgetById", request);
+        }
+
+        [AcceptVerbs("POST")]
+        public Task<ActionResponseGeneric<string>> AddBudgetItem(BudgetItem request)
+        {
+            return _privateApiProvider.InvokePostAsync<ActionResponseGeneric<string>>("Budget", "AddBudgetItem", request);
+        }
+
+        [AcceptVerbs("POST")]
+        public Task<ActionResponseGeneric<string>> DeleteBudgetItem(BudgetItem request)
+        {
+            return _privateApiProvider.InvokePostAsync<ActionResponseGeneric<string>>("Budget", "DeleteBudgetItem", request);
         }
     }
 }

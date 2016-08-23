@@ -4,7 +4,7 @@ angular.module('show.when.loading', [])
     .directive('showWhenLoading', ['$http', function ($http) {
         return {
             restrict: 'E',
-            template: '<img src="Content/images/loading-animation.svg" height="{{height}}" alt="loading animation - data is loading" />',
+            template: '<span><i class="fa fa-cog"></i></span>',//'<img src="Content/images/loading-animation.svg" height="{{height}}" alt="loading animation - data is loading" />',
             link: function (scope, elm, attrs) {
 
                 if (attrs.small != null) {

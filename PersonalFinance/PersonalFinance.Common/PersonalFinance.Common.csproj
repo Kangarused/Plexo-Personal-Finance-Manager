@@ -167,6 +167,7 @@
     <Compile Include="App_Start\IoCConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Dtos\BudgetDetailsResponse.cs" />
     <Compile Include="Dtos\LoginRequest.cs" />
     <Compile Include="Dtos\RecentBudgetResponse.cs" />
     <Compile Include="IocAttributes\PerDependencyAttribute.cs" />
@@ -213,7 +214,6 @@
     <Compile Include="Providers\SessionProvider.cs" />
     <Compile Include="Providers\VersionProvider.cs" />
     <Compile Include="Providers\WebAssemblyResolver.cs" />
-    <Compile Include="CustomException.cs" />
     <Compile Include="Utils\EmbeddedResourcesUtils\EmbeddedResourceException.cs" />
     <Compile Include="Utils\EmbeddedResourcesUtils\EmbeddedResourceHttpHandler.cs" />
     <Compile Include="Utils\EmbeddedResourcesUtils\EmbeddedResourceRouteHandler.cs" />
@@ -325,6 +325,7 @@
     <None Include="Content\styles\bootstrap\sass\_variables.scss" />
     <None Include="Content\styles\bootstrap\sass\_wells.scss" />
     <EmbeddedResource Include="Content\scripts\angular-ui-router\angular-ui-router.js" />
+    <EmbeddedResource Include="Content\scripts\angular-breadcrumb\angular-breadcrumb.js" />
     <Content Include="Content\styles\personal-finance-common.css">
       <DependentUpon>personal-finance-common.scss</DependentUpon>
     </Content>
@@ -341,7 +342,6 @@
       <DependentUpon>angularCommonInitSettings.ts</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Content\scripts\angular-bootstrap\ui-bootstrap-tpls-1.3.3.js" />
-    <Content Include="LICENSE.txt" />
     <EmbeddedResource Include="Content\scripts\angular-bootstrap\ui-utils.js" />
     <EmbeddedResource Include="Content\scripts\angular-case\angular-case.js" />
     <EmbeddedResource Include="Content\scripts\angular-permission\angular-permission.js" />

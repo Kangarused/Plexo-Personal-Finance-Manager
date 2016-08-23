@@ -72,11 +72,11 @@ namespace PersonalFinance.Migrations.Migrations
             Create.Table("BudgetItems")
                 .WithId()
                 .WithColumn("BudgetId").AsInt32().ForeignKey("Budgets", "Id").NotNullable()
-                .WithColumn("Type").AsString().Nullable()
+                .WithColumn("Type").AsString().NotNullable()
                 .WithColumn("Name").AsString().NotNullable()
                 .WithColumn("Description").AsMaxString().Nullable()
                 .WithColumn("Amount").AsCurrency().NotNullable()
-                .WithColumn("AnnualFrequency").AsInt32().Nullable();
+                .WithColumn("PaymentFrequency").AsString().Nullable();
 
             Create.Table("Account")
                 .WithId()

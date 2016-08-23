@@ -69,9 +69,14 @@ namespace PersonalFinance.Migrations.Profiles
                     UserId = 1,
                     Name = Faker.Lorem.Sentence(),
                     AllocatedAmount = Faker.RandomNumber.Next(100, 10000),
-                    Balance = 0,
-                    Type = (trigger < 5) ? BudgetType.Savings : BudgetType.Spendings
+                    Type = (trigger < 5) ? BudgetType.Savings : BudgetType.Spendings,
+                    Balance = 0
                 });
+
+                if (_budgets[i - 1].Type == BudgetType.Spendings)
+                {
+                    _budgets[i - 1].Balance = _budgets[i - 1].AllocatedAmount;
+                }
 
                 Insert.IntoTable("Budgets").WithIdentityInsert().Row(new
                 {
@@ -92,23 +97,66 @@ namespace PersonalFinance.Migrations.Profiles
         private void LoadBudgetItems()
         {
             Random rand = new Random();
+            int balance = 0;
 
             foreach (MockBudget budget in _budgets)
             {
+                balance = budget.Balance;
                 for (int i = 0; i < 10; i++)
                 {
-                    var trigger = rand.Next(1, 10);
+                    var randType = rand.Next(1, 10);
+                    int randFreq = rand.Next(1, 6);
+
+                    MockBudgetItem item = new MockBudgetItem
+                    {
+                        BudgetId = budget.Id,
+                        Type = (randType < 5) ? BudgetItemType.Expense : BudgetItemType.Income,
+                        Name = String.Join(" ", Faker.Lorem.Words(3)),
+                        Description = Faker.Lorem.Sentence(),
+                        Amount = Faker.RandomNumber.Next(10, 50),
+                        PaymentFrequency = GetRandomFrequency(randFreq)
+                    };
 
                     Insert.IntoTable("BudgetItems").Row(new
                     {
-                        BudgetId = budget.Id,
-                        Type = (trigger < 5) ? BudgetItemType.Expense : BudgetItemType.Income,
-                        Name = String.Join(" ", Faker.Lorem.Words(3)),
-                        Description = Faker.Lorem.Sentence(),
-                        Amount = Faker.RandomNumber.Next(10, 50)
+                        item.BudgetId,
+                        item.Type,
+                        item.Name,
+                        item.Description,
+                        item.Amount,
+                        item.PaymentFrequency
                     });
+
+                    if (item.Type == BudgetItemType.Expense)
+                    {
+                        balance -= item.Amount;
+                    }
+                    else
+                    {
+                        balance += item.Amount;
+                    }
                 }
+
+                Update.Table("Budgets").Set(new {Balance = balance}).Where(new {Id = budget.Id});
             }
+        }
+
+        private PaymentFrequency GetRandomFrequency(int randFreq)
+        {
+            switch (randFreq)
+            {
+                case 1:
+                    return PaymentFrequency.Daily;
+                case 2:
+                    return PaymentFrequency.Weekly;
+                case 3:
+                    return PaymentFrequency.Fortnightly;
+                case 4:
+                    return PaymentFrequency.Monthly;
+                case 5:
+                    return PaymentFrequency.Yearly;
+            }
+            return PaymentFrequency.Yearly;
         }
 
 

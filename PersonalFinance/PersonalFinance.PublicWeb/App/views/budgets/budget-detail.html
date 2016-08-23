@@ -1,0 +1,125 @@
+﻿<header>
+    <h3>
+        Budget <small>- {{vm.budget.name}}</small>
+        <small><show-when-loading></show-when-loading></small>
+    </h3>
+    <errors-display></errors-display>
+</header>
+<hr/>
+<h4>Add Transaction</h4>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form name="addBudgetItemForm" role="form" validation-schema schema="AddBudgetItem" track-changes>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group col-sm-12">
+                        <label class="control-label col-sm-3 mandatory-field">Type</label>
+                        <div class="col-sm-9">
+                            <label class="radio-inline" ng-repeat="(key,label) in vm.budgetItemTypes">
+                                <input type="radio" name="budgetItemType" ng-model="vm.newBudgetItem.type"
+                                        message-id="inBudgetItemType" value="{{key}}"> {{enumDescriptions.get('BudgetItemType', key) }}
+                            </label>
+                            <div id="inBudgetItemType"></div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label class="control-label col-sm-3 mandatory-field">Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="name" class="form-control"
+                                    ng-model="vm.newBudgetItem.name"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label class="control-label col-sm-3 mandatory-field">Amount</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="amount" class="form-control"
+                                    ng-model="vm.newBudgetItem.amount"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label class="control-label col-sm-3">Frequency</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" ng-model="vm.newBudgetItem.paymentFrequency" ng-options="opt for opt in vm.frequencyTypes">
+                                <option selected="selected" value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label col-sm-12">Description</label>
+                            <div class="col-sm-12">
+                                <textarea class="form-control vresize" ng-model="vm.newBudgetItem.description" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button class="btn btn-block btn-default" ng-click="vm.addBudgetItem(addBudgetItemForm)">Add Transaction</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<hr/>
+<h4>Budget History</h4>
+<div ng-show="vm.budgetItems == null">
+    This budget has no history of transactions
+</div>
+<div ng-show="vm.budgetItems != null">
+    <table st-table="vm.budgetItems" class="table table-striped">
+        <thead>
+        <tr>
+            <th></th>
+            <th st-sort="type">Type</th>
+            <th st-sort="name">Name</th>
+            <th>Description</th>
+            <th st-sort="amount">Amount</th>
+            <th st-sort="paymentFrequency">Frequency</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="row in vm.budgetItems" ng-class="{expense: row.type == 'Expense', income: row.type == 'Income'}">
+            <td class="income-icon" ng-show="row.type == 'Income'"><i class="fa fa-plus-circle"></i></td>
+            <td class="expense-icon" ng-show="row.type == 'Expense'"><i class="fa fa-minus-circle"></i></td>
+            <td>{{row.type}}</td>
+            <td>{{row.name}}</td>
+            <td>{{row.description | limitTo: 50}}{{row.description.length > 50 ? '...' : ''}}</td>
+            <td>{{row.amount | currency}}</td>
+            <td>{{row.paymentFrequency}}</td>
+            <td><a data-toggle="modal" data-target="#confirmDeleteModal" ng-click="vm.setWaitingDelete(row)"><i class="fa fa-trash"></i></a></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="col-sm-4 col-sm-offset-6" ng-show="vm.budget.type == 'Spendings'">
+        Budget Remaining: {{vm.budget.balance - vm.budget.balance}}
+    </div>
+    <div class="col-sm-4 col-sm-offset-6" ng-show="vm.budget.type == 'Savings'">
+        Savings to Goal: {{vm.allocatedAmount - vm.budget.balance}}
+    </div>
+</div>
+
+<!-- Confirm Delete Modal -->
+<div id="confirmDeleteModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete Transaction</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this transaction?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.deleteBudgetItem()"><i class="fa fa-trash"></i> Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

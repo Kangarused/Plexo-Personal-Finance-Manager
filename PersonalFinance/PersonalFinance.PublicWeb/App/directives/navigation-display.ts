@@ -12,13 +12,13 @@
         template =
         '<ul class="nav navbar-nav" ng-show="isAuth">' +
             '<li>' +
-                '<a style="cursor: pointer;" ui-sref="budgets">Budgets </a>' +
+                '<a style="cursor: pointer;" ui-sref="home.budgets">Budgets </a>' +
             '</li>' +
             '<li>' +
-                '<a style="cursor: pointer;" ui-sref="accounts">Accounts </a>' +
+                '<a style="cursor: pointer;" ui-sref="home.accounts">Accounts </a>' +
             '</li>' +
             '<li>' +
-                '<a style="cursor: pointer;" ui-sref="households">Households </a>' +
+                '<a style="cursor: pointer;" ui-sref="home.households">Households </a>' +
             '</li>' +
         '</ul>' +
         '<ul class="nav navbar-nav navbar-right">' +

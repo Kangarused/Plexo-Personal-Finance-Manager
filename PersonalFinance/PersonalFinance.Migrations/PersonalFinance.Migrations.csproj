@@ -50,6 +50,7 @@
     <Compile Include="Profiles\DevelopmentProfile.cs" />
     <Compile Include="Profiles\MockData\MockAudit.cs" />
     <Compile Include="Profiles\MockData\MockBudget.cs" />
+    <Compile Include="Profiles\MockData\MockBudgetItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

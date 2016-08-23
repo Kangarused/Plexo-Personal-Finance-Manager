@@ -39,8 +39,21 @@ var addBudget = {
     }
 }
 
+var addBudgetItem = {
+    budgetItemType: {
+        'validations': 'required'
+    },
+    name: {
+        'validations': 'required'
+    },
+    amount: {
+        'validations': 'required'
+    }
+}
+
 angularApplication.config(['validationSchemaProvider', validationSchemaProvider => {
     validationSchemaProvider.set("UserAccount", userAccount);
     validationSchemaProvider.set("Login", login);
     validationSchemaProvider.set("AddBudget", addBudget);
+    validationSchemaProvider.set("AddBudgetItem", addBudgetItem);
 }]);

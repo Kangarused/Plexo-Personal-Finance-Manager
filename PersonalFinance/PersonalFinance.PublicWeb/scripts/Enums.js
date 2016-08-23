@@ -20,6 +20,13 @@ var PersonalFinance;
             Expense: "Expense",
             Income: "Income",
         };
+        Models.PaymentFrequency = {
+            Daily: "Daily",
+            Weekly: "Weekly",
+            Fortnightly: "Fortnightly",
+            Monthly: "Monthly",
+            Yearly: "Yearly",
+        };
         Models.EnumLabelDictionary = {
             "RolePublicUser": "PublicUser",
             "RoleHouseholdMember": "HouseholdMember",
@@ -30,6 +37,11 @@ var PersonalFinance;
             "BudgetTypeSpendings": "Spendings",
             "BudgetItemTypeExpense": "Expense",
             "BudgetItemTypeIncome": "Income",
+            "PaymentFrequencyDaily": "Daily",
+            "PaymentFrequencyWeekly": "Weekly",
+            "PaymentFrequencyFortnightly": "Fortnightly",
+            "PaymentFrequencyMonthly": "Monthly",
+            "PaymentFrequencyYearly": "Yearly",
             get: function (type, key) {
                 return this[type + key];
             }

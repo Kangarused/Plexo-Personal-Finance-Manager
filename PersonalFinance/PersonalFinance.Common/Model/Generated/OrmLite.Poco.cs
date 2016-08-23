@@ -141,13 +141,14 @@ namespace PersonalFinance.Common.Model
         public int Id { get; set;}
         [Required]
         public int BudgetId { get; set;}
+        [Required]
         public string Type { get; set;}
         [Required]
         public string Name { get; set;}
         public string Description { get; set;}
         [Required]
         public decimal Amount { get; set;}
-        public int? AnnualFrequency { get; set;}
+        public string PaymentFrequency { get; set;}
     }
 
 [Alias("Budgets")]

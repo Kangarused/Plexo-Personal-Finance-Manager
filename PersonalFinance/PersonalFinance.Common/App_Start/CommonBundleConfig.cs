@@ -39,6 +39,7 @@ namespace PersonalFinance.Common
                     "~/PersonalFinanceCommon/Embedded/scripts/angular/angular-cookies.js",
                     "~/PersonalFinanceCommon/Embedded/scripts/angular-validation/angular-validation.js",
                     "~/PersonalFinanceCommon/Embedded/scripts/angular-validation/angular-validation-schema.js",
+                    "~/PersonalFinanceCommon/Embedded/scripts/angular-breadcrumb/angular-breadcrumb.js",
                     
                     "~/PersonalFinanceCommon/Embedded/scripts/smart-table/smart-table.js",
                     "~/PersonalFinanceCommon/Embedded/scripts/bootstrap/bootstrap.js",

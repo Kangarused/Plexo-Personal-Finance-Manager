@@ -19,7 +19,7 @@
         constructor(
             private $scope: IScope,
             private $stateParams,
-            private accountDataService: Services.IAccountDataService,
+            private accountDataService: Services.IAccountDataService, 
             private transactionDataService: Services.ITransactionDataService,
             private categoryDataService: Services.ICategoryDataService
         ) {

@@ -1,6 +1,6 @@
 ﻿module PersonalFinance.Controllers {
     export class LoginController {
-        static $inject = ['$scope', '$state', '$validation', 'authService', 'userAccountService', 'errorService'];
+        static $inject = ['$scope', '$state', '$validation', 'authService', 'userAccountService', 'messageService'];
 
         loginData: Models.ILoginRequest;
          
@@ -10,13 +10,13 @@
             private $validation,
             private authService: Services.IAuthService,
             private userAccountService: Services.IUserAccountService, 
-            private errorService: Modules.ErrorDisplay.IErrorService
+            private messageService: Modules.MessageDisplay.IMessageService
         ) {
             $scope.vm = this;
         }
 
         login(form) {
-            this.errorService.clear();
+            this.messageService.clear();
             this.$validation.validate(form)
             .success(() => {
                 this.userAccountService.getLocalToken(this.loginData.userName, this.loginData.password).then(
@@ -24,14 +24,14 @@
                     this.authService.setAuthData(response.data);
                     this.redirectIfAuthorised();
                 }, () => {
-                    this.errorService.addError("Error performing user validation.");
+                    this.messageService.addError("Error performing user validation.");
                 });
             });
         }
 
         redirectIfAuthorised(): void {
             if (this.authService.isUserAuth()) {
-                this.$state.go("dashboard");
+                this.$state.go("home.dashboard");
             }
         }
     }

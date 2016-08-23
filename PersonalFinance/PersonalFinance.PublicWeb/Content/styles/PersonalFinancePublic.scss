@@ -1,37 +1,45 @@
 ﻿@import "../../../PersonalFinance.Common/Content/styles/bootstrap/bootstrap.scss";
 @import "../../../PersonalFinance.Common/Content/styles/theme/_bootswatch.scss"; 
 @import "../../../PersonalFinance.Common/Content/styles/personal-finance-common.scss";
-
-.vresize {
-    resize: vertical;
-}
  
-.hresize {
-    resize: horizontal;
+//Rounded Corners fix
+* {
+  border-radius: 0 !important;
+}
+
+//Breadcrumbs fix
+.breadcrumb {
+    font-size: 12px;
+    font-weight: bolder;
 }
 
 .centered {
-    margin: 0 auto;
+    margin: 0 auto; 
 }
 
 .expense {
-    background-color: #ffcccc;
-}
+    background-color: #ffcccc !important;
+} 
  
-.expense td i {
-    color: #990000 !important; 
-}
-
 .income {
-    background-color: #ccffcc;
+    background-color: #ccffcc !important;
 }
 
-.income td i {
+.income-icon {
     color: #009900 !important;
 }
 
+.expense-icon {
+    color: #990000 !important; 
+}
+
+.fa-plus, .fa-trash, .fa-plus:hover, .fa-trash:hover {
+    font-size: 18px !important;
+    cursor:pointer;
+}
+
 .fa-plus:hover, .fa-trash:hover {
-    color: red;
+    color: #ff6666 !important;
 }
 
 //Position modals in vertical center of screen
