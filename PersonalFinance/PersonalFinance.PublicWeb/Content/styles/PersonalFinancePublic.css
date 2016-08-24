@@ -8319,6 +8319,9 @@ input[type="checkbox"] {
 .fa-plus:hover, .fa-trash:hover {
   color: #ff6666 !important; }
 
+thead {
+  color: #fff !important; }
+
 .modal {
   text-align: center; }
 

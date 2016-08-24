@@ -1,29 +1,29 @@
-﻿<div class="col-md-6 col-md-offset-3">
-    <h3>
+﻿<div class="col-md-4 col-md-offset-4">
+    <h4>
         Create a Plexo Account
         <show-when-loading></show-when-loading>
-    </h3>
+    </h4>
     <errors-display></errors-display>
-    <hr/>
+    <hr />
     <div class="form">
         <form name="createAccountForm" role="form" validation-schema schema="UserAccount" track-changes>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Username" name="username" id="txtUsername" ng-model="vm.newUserAccount.username"/>
+                <input type="text" class="form-control" placeholder="Username" name="username" id="txtUsername" ng-model="vm.newUserAccount.username" />
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Name" name="name" id="txtName" ng-model="vm.newUserAccount.name"/>
+                <input type="text" class="form-control" placeholder="Name" name="name" id="txtName" ng-model="vm.newUserAccount.name" />
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Email" name="email" id="txtEmail" ng-model="vm.newUserAccount.email"/>
+                <input type="text" class="form-control" placeholder="Email" name="email" id="txtEmail" ng-model="vm.newUserAccount.email" />
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" name="password" id="txtPassword" ng-model="vm.newUserAccount.password"/>
+                <input type="password" class="form-control" placeholder="Password" name="password" id="txtPassword" ng-model="vm.newUserAccount.password" />
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" placeholder="Confirm Password" name="confirmPassword" id="txtPasswordConfirm" ng-model="vm.newUserAccount.confirmPassword"/>
+                <input type="password" class="form-control" placeholder="Confirm Password" name="confirmPassword" id="txtPasswordConfirm" ng-model="vm.newUserAccount.confirmPassword" />
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-sm btn-info btn-block" ng-click="vm.register(createAccountForm)">Register</button>
+                <button type="submit" class="btn btn-sm btn-success btn-block" ng-click="vm.register(createAccountForm)">Register</button>
             </div>
         </form>
     </div>

@@ -1,12 +1,12 @@
 ﻿@import "../../../PersonalFinance.Common/Content/styles/bootstrap/bootstrap.scss";
 @import "../../../PersonalFinance.Common/Content/styles/theme/_bootswatch.scss"; 
 @import "../../../PersonalFinance.Common/Content/styles/personal-finance-common.scss";
-@import "../../../PersonalFinance.Common/Content/styles/font-awesome/font-awesome.scss";
+@import "../../../PersonalFinance.Common/Content/styles/font-awesome/font-awesome.scss"; 
  
 //Rounded Corners fix
 * {
   border-radius: 0 !important;
-}
+} 
    
 //Breadcrumbs fix
 .breadcrumb {
@@ -41,6 +41,10 @@
 
 .fa-plus:hover, .fa-trash:hover {
     color: #ff6666 !important;
+}
+
+thead {
+    color: $navbar-default-brand-color !important;
 }
 
 //Position modals in vertical center of screen

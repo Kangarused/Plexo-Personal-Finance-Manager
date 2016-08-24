@@ -7,66 +7,77 @@
 </header>
 <hr />
 
-<h4>Add Budget</h4>
-<div class="panel panel-default">
-    <div class="panel-body">
-        <form name="addBudgetForm" role="form" validation-schema schema="AddBudget" track-changes>
-            <div class="col-sm-12">
+<div class="col-md-3">
+    <h4>Add Budget</h4>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form name="addBudgetForm" role="form" validation-schema schema="AddBudget" track-changes>
                 <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label col-md-3 mandatory-field">Type</label>
-                        <div class="col-md-9">
-                            <label class="radio-inline" ng-repeat="(key,label) in vm.budgetTypes">
-                                <input type="radio" name="budgetType" ng-model="vm.newBudget.type"
-                                       message-id="inBudgetItemType" value="{{key}}"> {{enumDescriptions.get('BudgetType', key) }}
-                            </label>
-                            <div id="inBudgetItemType"></div>
+                    <div class="form-group">
+                        <div class="btn-group btn-group-justified col-xs-12">
+                            <a class="btn btn-default" ng-class="{'btn-success': vm.newBudget.type == 'Savings'}" ng-click="vm.newBudget.type = 'Savings'">Savings</a>
+                            <a class="btn btn-default" ng-class="{'btn-danger': vm.newBudget.type == 'Spendings'}" ng-click="vm.newBudget.type = 'Spendings'">Spendings</a>
                         </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label col-md-3 mandatory-field">Name</label>
-                        <div class="col-md-9">
-                            <input type="text" name="name" class="form-control"
-                                   ng-model="vm.newBudget.name" />
+                        <div class="col-xs-12">
+                            <input ng-model="vm.newBudget.type" name="budgetType" message-id="typeMessage" ng-show="false" />
+                            <div id="typeMessage"></div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-6">
-                        <label ng-show="vm.newBudget.type != 'Savings'" class="control-label col-md-3 mandatory-field">Allocated Amount</label>
-                        <label ng-show="vm.newBudget.type == 'Savings'" class="control-label col-md-3 mandatory-field">Target Amount</label>
-                        <div class="col-md-9">
-                            <input type="text" name="allocatedAmount" class="form-control"
-                                   ng-model="vm.newBudget.amount"/>
+                    <div class="form-group col-md-12">
+                        <label class="control-label mandatory-field">Name</label>
+                        <div class="input-group">
+                            <div class="input-group-addon input-sm">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <input type="text" name="name" class="form-control input-sm" message-id="nameMessage"
+                                   ng-model="vm.newBudget.name" maxlength="40"/>
                         </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="col-md-3"></label>
-                        <div class="col-md-9">
-                            <button class="btn btn-block btn-default" ng-click="vm.addBudget(addBudgetForm)">Add Transaction</button>
-                        </div>
+                        <div id="nameMessage"></div>
                     </div>
                 </div>
-            </div>
-        </form>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label ng-show="vm.newBudget.type != 'Savings'" name="budgetType" class="control-label mandatory-field">Allocated Amount</label>
+                        <label ng-show="vm.newBudget.type == 'Savings'" name="budgetType" class="control-label mandatory-field">Target Amount</label>
+                        <div id="inBudgetItemType"></div>
+                        <div class="input-group">
+                            <div class="input-group-addon input-sm">
+                                <i class="fa fa-dollar"></i>
+                            </div>
+                            <input type="text" name="allocatedAmount" class="form-control input-sm" message-id="amountMessage"
+                                   ng-model="vm.newBudget.allocatedAmount"/>
+                        </div>
+                        <div id="amountMessage"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="input-group"></label>
+                        <button class="btn btn-block btn-default" ng-click="vm.addBudget(addBudgetForm)">Add Budget</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-<hr />
-<div class="">
+
+<div class="col-md-9">
     <h4>Budget History</h4>
     <div ng-show="vm.budgets.length <= 0">
         No budgets
     </div>
     <div ng-show="vm.budgets.length > 0">
         <table st-table="vm.budgets" class="table table-striped">
-            <thead>
+            <thead class="navbar navbar-inverse">
                 <tr>
                     <th st-sort="type">Type</th>
                     <th st-sort="name">Name</th>
                     <th st-sort="allocatedAmount">Allocated Amount</th>
                     <th st-sort="balance">Balance</th>
                     <th>Remaining</th>
-                    <th><a data-toggle="modal" data-target="#addBudgetModal"><i class="fa fa-plus"></i></a></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
