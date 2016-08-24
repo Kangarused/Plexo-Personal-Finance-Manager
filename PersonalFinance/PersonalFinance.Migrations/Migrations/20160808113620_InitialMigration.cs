@@ -83,7 +83,8 @@ namespace PersonalFinance.Migrations.Migrations
                 .WithColumn("UserId").AsInt32().ForeignKey("Users", "Id").Nullable()
                 .WithColumn("HouseholdId").AsInt32().ForeignKey("Households", "Id").Nullable()
                 .WithColumn("Name").AsString().NotNullable()
-                .WithColumn("IsReconciled").AsBoolean().WithDefaultValue(0).NotNullable()
+                .WithColumn("Balance").AsCurrency().NotNullable()
+                .WithColumn("Reconciled").AsCurrency().NotNullable()
                 .WithAuditInfo();
 
             Create.Table("Transactions")

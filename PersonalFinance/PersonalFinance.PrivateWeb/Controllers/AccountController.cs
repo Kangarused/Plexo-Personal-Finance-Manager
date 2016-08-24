@@ -52,24 +52,28 @@ namespace PersonalFinance.PrivateWeb.Controllers
         public async Task<ActionResponseGeneric<string>> CreateAccount(Account newAccount)
         {
             var currentUser = _userResolver.GetUser();
-            
-            //todo: add validation
-            if (currentUser.Id == newAccount.UserId)
-            {
-                await _accountRepository.InsertAsync(newAccount);
+            newAccount.UserId = currentUser.Id;
+            newAccount.CreatedBy = currentUser.DisplayName;
+            newAccount.CreatedTime = DateTime.Now;
+            newAccount.ModifiedBy = currentUser.DisplayName;
+            newAccount.ModifiedTime = DateTime.Now;
 
-                return new ActionResponseGeneric<string>()
-                {
-                    Succeed = true,
-                    Response = "Account created successfully"
-                };
-            }
+            //todo: add validation
+
+            await _accountRepository.InsertAsync(newAccount);
 
             return new ActionResponseGeneric<string>()
             {
-                Succeed = false,
-                Response = "Account creation failed"
+                Succeed = true,
+                Response = "Account created successfully"
             };
+      
+
+            //return new ActionResponseGeneric<string>()
+            //{
+            //    Succeed = false,
+            //    Response = "Account creation failed"
+            //};
         }
 
         [AcceptVerbs("POST")]

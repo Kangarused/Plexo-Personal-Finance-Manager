@@ -23,11 +23,11 @@
         }
 
         createAccount(account: PersonalFinance.Models.IAccount): ng.IPromise<PersonalFinance.Models.IResponseObject<PersonalFinance.Models.IActionResponseGeneric<string>>> {
-            return this.$http.post("/api/Account/CreateAccount/", account);
+            return this.$http.post("/api/Account/CreateAccount", account);
         }
 
         deleteAccount(accountId: number): ng.IPromise<PersonalFinance.Models.IResponseObject<PersonalFinance.Models.IActionResponseGeneric<string>>> {
-            return this.$http.post("/api/Account/DeleteAccount/", accountId);
+            return this.$http.post("/api/Account/DeleteAccount", accountId);
         }
     }
 }

@@ -1,17 +1,17 @@
 ﻿<header class="clearfix">
     <section class="pull-left">
         <h1>
-            {{account.name}} Account
+            {{vm.account.name}} Account
         </h1>
     </section>
     <section class="pull-right account-detail">
         <article class="account-detail-balance">
             <h5>Balance</h5>
-            <h4>{{account.balance | currency}}</h4>
+            <h4>{{vm.account.balance | currency}}</h4>
         </article><!--
      --><article class="account-detail-reconciled">
             <h5>Reconciled</h5>
-            <h4>{{account.reconciled | currency}}</h4>
+            <h4>{{vm.account.reconciled | currency}}</h4>
         </article>
     </section>
 </header>
@@ -23,14 +23,14 @@
                 <form role="form" ng-submit="createTransaction(transactionData)" novalidate>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <input ng-model="transactionData.description" type="text" class="form-control input-sm" name="description" required />
+                        <input ng-model="vm.newTransaction.description" type="text" class="form-control input-sm" name="description" required />
                     </div>
 
                     <div class="form-group">
                         <label for="amount">Amount</label>
                         <div class="input-group">
                             <div class="input-group-addon input-sm">$</div>
-                            <input ng-model="transactionData.amount" type="number" class="form-control input-sm" name="amount" required />
+                            <input ng-model="vm.newTransaction.amount" type="number" class="form-control input-sm" name="amount" required />
                             <div class="input-group-btn">
                                 <button type="button" class="btn btn-success btn-sm" ng-show="deposit" ng-click="deposit = !deposit">
                                     <i class="glyphicon glyphicon-plus"></i>
@@ -40,7 +40,7 @@
                                 </button>
                             </div>
                             <div class="input-group-btn">
-                                <button type="button" class="btn btn-info btn-sm" ng-click="transactionData.reconciled = transactionData.amount">
+                                <button type="button" class="btn btn-info btn-sm" ng-click="vm.newTransaction.reconciled = vm.newTransaction.amount">
                                     <i class="glyphicon glyphicon-check"></i>
                                 </button>
                             </div>
@@ -51,19 +51,19 @@
                         <label for="reconciled">Reconciled Amount</label>
                         <div class="input-group">
                             <div class="input-group-addon input-sm">$</div>
-                            <input ng-model="transactionData.reconciled" type="number" class="form-control input-sm" name="reconciled" required />
+                            <input ng-model="vm.newTransaction.reconciled" type="number" class="form-control input-sm" name="reconciled" required />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="category">Category</label>
-                        <input type="text" ng-model="transactionData.category" typeahead="category for category in getCategories($viewValue)" class="form-control input-sm" name="category" required />
+                        <input type="text" ng-model="vm.newTransaction.category" typeahead="category for category in getCategories($viewValue)" class="form-control input-sm" name="category" required />
                     </div>
 
                     <div class="form-group">
                         <label for="date">Date</label>
                         <div class="input-group">
-                            <input type="text" class="form-control input-sm" datepicker-popup="shortDate" ng-model="transactionData.transactionDate" is-open="calendar.createTransactionOpened" name="date" ng-required="true" />
+                            <input type="text" class="form-control input-sm" datepicker-popup="shortDate" ng-model="vm.newTransaction.transactionDate" is-open="calendar.createTransactionOpened" name="date" ng-required="true" />
                             <div class="input-group-btn">
                                 <button type="button" class="btn btn-info btn-sm" ng-click="open($event, 'createTransactionOpened')">
                                     <i class="glyphicon glyphicon-calendar"></i>
@@ -224,7 +224,7 @@
                     <th ng-class="sortClass('Reconciled')">
                         <a href="" ng-click="sort('Reconciled')">Reconciled</a>
                         &nbsp;
-                        <span ng-class="sortIcon('Reconciled')"
+                        <span ng-class="sortIcon('Reconciled')"></span>
                     </th>
                     <th ng-class="sortClass('UpdatedBy')">
                         <a href="" ng-click="sort('UpdatedBy')">Updated By</a>
@@ -233,7 +233,7 @@
                     </th>
                 </tr>
             </thead>
-            <tbody ng-repeat="transaction in transactions" ng-switch="row.edit" ng-init="row={}">
+            <tbody ng-repeat="transaction in vm.transactions" ng-switch="row.edit" ng-init="row={}">
                 <tr ng-switch-when="true">
                     <td>
                         <div class="btn-group">

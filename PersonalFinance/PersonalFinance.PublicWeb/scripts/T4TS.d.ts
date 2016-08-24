@@ -71,7 +71,8 @@ declare module PersonalFinance.Models {
         userId: number;
         householdId: number;
         name: string;
-        isReconciled: boolean;
+        balance: number;
+        reconciled: number;
         createdBy: string;
         createdTime: string;
         modifiedBy: string;

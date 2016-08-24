@@ -57,22 +57,34 @@ var angularApplication = angular.module('personalFinance',
                 }
             });
 
+            $urlRouterProvider.when('/home/accounts', '/home/accounts/list');
             $stateProvider.state('home.accounts', {
                 url: '/accounts',
                 templateUrl: "App/views/accounts/accounts.html",
                 controller: "accountsController",
                 ncyBreadcrumb: {
                     label: 'Accounts',
-                    parent: 'home.dashboard'
+                    parent: 'home.dashboard',
+                    skip: true 
                 }
             });
 
-            $stateProvider.state('home.accounts.detail', {
-                url: '/details/:accountId',
+            $stateProvider.state('home.accounts.list', {
+                url: '/list',
+                templateUrl: "App/views/accounts/accounts-list.html",
+                controller: "accountsListController",
+                ncyBreadcrumb: {
+                    label: 'Accounts'
+                }
+            });
+
+            $stateProvider.state('home.accounts.details', {
+                url: '/details/{accountId:int}',
                 templateUrl: "App/views/accounts/account-detail.html",
                 controller: "accountDetailsController",
                 ncyBreadcrumb: {
-                    label: 'Account Details'
+                    label: 'Account Details',
+                    parent: 'home.accounts.list'
                 }
             });
 
@@ -137,6 +149,7 @@ var angularApplication = angular.module('personalFinance',
     .controller('budgetDetailsController', PersonalFinance.Controllers.BudgetDetailsController)
 
     .controller('accountDetailsController', PersonalFinance.Controllers.AccountDetailsController)
+    .controller('accountsListController', PersonalFinance.Controllers.AccountsListController)
     .controller('accountsController', PersonalFinance.Controllers.AccountsController)
 
     .controller('dashboardController', PersonalFinance.Controllers.DashboardController)

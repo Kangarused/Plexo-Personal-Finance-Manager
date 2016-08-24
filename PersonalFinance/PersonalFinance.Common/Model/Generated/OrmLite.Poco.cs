@@ -39,7 +39,9 @@ namespace PersonalFinance.Common.Model
         [Required]
         public string Name { get; set;}
         [Required]
-        public bool IsReconciled { get; set;}
+        public decimal Balance { get; set;}
+        [Required]
+        public decimal Reconciled { get; set;}
         [Required]
         public string CreatedBy { get; set;}
         [Required]
