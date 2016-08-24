@@ -209,6 +209,7 @@
     </Content>
     <Content Include="App\templates\smart-tables\pagination.custom.html" />
     <Content Include="App\views\accounts\account-detail.html" />
+    <Content Include="App\views\accounts\accounts-list.html" />
     <Content Include="App\views\accounts\accounts.html" />
     <Content Include="App\views\budgets\budget-detail.html" />
     <Content Include="App\views\budgets\budget-list.html" />
@@ -218,7 +219,7 @@
     <Content Include="App\views\households\household.html" />
     <Content Include="App\views\login.html" />
     <Content Include="App\views\signup.html" />
-    <Content Include="Content\images\loading-animation.gif" />
+    <EmbeddedResource Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\styles\PersonalFinancePublic.css">
       <DependentUpon>PersonalFinancePublic.scss</DependentUpon>
     </Content>
@@ -233,6 +234,11 @@
     <Content Include="Scripts\Enums.js">
       <DependentUpon>Enums.ts</DependentUpon>
     </Content>
+    <EmbeddedResource Include="Content\fonts\fontawesome-webfont.eot" />
+    <EmbeddedResource Include="Content\fonts\fontawesome-webfont.ttf" />
+    <EmbeddedResource Include="Content\fonts\fontawesome-webfont.woff" />
+    <EmbeddedResource Include="Content\fonts\fontawesome-webfont.woff2" />
+    <EmbeddedResource Include="Content\fonts\FontAwesome.otf" />
     <None Include="Scripts\Enums.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Enums.ts</LastGenOutput>
@@ -322,6 +328,7 @@
     <TypeScriptCompile Include="App\appValidationSchemas.ts" />
     <TypeScriptCompile Include="App\controllers\accounts\accountDetailsController.ts" />
     <TypeScriptCompile Include="App\controllers\accounts\accountsController.ts" />
+    <TypeScriptCompile Include="App\controllers\accounts\accountsListController.ts" />
     <TypeScriptCompile Include="App\controllers\budgets\budgetDetailsController.ts" />
     <TypeScriptCompile Include="App\controllers\budgets\budgetListController.ts" />
     <TypeScriptCompile Include="App\controllers\budgets\budgetsController.ts" />

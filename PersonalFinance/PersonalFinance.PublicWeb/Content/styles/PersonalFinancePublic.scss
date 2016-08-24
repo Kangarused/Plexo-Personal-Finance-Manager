@@ -1,16 +1,17 @@
 ﻿@import "../../../PersonalFinance.Common/Content/styles/bootstrap/bootstrap.scss";
 @import "../../../PersonalFinance.Common/Content/styles/theme/_bootswatch.scss"; 
 @import "../../../PersonalFinance.Common/Content/styles/personal-finance-common.scss";
+@import "../../../PersonalFinance.Common/Content/styles/font-awesome/font-awesome.scss";
  
 //Rounded Corners fix
 * {
   border-radius: 0 !important;
 }
-
+   
 //Breadcrumbs fix
 .breadcrumb {
-    font-size: 12px;
-    font-weight: bolder;
+    font-size: 12px;  
+    font-weight: bolder; 
 }
 
 .centered {

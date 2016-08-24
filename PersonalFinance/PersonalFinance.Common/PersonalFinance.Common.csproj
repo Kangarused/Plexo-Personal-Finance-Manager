@@ -333,6 +333,20 @@
       <DependentUpon>personal-finance-common.css</DependentUpon>
     </Content>
     <Content Include="Content\styles\theme\_bootswatch.scss" />
+    <None Include="Content\styles\font-awesome\font-awesome.scss" />
+    <None Include="Content\styles\font-awesome\_animated.scss" />
+    <None Include="Content\styles\font-awesome\_bordered-pulled.scss" />
+    <None Include="Content\styles\font-awesome\_core.scss" />
+    <None Include="Content\styles\font-awesome\_fixed-width.scss" />
+    <None Include="Content\styles\font-awesome\_icons.scss" />
+    <None Include="Content\styles\font-awesome\_larger.scss" />
+    <None Include="Content\styles\font-awesome\_list.scss" />
+    <None Include="Content\styles\font-awesome\_mixins.scss" />
+    <None Include="Content\styles\font-awesome\_path.scss" />
+    <None Include="Content\styles\font-awesome\_rotated-flipped.scss" />
+    <None Include="Content\styles\font-awesome\_screen-reader.scss" />
+    <None Include="Content\styles\font-awesome\_stacked.scss" />
+    <None Include="Content\styles\font-awesome\_variables.scss" />
     <None Include="Content\styles\personal-finance-common.scss" />
     <None Include="Model\Generated\OrmLite.Core.ttinclude" />
     <None Include="packages.config" />
