@@ -1,0 +1,114 @@
+﻿<div ncy-breadcrumb></div>
+<header>
+    <h3>
+        My Bills
+        <small><show-when-loading></show-when-loading></small>
+    </h3>
+    <messages-display></messages-display>
+</header>
+<hr />
+<h4>Add Bill</h4>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form name="addBillForm" role="form" validation-schema schema="AddBill" track-changes>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label class="control-label col-sm-2 mandatory-field">Name</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <div class="input-group-addon input-sm">
+                                    <i class="fa fa-pencil btn-icon"></i>
+                                </div>
+                                <input type="text" name="name" class="form-control"
+                                        ng-model="vm.newBill.name" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-sm-2 mandatory-field">Amount</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <div class="input-group-addon input-sm">
+                                    <i class="fa fa-dollar btn-icon"></i>
+                                </div>
+                                <input type="text" name="amount" class="form-control"
+                                        ng-model="vm.newBill.amount" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-sm-2 mandatory-field">Due Date</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <div class="input-group-addon input-sm">
+                                    <i class="fa fa-calendar btn-icon"></i>
+                                </div>
+                                <input type="text" name="dueDate" datepicker class="form-control"
+                                        ng-model="vm.newBill.dueDate" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-sm-2 mandatory-field">Status</label>
+                        <div class="col-sm-10">
+                            <div class="btn-group btn-group-justified">
+                                <a class="btn btn-default" ng-class="{'btn-success': vm.newBill.status == 'Paid'}" ng-click="vm.newBill.status = 'Paid'">Paid</a>
+                                <a class="btn btn-default" ng-class="{'btn-danger': vm.newBill.status == 'Unpaid'}" ng-click="vm.newBill.status = 'Unpaid'">Unpaid</a>
+                            </div>
+                            <div class="col-xs-12">
+                                <input ng-model="vm.newBill.status" name="status" message-id="typeMessage" ng-show="false" />
+                                <div id="typeMessage"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <label class="control-label col-sm-12">Description</label>
+                        <div class="col-sm-12">
+                            <textarea style="min-height: 123px;" class="form-control vresize" name="description" ng-model="vm.newBill.description"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-block btn-default" ng-click="vm.addBill(addBillForm)">Add Bill</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+<h4>Billing History</h4>
+<div ng-show="vm.bills == null">
+    You have no billing history
+</div>
+<div ng-show="vm.bills != null">
+    <table st-table="vm.bills" class="table table-striped">
+        <thead class="navbar navbar-inverse">
+        <tr>
+            <th></th>
+            <th st-sort="name">Name</th>
+            <th>Description</th>
+            <th st-sort="amount">Amount</th>
+            <th st-sort="dueDate">Due Date</th>
+            <th st-sort="status">Status</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="row in vm.bills" ng-class="{expense: row.status == 'Unpaid', income: row.status == 'Paid'}">
+            <td class="income-icon" ng-show="row.status == 'Paid'"><i class="fa fa-check"></i></td>
+            <td class="expense-icon" ng-show="row.status == 'Unpaid'"><i class="fa fa-calendar"></i></td>
+            <td style="font-weight: bold;">{{row.name}}</td>
+            <td>{{row.description | limitTo: 50}}{{row.description.length > 50 ? '...' : ''}}</td>
+            <td>{{row.amount | currency}}</td>
+            <td>{{row.dueDate | date:'EEE dd MMM yyyy'}}</td>
+            <td>{{row.status}}</td>
+            <td><a ng-click="vm.deleteBill(row)"><i class="fa fa-trash"></i></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

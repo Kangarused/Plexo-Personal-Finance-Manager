@@ -178,7 +178,7 @@
     }
 }
 
-(function () {
+(() => {
     angular
         .module("message-utils", [])
         .directive("messagesDisplay", PersonalFinance.Modules.MessageDisplay.MessagesDirective.factory())

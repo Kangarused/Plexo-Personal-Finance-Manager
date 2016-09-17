@@ -176,7 +176,6 @@
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\AuthClient.cs" />
     <Compile Include="Model\Bill.cs" />
-    <Compile Include="Model\Billing.cs" />
     <Compile Include="Model\Budget.cs" />
     <Compile Include="Model\BudgetItem.cs" />
     <Compile Include="Model\Category.cs" />

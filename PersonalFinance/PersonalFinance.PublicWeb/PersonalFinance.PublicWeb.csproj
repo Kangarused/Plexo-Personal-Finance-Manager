@@ -207,17 +207,83 @@
     <Content Include="App\appValidationSchemas.js">
       <DependentUpon>appValidationSchemas.ts</DependentUpon>
     </Content>
+    <Content Include="App\controllers\accounts\accountDetailsController.js">
+      <DependentUpon>accountDetailsController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\controllers\accounts\accountsListController.js">
+      <DependentUpon>accountsListController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\controllers\bills\billsController.js">
+      <DependentUpon>billsController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\controllers\budgets\budgetDetailsController.js">
+      <DependentUpon>budgetDetailsController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\controllers\budgets\budgetListController.js">
+      <DependentUpon>budgetListController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\controllers\dashboardController.js">
+      <DependentUpon>dashboardController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\controllers\homeController.js">
+      <DependentUpon>homeController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\controllers\households\householdsController.js">
+      <DependentUpon>householdsController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\controllers\loginController.js">
+      <DependentUpon>loginController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\controllers\modals\confirm-modal-controller.js">
+      <DependentUpon>confirm-modal-controller.ts</DependentUpon>
+    </Content>
+    <Content Include="App\controllers\signupController.js">
+      <DependentUpon>signupController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\directives\message-utils.js">
+      <DependentUpon>message-utils.ts</DependentUpon>
+    </Content>
+    <Content Include="App\directives\navigation-display.js">
+      <DependentUpon>navigation-display.ts</DependentUpon>
+    </Content>
+    <Content Include="App\factories\publicHttpInterceptor.js">
+      <DependentUpon>publicHttpInterceptor.ts</DependentUpon>
+    </Content>
+    <Content Include="App\services\accountDataService.js">
+      <DependentUpon>accountDataService.ts</DependentUpon>
+    </Content>
+    <Content Include="App\services\authService.js">
+      <DependentUpon>authService.ts</DependentUpon>
+    </Content>
+    <Content Include="App\services\billDataService.js">
+      <DependentUpon>billDataService.ts</DependentUpon>
+    </Content>
+    <Content Include="App\services\browserStorageService.js">
+      <DependentUpon>browserStorageService.ts</DependentUpon>
+    </Content>
+    <Content Include="App\services\budgetDataService.js">
+      <DependentUpon>budgetDataService.ts</DependentUpon>
+    </Content>
+    <Content Include="App\services\categoryDataService.js">
+      <DependentUpon>categoryDataService.ts</DependentUpon>
+    </Content>
+    <Content Include="App\services\transactionDataService.js">
+      <DependentUpon>transactionDataService.ts</DependentUpon>
+    </Content>
+    <Content Include="App\services\userAccountService.js">
+      <DependentUpon>userAccountService.ts</DependentUpon>
+    </Content>
     <Content Include="App\templates\smart-tables\pagination.custom.html" />
     <Content Include="App\views\accounts\account-detail.html" />
     <Content Include="App\views\accounts\accounts-list.html" />
-    <Content Include="App\views\accounts\accounts.html" />
+    <Content Include="App\views\bills\bills-list.html" />
     <Content Include="App\views\budgets\budget-detail.html" />
     <Content Include="App\views\budgets\budget-list.html" />
-    <Content Include="App\views\budgets\budget.html" />
     <Content Include="App\views\dashboard.html" />
     <Content Include="App\views\home.html" />
     <Content Include="App\views\households\household.html" />
     <Content Include="App\views\login.html" />
+    <Content Include="App\views\modals\confirm-modal.html" />
     <Content Include="App\views\signup.html" />
     <EmbeddedResource Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\styles\PersonalFinancePublic.css">
@@ -240,6 +306,72 @@
     <EmbeddedResource Include="Content\fonts\fontawesome-webfont.woff" />
     <EmbeddedResource Include="Content\fonts\fontawesome-webfont.woff2" />
     <EmbeddedResource Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="App\controllers\bills\billsController.js.map">
+      <DependentUpon>billsController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\controllers\budgets\budgetDetailsController.js.map">
+      <DependentUpon>budgetDetailsController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\controllers\budgets\budgetListController.js.map">
+      <DependentUpon>budgetListController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\controllers\households\householdsController.js.map">
+      <DependentUpon>householdsController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\controllers\dashboardController.js.map">
+      <DependentUpon>dashboardController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\controllers\homeController.js.map">
+      <DependentUpon>homeController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\controllers\loginController.js.map">
+      <DependentUpon>loginController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\controllers\signupController.js.map">
+      <DependentUpon>signupController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\controllers\accounts\accountDetailsController.js.map">
+      <DependentUpon>accountDetailsController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\controllers\accounts\accountsListController.js.map">
+      <DependentUpon>accountsListController.ts</DependentUpon>
+    </Content>
+    <Content Include="App\controllers\modals\confirm-modal-controller.js.map">
+      <DependentUpon>confirm-modal-controller.ts</DependentUpon>
+    </Content>
+    <Content Include="App\directives\message-utils.js.map">
+      <DependentUpon>message-utils.ts</DependentUpon>
+    </Content>
+    <Content Include="App\directives\navigation-display.js.map">
+      <DependentUpon>navigation-display.ts</DependentUpon>
+    </Content>
+    <Content Include="App\factories\publicHttpInterceptor.js.map">
+      <DependentUpon>publicHttpInterceptor.ts</DependentUpon>
+    </Content>
+    <Content Include="App\services\accountDataService.js.map">
+      <DependentUpon>accountDataService.ts</DependentUpon>
+    </Content>
+    <Content Include="App\services\authService.js.map">
+      <DependentUpon>authService.ts</DependentUpon>
+    </Content>
+    <Content Include="App\services\browserStorageService.js.map">
+      <DependentUpon>browserStorageService.ts</DependentUpon>
+    </Content>
+    <Content Include="App\services\budgetDataService.js.map">
+      <DependentUpon>budgetDataService.ts</DependentUpon>
+    </Content>
+    <Content Include="App\services\categoryDataService.js.map">
+      <DependentUpon>categoryDataService.ts</DependentUpon>
+    </Content>
+    <Content Include="App\services\transactionDataService.js.map">
+      <DependentUpon>transactionDataService.ts</DependentUpon>
+    </Content>
+    <Content Include="App\services\userAccountService.js.map">
+      <DependentUpon>userAccountService.ts</DependentUpon>
+    </Content>
+    <Content Include="App\services\billDataService.js.map">
+      <DependentUpon>billDataService.ts</DependentUpon>
+    </Content>
     <None Include="Scripts\Enums.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Enums.ts</LastGenOutput>
@@ -259,6 +391,7 @@
     <Compile Include="App_Start\IoCConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BillController.cs" />
     <Compile Include="Controllers\BudgetController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -308,7 +441,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App\controllers\households\" />
     <Folder Include="App\models\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
@@ -328,20 +460,22 @@
     <TypeScriptCompile Include="App\appValidationRules.ts" />
     <TypeScriptCompile Include="App\appValidationSchemas.ts" />
     <TypeScriptCompile Include="App\controllers\accounts\accountDetailsController.ts" />
-    <TypeScriptCompile Include="App\controllers\accounts\accountsController.ts" />
     <TypeScriptCompile Include="App\controllers\accounts\accountsListController.ts" />
+    <TypeScriptCompile Include="App\controllers\bills\billsController.ts" />
     <TypeScriptCompile Include="App\controllers\budgets\budgetDetailsController.ts" />
     <TypeScriptCompile Include="App\controllers\budgets\budgetListController.ts" />
-    <TypeScriptCompile Include="App\controllers\budgets\budgetsController.ts" />
     <TypeScriptCompile Include="App\controllers\dashboardController.ts" />
     <TypeScriptCompile Include="App\controllers\homeController.ts" />
+    <TypeScriptCompile Include="App\controllers\households\householdsController.ts" />
     <TypeScriptCompile Include="App\controllers\loginController.ts" />
+    <TypeScriptCompile Include="App\controllers\modals\confirm-modal-controller.ts" />
     <TypeScriptCompile Include="App\controllers\signupController.ts" />
     <TypeScriptCompile Include="App\directives\navigation-display.ts" />
     <TypeScriptCompile Include="App\directives\message-utils.ts" />
     <TypeScriptCompile Include="App\factories\publicHttpInterceptor.ts" />
     <TypeScriptCompile Include="App\services\accountDataService.ts" />
     <TypeScriptCompile Include="App\services\authService.ts" />
+    <TypeScriptCompile Include="App\services\billDataService.ts" />
     <TypeScriptCompile Include="App\services\browserStorageService.ts" />
     <TypeScriptCompile Include="App\services\budgetDataService.ts" />
     <TypeScriptCompile Include="App\services\categoryDataService.ts" />

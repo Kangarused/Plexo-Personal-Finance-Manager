@@ -1,7 +1,7 @@
 ﻿module PersonalFinance.Controllers {
 
     export class BudgetDetailsController {
-        static $inject = ['$scope', '$stateParams', 'messageService', '$validation', 'budgetDataService'];
+        static $inject = ['$scope', '$stateParams', 'messageService', '$validation', 'budgetDataService', '$uibModal'];
 
         budget: Models.IBudget;
         budgetItems: Models.IBudgetItem[];
@@ -18,7 +18,8 @@
             private $stateParams,
             private messageService: Modules.MessageDisplay.IMessageService,
             private $validation,
-            private budgetDataService: Services.IBudgetDataService
+            private budgetDataService: Services.IBudgetDataService,
+            private $uibModal
         ) {
             $scope.vm = this;
             this.loadBudgetDetails($stateParams.budgetId);
@@ -59,16 +60,34 @@
             this.delBudgetItem = item;
         }
 
-        deleteBudgetItem() {
-            this.budgetDataService.deleteBudgetItem(this.delBudgetItem).then(
-            (response) => {
-                this.messageService.addInfo(response.data.response);
-                this.messageService.removeInfoAfterSeconds(response.data.response, 3);
-                this.loadBudgetDetails(this.budget.id);
-            }, (err) => {
-                var message = "Failed to delete transaction";
-                this.messageService.addError(message);
-                this.messageService.removeErrorAfterSeconds(message, 4);
+        deleteBudgetItem(budget) {
+            var modalInstance = this.$uibModal.open({
+                animation: true,
+                templateUrl: '/App/views/modals/confirm-modal.html',
+                controller: 'confirmModalController',
+                resolve: {
+                    modalData: () => {
+                        return {
+                            modalHead: 'Delete Transaction',
+                            modalBody: 'Are you sure you want to delete this transaction?'
+                        };
+                    }
+                }
+            });
+
+            modalInstance.result.then(confirm => {
+                if (confirm) {
+                    this.budgetDataService.deleteBudgetItem(budget).then(
+                    (response) => {
+                        this.messageService.addInfo(response.data.response);
+                        this.messageService.removeInfoAfterSeconds(response.data.response, 3);
+                        this.loadBudgetDetails(this.budget.id);
+                    }, (err) => {
+                        var message = "Failed to delete transaction";
+                        this.messageService.addError(message);
+                        this.messageService.removeErrorAfterSeconds(message, 4);
+                    });
+                }
             });
         }
     }

@@ -53,9 +53,6 @@ declare module PersonalFinance.Models {
     /** Generated from PersonalFinance.Common.Model.Bill **/
     export interface IBill {
     }
-    /** Generated from PersonalFinance.Common.Model.Billing **/
-    export interface IBilling {
-    }
     /** Generated from PersonalFinance.Common.Model.Budget **/
     export interface IBudget {
     }
@@ -81,19 +78,14 @@ declare module PersonalFinance.Models {
     /** Generated from PersonalFinance.Common.Model.Bill **/
     export interface IBill {
         id: number;
-        billingId: number;
+        userId: number;
+        householdId: number;
         name: string;
         description: string;
         dueDate: string;
         amount: number;
         annualFrequency: number;
-        isPaid: boolean;
-    }
-    /** Generated from PersonalFinance.Common.Model.Billing **/
-    export interface IBilling {
-        id: number;
-        userId: number;
-        householdId: number;
+        status: string;
     }
     /** Generated from PersonalFinance.Common.Model.BudgetItem **/
     export interface IBudgetItem {
@@ -103,7 +95,6 @@ declare module PersonalFinance.Models {
         name: string;
         description: string;
         amount: number;
-        paymentFrequency: string;
     }
     /** Generated from PersonalFinance.Common.Model.Budget **/
     export interface IBudget {
@@ -140,6 +131,7 @@ declare module PersonalFinance.Models {
         id: number;
         userId: number;
         householdId: number;
+        role: string;
     }
     /** Generated from PersonalFinance.Common.Model.Household **/
     export interface IHousehold {

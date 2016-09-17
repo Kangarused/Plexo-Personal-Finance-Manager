@@ -15,7 +15,7 @@
             $scope.vm = this;
         }
 
-        login(form) {
+        login(form): void {
             this.messageService.clear();
             this.$validation.validate(form)
             .success(() => {
@@ -23,8 +23,12 @@
                 (response) => {
                     this.authService.setAuthData(response.data);
                     this.redirectIfAuthorised();
-                }, () => {
-                    this.messageService.addError("Error performing user validation.");
+                }, (error) => {
+                    if (error.data.error == "invalid_grant") {
+                        this.messageService.addError(error.data.error_description);
+                    } else {
+                        this.messageService.addError("Error performing user validation.");
+                    }
                 });
             });
         }

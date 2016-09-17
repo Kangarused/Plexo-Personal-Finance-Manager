@@ -228,6 +228,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\BillController.cs" />
     <Compile Include="Controllers\BudgetController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
@@ -241,6 +242,7 @@
     <Compile Include="Database\OrmLiteInfrastructure\UnitOfWork.cs" />
     <Compile Include="Database\Repositories\AccountRepository.cs" />
     <Compile Include="Database\Repositories\AuthClientRepository.cs" />
+    <Compile Include="Database\Repositories\BillRepository.cs" />
     <Compile Include="Database\Repositories\BudgetItemRepository.cs" />
     <Compile Include="Database\Repositories\BudgetRepository.cs" />
     <Compile Include="Database\Repositories\UserRepository.cs" />

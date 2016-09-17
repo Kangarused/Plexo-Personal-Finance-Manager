@@ -113,8 +113,7 @@ namespace PersonalFinance.Migrations.Profiles
                         Type = (randType < 5) ? BudgetItemType.Expense : BudgetItemType.Income,
                         Name = String.Join(" ", Faker.Lorem.Words(3)),
                         Description = Faker.Lorem.Sentence(),
-                        Amount = Faker.RandomNumber.Next(10, 50),
-                        PaymentFrequency = GetRandomFrequency(randFreq)
+                        Amount = Faker.RandomNumber.Next(10, 50)
                     };
 
                     Insert.IntoTable("BudgetItems").Row(new
@@ -123,8 +122,7 @@ namespace PersonalFinance.Migrations.Profiles
                         item.Type,
                         item.Name,
                         item.Description,
-                        item.Amount,
-                        item.PaymentFrequency
+                        item.Amount
                     });
 
                     if (item.Type == BudgetItemType.Expense)

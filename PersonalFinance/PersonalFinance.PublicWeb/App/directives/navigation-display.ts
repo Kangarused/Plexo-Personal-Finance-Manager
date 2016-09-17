@@ -15,6 +15,9 @@
                 '<a style="cursor: pointer;" ui-sref="home.budgets">Budgets </a>' +
             '</li>' +
             '<li>' +
+            '<a style="cursor: pointer;" ui-sref="home.bills">Bills </a>' +
+            '</li>' +
+            '<li>' +
                 '<a style="cursor: pointer;" ui-sref="home.accounts">Accounts </a>' +
             '</li>' +
             '<li>' +

@@ -74,7 +74,7 @@ namespace PersonalFinance.PublicWeb.Providers
             var allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin") ?? "*";
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
-            User user;
+            User user = null;
 
             //If username is email check against emails, else check against usernames
             if (Regex.IsMatch(context.UserName, Common.Model.Constants.EmailVerificationRegex))
@@ -86,7 +86,7 @@ namespace PersonalFinance.PublicWeb.Providers
                 user = await AuthRepository.GetUserByUsername(context.UserName);
             }
 
-            if (user.PasswordHash == null || context.Password == null)
+            if (context.Password == null)
             {
                 context.SetError("invalid_grant", "Password is required");
                 return;

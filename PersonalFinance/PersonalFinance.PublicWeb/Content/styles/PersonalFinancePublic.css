@@ -8293,6 +8293,9 @@ input[type="checkbox"] {
 * {
   border-radius: 0 !important; }
 
+.btn-icon {
+  width: 15px; }
+
 .breadcrumb {
   font-size: 12px;
   font-weight: bolder; }

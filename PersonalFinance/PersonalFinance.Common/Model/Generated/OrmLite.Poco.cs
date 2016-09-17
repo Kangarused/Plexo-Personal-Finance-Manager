@@ -99,8 +99,8 @@ namespace PersonalFinance.Common.Model
         [Alias("Id")]
         [AutoIncrement]
         public int Id { get; set;}
-        [Required]
-        public int BillingId { get; set;}
+        public int? UserId { get; set;}
+        public int? HouseholdId { get; set;}
         [Required]
         public string Name { get; set;}
         public string Description { get; set;}
@@ -110,17 +110,7 @@ namespace PersonalFinance.Common.Model
         public decimal Amount { get; set;}
         public int? AnnualFrequency { get; set;}
         [Required]
-        public bool IsPaid { get; set;}
-    }
-
-[Alias("Billing")]
-    public partial class Billing : IHasId<int> 
-    {
-        [Alias("Id")]
-        [AutoIncrement]
-        public int Id { get; set;}
-        public int? UserId { get; set;}
-        public int? HouseholdId { get; set;}
+        public string Status { get; set;}
     }
 
 [Alias("BudgetItemCategories")]
@@ -150,7 +140,6 @@ namespace PersonalFinance.Common.Model
         public string Description { get; set;}
         [Required]
         public decimal Amount { get; set;}
-        public string PaymentFrequency { get; set;}
     }
 
 [Alias("Budgets")]
@@ -219,6 +208,8 @@ namespace PersonalFinance.Common.Model
         public int UserId { get; set;}
         [Required]
         public int HouseholdId { get; set;}
+        [Required]
+        public string Role { get; set;}
     }
 
 [Alias("Households")]

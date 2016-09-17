@@ -25,108 +25,136 @@ var angularApplication = angular.module('personalFinance',
 
             $urlRouterProvider.otherwise("/login");
 
+            $stateProvider.state('login', {
+                url: '/login',
+                views: {
+                    "main-body@": {
+                        templateUrl: "App/views/login.html",
+                        controller: "loginController"
+                    }
+                }
+            });
+
+            $stateProvider.state('signup', {
+                url: '/signup',
+                views: {
+                    "main-body@": {
+                        templateUrl: "App/views/signup.html",
+                        controller: "signupController"
+                    }
+                }
+            });
+
+
             $urlRouterProvider.when('/home', '/home/dashboard');
             $stateProvider.state('home', {
                 url: '/home',
-                templateUrl: "App/views/home.html",
-                controller: "homeController",
+                views: {
+                    "main-body@": {
+                        templateUrl: "App/views/home.html",
+                        controller: "homeController"
+                    }
+                },
                 ncyBreadcrumb: {
                     label: 'Home',
                     skip: true 
                 }
             });
 
-            $stateProvider.state('login', {
-                url: '/login',
-                templateUrl: "App/views/login.html",
-                controller: "loginController"
-            });
-
-            $stateProvider.state('signup', {
-                url: '/signup',
-                templateUrl: "App/views/signup.html",
-                controller: "signupController"
-            });
-
             $stateProvider.state('home.dashboard', {
                 url: '/dashboard',
-                templateUrl: "App/views/dashboard.html",
-                controller: "dashboardController",
+                views: {
+                    "main-body@": {
+                        templateUrl: "App/views/dashboard.html",
+                        controller: "dashboardController"
+                    }
+                },
                 ncyBreadcrumb: {
                     label: 'Dashboard'
                 }
             });
 
-            $urlRouterProvider.when('/home/accounts', '/home/accounts/list');
             $stateProvider.state('home.accounts', {
                 url: '/accounts',
-                templateUrl: "App/views/accounts/accounts.html",
-                controller: "accountsController",
+                views: {
+                    "main-body@": {
+                        templateUrl: "App/views/accounts/accounts-list.html",
+                        controller: "accountsListController"
+                    }
+                },
                 ncyBreadcrumb: {
                     label: 'Accounts',
-                    parent: 'home.dashboard',
-                    skip: true 
-                }
-            });
-
-            $stateProvider.state('home.accounts.list', {
-                url: '/list',
-                templateUrl: "App/views/accounts/accounts-list.html",
-                controller: "accountsListController",
-                ncyBreadcrumb: {
-                    label: 'Accounts'
+                    parent: 'home.dashboard'
                 }
             });
 
             $stateProvider.state('home.accounts.details', {
                 url: '/details/{accountId:int}',
-                templateUrl: "App/views/accounts/account-detail.html",
-                controller: "accountDetailsController",
+                views: {
+                    "main-body@": {
+                        templateUrl: "App/views/accounts/account-detail.html",
+                        controller: "accountDetailsController"
+                    }
+                },
                 ncyBreadcrumb: {
                     label: 'Account Details',
-                    parent: 'home.accounts.list'
+                    parent: 'home.accounts'
+                }
+            });
+
+            $stateProvider.state('home.bills', {
+                url: '/bills',
+                views: {
+                    "main-body@": {
+                        templateUrl: "App/views/bills/bills-list.html",
+                        controller: "billsController"
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: 'Bills',
+                    parent: 'home.dashboard'
                 }
             });
 
             $stateProvider.state('home.households', {
                 url: '/households',
-                templateUrl: "App/views/households/household.html",
-                controller: "householdsController",
+                views: {
+                    "main-body@": {
+                        templateUrl: "App/views/households/household.html",
+                        controller: "householdsController"
+                    }
+                },
                 ncyBreadcrumb: {
                     label: 'Households',
                     parent: 'home.dashboard'
                 }
             });
 
-
-            $urlRouterProvider.when('/home/budgets', '/home/budgets/list');
             $stateProvider.state('home.budgets', {
                 url: '/budgets',
-                templateUrl: "App/views/budgets/budget.html",
-                controller: "budgetsController",
+                views: {
+                    "main-body@": {
+                        templateUrl: "App/views/budgets/budget-list.html",
+                        controller: 'budgetListController'
+                    }
+                },
                 ncyBreadcrumb: {
                     label: 'Budgets',
-                    parent: 'home.dashboard',
-                    skip: true 
-                }
-            });
-
-            $stateProvider.state('home.budgets.list', {
-                url: '/list',
-                templateUrl: "App/views/budgets/budget-list.html",
-                controller: 'budgetListController',
-                ncyBreadcrumb: {
-                    label: 'Budgets'
+                    parent: 'home.dashboard'
                 }
             });
 
             $stateProvider.state('home.budgets.details', {
                 url: '/details/{budgetId:int}',
-                templateUrl: "App/views/budgets/budget-detail.html",
-                controller: 'budgetDetailsController',
+                views: {
+                    "main-body@": {
+                        templateUrl: "App/views/budgets/budget-detail.html",
+                        controller: 'budgetDetailsController'
+                    }
+                },
                 ncyBreadcrumb: {
                     label: 'Budget Details',
-                    parent: 'home.budgets.list'
+                    parent: 'home.budgets'
                 }
             });
         }
@@ -143,19 +171,21 @@ var angularApplication = angular.module('personalFinance',
     .service('categoryDataService', PersonalFinance.Services.CategoryDataService)
     .service('browserStorageService', PersonalFinance.Services.BrowserStorageService)
     .service('budgetDataService', PersonalFinance.Services.BudgetDataService)
+    .service('billDataService', PersonalFinance.Services.BillDataService)
 
-    .controller('budgetsController', PersonalFinance.Controllers.BudgetsController)
     .controller('budgetListController', PersonalFinance.Controllers.BudgetListController)
     .controller('budgetDetailsController', PersonalFinance.Controllers.BudgetDetailsController)
 
-    .controller('accountDetailsController', PersonalFinance.Controllers.AccountDetailsController)
     .controller('accountsListController', PersonalFinance.Controllers.AccountsListController)
-    .controller('accountsController', PersonalFinance.Controllers.AccountsController)
+    .controller('householdsController', PersonalFinance.Controllers.HousesholdsController)
+    .controller('billsController', PersonalFinance.Controllers.BillsController)
 
     .controller('dashboardController', PersonalFinance.Controllers.DashboardController)
     .controller('homeController', PersonalFinance.Controllers.HomeController)
     .controller('signupController', PersonalFinance.Controllers.SignupController)
     .controller('loginController', PersonalFinance.Controllers.LoginController)
+
+    .controller('confirmModalController', PersonalFinance.Controllers.ConfirmModalController)
 
     .factory('PublicHttpInterceptor', PersonalFinance.Factories.PublicHttpInterceptor)
 

@@ -57,7 +57,8 @@ namespace PersonalFinance.Migrations.Migrations
             Create.Table("HouseholdMembers")
                 .WithId()
                 .WithColumn("UserId").AsInt32().ForeignKey("Users", "Id").NotNullable()
-                .WithColumn("HouseholdId").AsInt32().ForeignKey("Households", "Id").NotNullable();
+                .WithColumn("HouseholdId").AsInt32().ForeignKey("Households", "Id").NotNullable()
+                .WithColumn("Role").AsString().NotNullable();
 
             Create.Table("Budgets")
                 .WithId()
@@ -75,8 +76,7 @@ namespace PersonalFinance.Migrations.Migrations
                 .WithColumn("Type").AsString().NotNullable()
                 .WithColumn("Name").AsString().NotNullable()
                 .WithColumn("Description").AsMaxString().Nullable()
-                .WithColumn("Amount").AsCurrency().NotNullable()
-                .WithColumn("PaymentFrequency").AsString().Nullable();
+                .WithColumn("Amount").AsCurrency().NotNullable();
 
             Create.Table("Account")
                 .WithId()
@@ -98,20 +98,16 @@ namespace PersonalFinance.Migrations.Migrations
                 .WithColumn("TransactionDate").AsDateTime().NotNullable()
                 .WithAuditInfo();
 
-            Create.Table("Billing")
-                .WithId()
-                .WithColumn("UserId").AsInt32().ForeignKey("Users", "Id").Nullable()
-                .WithColumn("HouseholdId").AsInt32().ForeignKey("Households", "Id").Nullable();
-
             Create.Table("Bill")
                 .WithId()
-                .WithColumn("BillingId").AsInt32().ForeignKey("Billing", "Id").NotNullable()
+                .WithColumn("UserId").AsInt32().ForeignKey("Users", "Id").Nullable()
+                .WithColumn("HouseholdId").AsInt32().ForeignKey("Households", "Id").Nullable()
                 .WithColumn("Name").AsString().NotNullable()
                 .WithColumn("Description").AsMaxString().Nullable()
                 .WithColumn("DueDate").AsDateTime().NotNullable()
                 .WithColumn("Amount").AsCurrency().NotNullable()
                 .WithColumn("AnnualFrequency").AsInt32().Nullable()
-                .WithColumn("IsPaid").AsBoolean().WithDefaultValue(0).NotNullable();
+                .WithColumn("Status").AsString().NotNullable();
 
             Create.Table("Categories")
                 .WithId()

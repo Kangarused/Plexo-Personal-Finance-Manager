@@ -1,6 +1,68 @@
-﻿<header>
-    <h1>Household</h1>
+﻿<div ncy-breadcrumb></div>
+<header>
+    <h3>
+        Households
+        <small><show-when-loading></show-when-loading></small>
+    </h3>
+    <messages-display></messages-display>
 </header>
+<hr />
+
+<div class="col-md-3">
+    <h4>Create Household</h4>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form name="addHouseholdForm" role="form" validation-schema schema="AddHousehold" track-changes>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="control-label mandatory-field">Name</label>
+                        <div class="input-group">
+                            <div class="input-group-addon input-sm">
+                                <i class="fa fa-pencil btn-icon"></i>
+                            </div>
+                            <input type="text" name="name" class="form-control input-sm" message-id="nameMessage"
+                                   ng-model="vm.newHousehold.name" maxlength="40" />
+                        </div>
+                        <div id="nameMessage"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="control-label mandatory-field">Address</label>
+                        <div class="input-group">
+                            <div class="input-group-addon input-sm">
+                                <i class="fa fa-map-marker btn-icon"></i>
+                            </div>
+                            <input type="text" name="name" class="form-control input-sm" message-id="addressMessage"
+                                   ng-model="vm.newHousehold.address" maxlength="40" />
+                        </div>
+                        <div id="addressMessage"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label name="budgetType" class="control-label mandatory-field">Phone Number</label>
+                        <div class="input-group">
+                            <div class="input-group-addon input-sm">
+                                <i class="fa fa-phone btn-icon"></i>
+                            </div>
+                            <input type="text" name="allocatedAmount" class="form-control input-sm" message-id="phoneMessage"
+                                   ng-model="vm.newHousehold.phoneNumber" />
+                        </div>
+                        <div id="phoneMessage"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="input-group"></label>
+                        <button class="btn btn-block btn-default" ng-click="vm.addBudget(addBudgetForm)">Create Household</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-6">
         <section>
