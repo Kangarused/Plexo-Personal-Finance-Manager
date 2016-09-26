@@ -16,7 +16,8 @@ var angularApplication = angular.module('personalFinance',
     'ngCookies',
     'message-utils',
     'CaseFilter',
-    'ncy-angular-breadcrumb'
+    'ncy-angular-breadcrumb',
+    'chart.js'
     ])
     .constant("settings", personalFinanceSettings)
 

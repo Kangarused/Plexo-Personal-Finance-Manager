@@ -325,6 +325,8 @@
     <None Include="Content\styles\bootstrap\sass\_wells.scss" />
     <EmbeddedResource Include="Content\scripts\angular-ui-router\angular-ui-router.js" />
     <EmbeddedResource Include="Content\scripts\angular-breadcrumb\angular-breadcrumb.js" />
+    <EmbeddedResource Include="Content\scripts\angular-chart\angular-chart.js" />
+    <EmbeddedResource Include="Content\scripts\chartjs\chart.js" />
     <Content Include="Content\styles\personal-finance-common.css">
       <DependentUpon>personal-finance-common.scss</DependentUpon>
     </Content>
@@ -402,6 +404,7 @@
     <TypeScriptCompile Include="Content\scripts\moment\moment-node.d.ts" />
     <TypeScriptCompile Include="Content\scripts\moment\moment.d.ts" />
     <TypeScriptCompile Include="Content\scripts\smart-table\st-server-pagination.ts" />
+    <TypeScriptCompile Include="Content\scripts\typings\chartjs\chart.d.ts" />
     <TypeScriptCompile Include="Content\scripts\typings\jquery\jquery.d.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -51,6 +51,12 @@ thead {
     color: $navbar-default-brand-color !important;
 }
 
+.chartLabel {
+    text-align:center;
+    font-size: 0.8em;
+    padding-top: 10px;
+}
+
 //Position modals in vertical center of screen
 .modal {
   text-align: center;

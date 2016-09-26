@@ -55,7 +55,9 @@ namespace PersonalFinance.Common
                     "~/PersonalFinanceCommon/Embedded/scripts/bootstrap-datetimepicker/bootstrap-datetimepicker-directive.js",
 
                     "~/PersonalFinanceCommon/Embedded/scripts/smart-table/smart-table.js",
-                    "~/PersonalFinanceCommon/Embedded/scripts/smart-table/st-server-pagination.js"
+                    "~/PersonalFinanceCommon/Embedded/scripts/smart-table/st-server-pagination.js",
+                    "~/PersonalFinanceCommon/Embedded/scripts/chartjs/chart.js",
+                    "~/PersonalFinanceCommon/Embedded/scripts/angular-chart/angular-chart.js"
             ));
 
             BundleTable.Bundles.Add(new ScriptBundle(SiteCommonAngularSettings)

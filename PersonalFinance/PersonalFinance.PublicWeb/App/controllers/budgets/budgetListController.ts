@@ -10,6 +10,24 @@
         budgetTypes = Models.BudgetType;
         modalError: string = null;
 
+        overviewChartDataset = {
+            data: [],
+            labels: [],
+            colors: [],
+            options: {
+                tooltips: {
+                    enabled: true,
+                    mode: 'single',
+                    callbacks: {
+                        label: (tooltipItem, data) => {
+                            var datasetLabel = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                            return 'Remaining: $' + datasetLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        }
+                    }
+                }
+            }
+        };
+
         constructor(
             private $scope: IScope,
             private messageService: Modules.MessageDisplay.IMessageService,
@@ -34,7 +52,22 @@
                 (response) => {
                     this.budgets = response.data;
                     this.loadRecentBudget();
+                    this.calculateChartData();
                 });
+        }
+
+        calculateChartData() {
+            this.budgets.forEach((budget, index) => {
+                var remaining = this.getRemainingForBudget(budget);
+                this.overviewChartDataset.data.push(remaining);
+                this.overviewChartDataset.labels.push(budget.name.substring(0, 10));
+
+                if (budget.type === 'Spendings') {
+                    this.overviewChartDataset.colors.push('#eeaaaa');
+                } else {
+                    this.overviewChartDataset.colors.push('#aaeeaa');
+                }
+            });
         }
 
         addBudget(form) {

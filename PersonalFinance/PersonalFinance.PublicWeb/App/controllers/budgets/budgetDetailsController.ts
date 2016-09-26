@@ -13,6 +13,41 @@
         budgetItemTypes = Models.BudgetItemType;
         frequencyTypes = Models.PaymentFrequency;
 
+        overviewChartDataset = {
+            data: [],
+            labels: [],
+            options: {
+                tooltips: {
+                    enabled: true,
+                    mode: 'single',
+                    callbacks: {
+                        label: (tooltipItem, data) => {
+                            var datasetLabel = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                            return 'Balance: $' + datasetLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        }
+                    }
+                }
+            }
+        };
+
+        spendSaveChartDataset = {
+            data: [],
+            labels: [],
+            colors: ['#aaeeaa', '#eeaaaa'],
+            options: {
+                tooltips: {
+                    enabled: true,
+                    mode: 'single',
+                    callbacks: {
+                        label: (tooltipItem, data) => {
+                            var datasetLabel = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                            return 'Balance: $' + datasetLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        }
+                    }
+                }
+            }
+        };
+
         constructor(
             private $scope: IScope,
             private $stateParams,
@@ -30,8 +65,48 @@
             (response) => {
                 this.budget = response.data.budget;
                 this.budgetItems = response.data.budgetItems;
+                this.calculateChartData();
             });
         }
+
+        calculateChartData() {
+            var budget = this.budget.allocatedAmount;
+            var data = [];
+            if (this.budget.type === 'Savings') {
+                budget = 0;
+            }
+
+            data.push(budget);
+            this.overviewChartDataset.labels.push('Start');
+            this.budgetItems.forEach((item, index) => {
+                if (item.type === 'Income') {
+                    budget += item.amount;
+                } else {
+                    budget -= item.amount;
+                }
+                data.push(budget);
+                this.overviewChartDataset.labels.push(item.name.substring(0, 10));
+            });
+
+            this.overviewChartDataset.data.push(data);
+        }
+
+        //calculateSpendSaveChartData() {
+        //    var budget = this.budget.allocatedAmount;
+        //    var spend = [];
+        //    var save = [];
+        //    if (this.budget.type === 'Savings') {
+        //        budget = 0;
+        //    }
+
+        //    this.budgetItems.forEach((item, index) => {
+        //        budget += item.amount;
+        //        data.push(budget);
+        //        this.overviewChartDataset.labels.push(item.name.substring(0, 10));
+        //    });
+
+        //    this.overviewChartDataset.data.push(data);
+        //}
 
         addBudgetItem(form) {
             this.messageService.clear();

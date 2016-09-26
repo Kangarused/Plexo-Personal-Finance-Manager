@@ -21,7 +21,7 @@
                                 <a class="btn btn-default" ng-class="{'btn-danger': vm.newBudget.type == 'Spendings'}" ng-click="vm.newBudget.type = 'Spendings'">Spendings</a>
                             </div>
                             <div class="col-xs-12">
-                                <input ng-model="vm.newBudget.type" name="budgetType" message-id="typeMessage" ng-show="false" />
+                                <input ng-model="vm.newBudget.type" name="budgetType" message-id="typeMessage" ng-show="false"/>
                                 <div id="typeMessage"></div>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                                     <i class="fa fa-pencil btn-icon"></i>
                                 </div>
                                 <input type="text" name="name" class="form-control input-sm" message-id="nameMessage"
-                                       ng-model="vm.newBudget.name" maxlength="40" />
+                                       ng-model="vm.newBudget.name" maxlength="40"/>
                             </div>
                             <div id="nameMessage"></div>
                         </div>
@@ -49,7 +49,7 @@
                                     <i class="fa fa-dollar btn-icon"></i>
                                 </div>
                                 <input type="text" name="allocatedAmount" class="form-control input-sm" message-id="amountMessage"
-                                       ng-model="vm.newBudget.allocatedAmount" />
+                                       ng-model="vm.newBudget.allocatedAmount"/>
                             </div>
                             <div id="amountMessage"></div>
                         </div>
@@ -64,8 +64,20 @@
             </div>
         </div>
     </div>
-
     <div class="col-md-9">
+        <h4>Budget Overview</h4>
+        <canvas id="bar" 
+                class="chart chart-bar" 
+                chart-data="vm.overviewChartDataset.data"
+                chart-labels="vm.overviewChartDataset.labels"
+                chart-colors="vm.overviewChartDataset.colors"
+                chart-series="vm.overviewChartDataset.series"
+                chart-options="vm.overviewChartDataset.options">
+        </canvas> 
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
         <h4>Budget History</h4>
         <div ng-show="vm.budgets.length <= 0">
             No budgets

@@ -4,8 +4,22 @@
 
         bills: Models.IBill[];
         newBill: Models.IBill;
-
         modalError: string = null;
+
+        paidUnpaidChartDataset = {
+            data: [],
+            label: ['Paid Bills', 'Unpaid Bills'],
+            colors: ['#aaeeaa', '#eeaaaa'],
+            options: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        boxWidth: 20
+                    }
+                }
+            }
+        };
 
         constructor(
             private $scope: IScope,
@@ -21,9 +35,21 @@
 
         loadBills() {
             this.billDataService.getBills().then(
-                (response) => {
-                    this.bills = response.data;
-                });
+            (response) => {
+                this.bills = response.data;
+                this.calculateChartData();
+            });
+        }
+
+        calculateChartData() {
+            //Calculate Paid / Unpaid Data
+            var paidBills = 0;
+            this.bills.forEach((bill, index) => {
+                if (bill.status === 'Paid') {
+                    paidBills++;
+                }
+            });
+            this.paidUnpaidChartDataset.data = [paidBills, (this.bills.length - paidBills)];
         }
 
         addBill(form) {
@@ -47,7 +73,7 @@
                 });
         }
 
-        deleteBill(bill) {
+        deleteBill(bill: Models.IBill) {
             var modalInstance = this.$uibModal.open({
                 animation: true,
                 templateUrl: '/App/views/modals/confirm-modal.html',
@@ -55,7 +81,7 @@
                 resolve: {
                     modalData: () => {
                         return {
-                            modalHead: 'Delete Bill',
+                            modalHead: 'Delete ' + bill.name,
                             modalBody: 'Are you sure you want to delete this bill?'
                         };
                     }

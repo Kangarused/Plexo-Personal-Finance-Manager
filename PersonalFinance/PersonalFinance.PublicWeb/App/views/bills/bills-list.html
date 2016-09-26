@@ -80,6 +80,22 @@
         </form>
     </div>
 </div>
+<hr/>
+<div class="row">
+    <div class="col-md-12">
+        <h4>Billing Overview</h4>
+        <div>
+            <div class="col-sm-6">
+                <canvas id="paidUnpaid" class="chart chart-pie"
+                        chart-data="vm.paidUnpaidChartDataset.data"
+                        chart-labels="vm.paidUnpaidChartDataset.label"
+                        chart-colors="vm.paidUnpaidChartDataset.colors"
+                        chart-options="vm.paidUnpaidChartDataset.options">
+                </canvas>
+            </div>
+        </div>
+    </div>
+</div>
 <hr />
 <h4>Billing History</h4>
 <div ng-show="vm.bills == null">

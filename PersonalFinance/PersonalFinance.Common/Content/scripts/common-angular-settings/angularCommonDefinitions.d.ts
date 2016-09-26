@@ -3,6 +3,7 @@
 /// <reference path="../linqjs/linq.d.ts" />
 /// <reference path="../angular-ui-router/angular-ui-router.d.ts" />
 /// <reference path="../smart-table/st-server-pagination.ts" />
+/// <reference path="../typings/chartjs/chart.d.ts" />
 
 //global vars and functions
 

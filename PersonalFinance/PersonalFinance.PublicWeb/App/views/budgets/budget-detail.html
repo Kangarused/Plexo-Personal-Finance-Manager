@@ -110,3 +110,26 @@
         </tfoot>
     </table>
 </div>
+<hr/>
+<div class="row">
+    <div class="col-md-6">
+        <h4>Balance History</h4>
+        <canvas id="line"
+                class="chart chart-line"
+                chart-data="vm.overviewChartDataset.data"
+                chart-labels="vm.overviewChartDataset.labels"
+                chart-series="vm.overviewChartDataset.series"
+                chart-options="vm.overviewChartDataset.options">
+        </canvas>
+    </div>
+    <div class="col-md-6">
+        <h4>Spendings vs Savings History</h4>
+        <canvas id="line"
+                class="chart chart-line"
+                chart-data="vm.overviewChartDataset.data"
+                chart-labels="vm.overviewChartDataset.labels"
+                chart-series="vm.overviewChartDataset.series"
+                chart-options="vm.overviewChartDataset.options"></canvas>
+    </div>
+</div>
+<hr/>

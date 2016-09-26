@@ -8325,6 +8325,11 @@ input[type="checkbox"] {
 thead {
   color: #fff !important; }
 
+.chartLabel {
+  text-align: center;
+  font-size: 0.8em;
+  padding-top: 10px; }
+
 .modal {
   text-align: center; }
 
