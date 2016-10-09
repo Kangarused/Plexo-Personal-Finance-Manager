@@ -1,0 +1,94 @@
+﻿<div ncy-breadcrumb></div>
+<header>
+    <h3>
+        Group <small>- {{vm.group.name}}</small>
+        <small><show-when-loading></show-when-loading></small>
+        <div class="pull-right">
+            <div class="btn-group">
+                <button class="btn btn-default">Group Budgets</button>
+                <button class="btn btn-default">Group Bills</button>
+            </div>
+        </div>
+    </h3>
+    
+    <messages-display></messages-display>
+</header>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <h4>Send Invites</h4>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form name="addBudgetItemForm" role="form" validation-schema schema="AddBudgetItem" track-changes>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group row">
+                                <label class="control-label col-sm-2 form-control-static">Email</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <div class="input-group-addon input-sm">
+                                            <i class="fa fa-pencil btn-icon"></i>
+                                        </div>
+                                        <input type="text" name="name" class="form-control"
+                                               ng-model="vm.newInvite.toUserEmail"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-sm-2 form-control-static">Privilege</label>
+                                <div class="col-sm-10">
+                                    <div class="btn-group btn-group-justified">
+                                        <a class="btn btn-default" ng-class="{'btn-success': vm.newInvite.inviteRole == 'GroupAdmin'}" ng-click="vm.newInvite.inviteRole = 'GroupAdmin'">Admin</a>
+                                        <a class="btn btn-default" ng-class="{'btn-danger': vm.newInvite.inviteRole == 'GroupMember'}" ng-click="vm.newInvite.inviteRole = 'GroupMember'">Member</a>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <input ng-model="vm.newInvite.inviteRole" name="inviteMessage" message-id="typeMessage" ng-show="false"/>
+                                        <div id="typeMessage"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">Description</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control vresize" ng-model="vm.newInvite.inviteMessage" rows="4"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-10 col-sm-offset-2">
+                                        <button class="btn btn-block btn-default" ng-click="vm.addBudgetItem(addBudgetItemForm)">Send Invite</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h4>Recently Sent Invites</h4>
+        <div ng-show="vm.pendingRequests.length <= 0">
+            There are no invites for this group
+        </div>
+        <div ng-show="vm.pendingRequests.length > 0">
+            <table st-table="vm.budgets" class="table table-striped">
+                <thead class="navbar navbar-inverse">
+                <tr>
+                    <th st-sort="name">Email</th>
+                    <th st-sort="name">Date Sent</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="row in vm.pendingRequests">
+                    <td>{{row.toEmail}}</td>
+                    <td>{{row.dateSent | date:'EEE dd MMM yyyy'}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<hr />

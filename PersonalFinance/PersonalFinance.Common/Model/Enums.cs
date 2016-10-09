@@ -8,8 +8,8 @@ namespace PersonalFinance.Common.Model
     public enum Role
     {
         PublicUser,
-        HouseholdMember,
-        HouseholdAdmin,
+        GroupMember,
+        GroupAdmin,
         AnonymousOverPrivateApi,
         SystemAdministrator
     }

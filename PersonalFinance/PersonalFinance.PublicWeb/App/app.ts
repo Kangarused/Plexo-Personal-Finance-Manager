@@ -75,31 +75,31 @@ var angularApplication = angular.module('personalFinance',
                 }
             });
 
-            $stateProvider.state('home.accounts', {
-                url: '/accounts',
+            $stateProvider.state('home.groups', {
+                url: '/groups',
                 views: {
                     "main-body@": {
-                        templateUrl: "App/views/accounts/accounts-list.html",
-                        controller: "accountsListController"
+                        templateUrl: "App/views/groups/groups-list.html",
+                        controller: "groupsController"
                     }
                 },
                 ncyBreadcrumb: {
-                    label: 'Accounts',
+                    label: 'Groups',
                     parent: 'home.dashboard'
                 }
             });
 
-            $stateProvider.state('home.accounts.details', {
-                url: '/details/{accountId:int}',
+            $stateProvider.state('home.groups.details', {
+                url: '/details/{groupId:int}',
                 views: {
                     "main-body@": {
-                        templateUrl: "App/views/accounts/account-detail.html",
-                        controller: "accountDetailsController"
+                        templateUrl: "App/views/groups/group-detail.html",
+                        controller: "groupsDetailController"
                     }
                 },
                 ncyBreadcrumb: {
-                    label: 'Account Details',
-                    parent: 'home.accounts'
+                    label: 'Group Details',
+                    parent: 'home.groups'
                 }
             });
 
@@ -113,20 +113,6 @@ var angularApplication = angular.module('personalFinance',
                 },
                 ncyBreadcrumb: {
                     label: 'Bills',
-                    parent: 'home.dashboard'
-                }
-            });
-
-            $stateProvider.state('home.households', {
-                url: '/households',
-                views: {
-                    "main-body@": {
-                        templateUrl: "App/views/households/household.html",
-                        controller: "householdsController"
-                    }
-                },
-                ncyBreadcrumb: {
-                    label: 'Households',
                     parent: 'home.dashboard'
                 }
             });
@@ -167,18 +153,18 @@ var angularApplication = angular.module('personalFinance',
     .service('authService', PersonalFinance.Services.AuthService)
     .service('userAccountService', PersonalFinance.Services.UserAccountService)
     .service('browserStorageService', PersonalFinance.Services.BrowserStorageService)
-    .service('accountDataService', PersonalFinance.Services.AccountDataService)
     .service('transactionDataService', PersonalFinance.Services.TransactionDataService)
     .service('categoryDataService', PersonalFinance.Services.CategoryDataService)
     .service('browserStorageService', PersonalFinance.Services.BrowserStorageService)
     .service('budgetDataService', PersonalFinance.Services.BudgetDataService)
     .service('billDataService', PersonalFinance.Services.BillDataService)
+    .service('groupDataService', PersonalFinance.Services.GroupDataService)
 
     .controller('budgetListController', PersonalFinance.Controllers.BudgetListController)
     .controller('budgetDetailsController', PersonalFinance.Controllers.BudgetDetailsController)
 
-    .controller('accountsListController', PersonalFinance.Controllers.AccountsListController)
-    .controller('householdsController', PersonalFinance.Controllers.HousesholdsController)
+    .controller('groupsController', PersonalFinance.Controllers.GroupsController)
+    .controller('groupsDetailController', PersonalFinance.Controllers.GroupDetailController)
     .controller('billsController', PersonalFinance.Controllers.BillsController)
 
     .controller('dashboardController', PersonalFinance.Controllers.DashboardController)

@@ -57,10 +57,14 @@
         }
 
         calculateChartData() {
+            this.overviewChartDataset.data.length = 0;
+            this.overviewChartDataset.labels.length = 0;
+            this.overviewChartDataset.colors.length = 0;
+
             this.budgets.forEach((budget, index) => {
                 var remaining = this.getRemainingForBudget(budget);
                 this.overviewChartDataset.data.push(remaining);
-                this.overviewChartDataset.labels.push(budget.name.substring(0, 10));
+                this.overviewChartDataset.labels.push(budget.name.substring(0, 30));
 
                 if (budget.type === 'Spendings') {
                     this.overviewChartDataset.colors.push('#eeaaaa');
@@ -79,6 +83,7 @@
                     (response) => {
                         this.messageService.addInfo(response.data.response);
                         this.messageService.removeInfoAfterSeconds(response.data.response, 3);
+                        this.newBudget = <Models.IBudget>{};
                         this.loadBudgets();
                     }, (err) => {
                     var message = "Failed to create budget";

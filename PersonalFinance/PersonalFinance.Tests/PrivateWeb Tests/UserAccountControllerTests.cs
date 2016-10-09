@@ -76,5 +76,25 @@ namespace PersonalFinance.Tests.PrivateWeb_Tests
 
             Assert.AreEqual(response.Result.Name, "Fake User");
         }
+
+        [Test]
+        public void Test_CreateAccountWithSimplePassword()
+        {
+            string simplePassword = "1234";
+
+            User testUser = new User
+            {
+                Name = "Test User",
+                UserName = "Test Account",
+                Email = "testAccount@test.com",
+                PasswordHash = simplePassword
+            };
+
+            var response = _userAccountController.AddUser(testUser);
+
+            Assert.AreEqual(response.Result.Response, 
+                "Password is not strong enough, must be atleast 8 characters" +
+                " long and include atleast 1 number and 1 uppercase letter");
+        }
     }
 }

@@ -168,12 +168,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Dtos\BudgetDetailsResponse.cs" />
+    <Compile Include="Dtos\CreateGroupRequest.cs" />
+    <Compile Include="Dtos\GroupInviteRequest.cs" />
     <Compile Include="Dtos\LoginRequest.cs" />
     <Compile Include="Dtos\RecentBudgetResponse.cs" />
     <Compile Include="IocAttributes\PerDependencyAttribute.cs" />
     <Compile Include="IocAttributes\PerRequestAttribute.cs" />
     <Compile Include="IocAttributes\SingletonAttribute.cs" />
-    <Compile Include="Model\Account.cs" />
+    <Compile Include="Model\Group.cs" />
     <Compile Include="Model\AuthClient.cs" />
     <Compile Include="Model\Bill.cs" />
     <Compile Include="Model\Budget.cs" />
@@ -192,15 +194,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OrmLite.SP.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Household.cs" />
-    <Compile Include="Model\HouseholdInvite.cs" />
-    <Compile Include="Model\HouseholdMember.cs" />
+    <Compile Include="Model\GroupInvite.cs" />
+    <Compile Include="Model\GroupMember.cs" />
     <Compile Include="Model\IAuditTrailable.cs" />
     <Compile Include="Model\IEntityWithAudit.cs" />
     <Compile Include="Model\IEntityWithTimeStamp.cs" />
     <Compile Include="Model\InternalApiCallerIdentity.cs" />
     <Compile Include="Model\PagedResponse.cs" />
     <Compile Include="Model\PagingFilter.cs" />
+    <Compile Include="Model\PendingInvites.cs" />
     <Compile Include="Model\Transaction.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\UserRole.cs" />

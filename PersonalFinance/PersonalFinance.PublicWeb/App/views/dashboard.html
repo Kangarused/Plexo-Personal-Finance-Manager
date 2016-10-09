@@ -3,26 +3,15 @@
     <h1>Dashboard</h1>
 </header>
 <div class="row">
-    <div class="col-md-3">
-        <section>
-            <h3>Accounts</h3>
-            <hr/>
-            <article ng-repeat="account in accounts">
-                <a href="#/accounts/{{account.name}}/{{account.id}}">{{account.name}}</a>
-                &nbsp;
-                <span ng-class="(account.balance > 0) ? 'alert-success' : 'alert-danger'">{{account.balance | currency}}</span>
-            </article>
-            <p></p>
-        </section>
-        <section>
-            <h3>Recent Transactions</h3>
-            <hr/>
-        </section>
-    </div>
     <div class="col-md-9">
         <section>
-            <h3>Budget</h3>
+            <h3>Recent Budgets <small> - {{budget.recentBudget.name}}</small></h3>
             <hr/>
+            <article ng-repeat="item in budget.item">
+                <a ui-sref="home.budgets.details({budgetId:budget.id})">{{item.name}}</a>
+                &nbsp;
+                <span ng-class="(item.amount > 0) ? 'alert-success' : 'alert-danger'">{{item.amount | currency}}</span>
+            </article>
         </section>
     </div>
 </div>

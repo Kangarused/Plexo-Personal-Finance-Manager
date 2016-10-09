@@ -78,41 +78,35 @@
     This budget has no transaction history
 </div>
 <div ng-show="vm.budgetItems != null">
-    <table st-table="vm.budgetItems" class="table table-striped">
-        <thead class="navbar navbar-inverse">
-        <tr>
-            <th></th>
-            <th st-sort="name">Name</th>
-            <th>Description</th>
-            <th st-sort="amount">Amount</th>
-            <th st-sort="type">Type</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="row in vm.budgetItems" ng-class="{expense: row.type == 'Expense', income: row.type == 'Income'}">
-            <td class="income-icon" ng-show="row.type == 'Income'"><i class="fa fa-plus-circle"></i></td>
-            <td class="expense-icon" ng-show="row.type == 'Expense'"><i class="fa fa-minus-circle"></i></td>
-            <td style="font-weight: bold;">{{row.name}}</td>
-            <td>{{row.description | limitTo: 50}}{{row.description.length > 50 ? '...' : ''}}</td>
-            <td>{{row.amount | currency}}</td>
-            <td>{{row.type}}</td>
-            <td><a ng-click="vm.deleteBudgetItem(row)"><i class="fa fa-trash"></i></a></td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-            <td colspan="7">Goal: {{vm.budget.allocatedAmount | currency}}</td>
-        </tr>
-        <tr>
-            <td colspan="7">Savings to Goal: {{vm.budget.allocatedAmount - vm.budget.balance | currency}}</td>
-        </tr>
-        </tfoot>
-    </table>
+    <div class="table-responsive">
+        <table st-table="vm.budgetItems" class="table table-striped">
+            <thead class="navbar navbar-inverse">
+                <tr>
+                    <th></th>
+                    <th st-sort="name">Name</th>
+                    <th>Description</th>
+                    <th st-sort="amount">Amount</th>
+                    <th st-sort="type">Type</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in vm.budgetItems" ng-class="{expense: row.type == 'Expense', income: row.type == 'Income'}">
+                    <td class="income-icon" ng-show="row.type == 'Income'"><i class="fa fa-plus-circle"></i></td>
+                    <td class="expense-icon" ng-show="row.type == 'Expense'"><i class="fa fa-minus-circle"></i></td>
+                    <td style="font-weight: bold;">{{row.name}}</td>
+                    <td>{{row.description | limitTo: 50}}{{row.description.length > 50 ? '...' : ''}}</td>
+                    <td>{{row.amount | currency}}</td>
+                    <td>{{row.type}}</td>
+                    <td><a ng-click="vm.deleteBudgetItem(row)"><i class="fa fa-trash"></i></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 <hr/>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <h4>Balance History</h4>
         <canvas id="line"
                 class="chart chart-line"
@@ -121,15 +115,6 @@
                 chart-series="vm.overviewChartDataset.series"
                 chart-options="vm.overviewChartDataset.options">
         </canvas>
-    </div>
-    <div class="col-md-6">
-        <h4>Spendings vs Savings History</h4>
-        <canvas id="line"
-                class="chart chart-line"
-                chart-data="vm.overviewChartDataset.data"
-                chart-labels="vm.overviewChartDataset.labels"
-                chart-series="vm.overviewChartDataset.series"
-                chart-options="vm.overviewChartDataset.options"></canvas>
     </div>
 </div>
 <hr/>

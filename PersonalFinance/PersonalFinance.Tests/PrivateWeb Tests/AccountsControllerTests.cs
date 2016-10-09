@@ -47,7 +47,7 @@ namespace PersonalFinance.Tests.PrivateWeb_Tests
         {
             //User resolver will return fake user when called
             _userResolver.GetUser().Returns(_fakeUser);
-            _accountRepository.GetByIdAsync(Arg.Any<int>()).Returns(new Account()
+            _accountRepository.GetByIdAsync(Arg.Any<int>()).Returns(new Group()
             {
                 Id = 1,
                 UserId = 2,
@@ -63,7 +63,7 @@ namespace PersonalFinance.Tests.PrivateWeb_Tests
         {
             //User resolver will return fake user when called
             _userResolver.GetUser().Returns(_fakeUser);
-            _accountRepository.GetByIdAsync(Arg.Any<int>()).Returns(new Account()
+            _accountRepository.GetByIdAsync(Arg.Any<int>()).Returns(new Group()
             {
                 Id = 1,
                 UserId = 1,
@@ -80,7 +80,7 @@ namespace PersonalFinance.Tests.PrivateWeb_Tests
         {
             //User resolver will return fake user when called
             _userResolver.GetUser().Returns(_fakeUser);
-            var newAccount = new Account
+            var newAccount = new Group
             {
                 Id = 1,
                 UserId = 2,
@@ -104,7 +104,7 @@ namespace PersonalFinance.Tests.PrivateWeb_Tests
         {
             //User resolver will return fake user when called
             _userResolver.GetUser().Returns(_fakeUser);
-            var newAccount = new Account
+            var newAccount = new Group
             {
                 Id = 1,
                 UserId = 1,
@@ -126,7 +126,7 @@ namespace PersonalFinance.Tests.PrivateWeb_Tests
         [Test]
         public void Test_DeleteAccount_ForAnotherUser()
         {
-            var newAccount = new Account
+            var newAccount = new Group
             {
                 Id = 1,
                 UserId = 2,
@@ -150,7 +150,7 @@ namespace PersonalFinance.Tests.PrivateWeb_Tests
         [Test]
         public void Test_DeleteAccount_ForCurrentUser()
         {
-            var newAccount = new Account
+            var newAccount = new Group
             {
                 Id = 1,
                 UserId = 1,

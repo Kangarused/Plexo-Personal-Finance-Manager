@@ -226,11 +226,11 @@
     <Compile Include="App_Start\ApplicationStartup.cs" />
     <Compile Include="App_Start\IoCConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\BillController.cs" />
     <Compile Include="Controllers\BudgetController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Controllers\UserAccountController.cs" />
     <Compile Include="Database\DatabaseOperationType.cs" />
@@ -240,11 +240,13 @@
     <Compile Include="Database\OrmLiteInfrastructure\OrmLiteLogger .cs" />
     <Compile Include="Database\OrmLiteInfrastructure\SqlExpressionExtensions.cs" />
     <Compile Include="Database\OrmLiteInfrastructure\UnitOfWork.cs" />
-    <Compile Include="Database\Repositories\AccountRepository.cs" />
     <Compile Include="Database\Repositories\AuthClientRepository.cs" />
     <Compile Include="Database\Repositories\BillRepository.cs" />
     <Compile Include="Database\Repositories\BudgetItemRepository.cs" />
     <Compile Include="Database\Repositories\BudgetRepository.cs" />
+    <Compile Include="Database\Repositories\GroupInviteRepository.cs" />
+    <Compile Include="Database\Repositories\GroupMemberRepository.cs" />
+    <Compile Include="Database\Repositories\GroupRepository.cs" />
     <Compile Include="Database\Repositories\UserRepository.cs" />
     <Compile Include="Database\Repositories\UserRoleRepository.cs" />
     <Compile Include="Global.asax.cs">

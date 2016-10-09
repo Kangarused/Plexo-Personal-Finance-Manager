@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using T4TS;
 
-namespace PersonalFinance.Common.Model
+namespace PersonalFinance.Common.Dtos
 {
     [TypeScriptInterface]
-    public partial class HouseholdMember
+    public class CreateGroupRequest
     {
+        public string Name { get; set; }
     }
 }

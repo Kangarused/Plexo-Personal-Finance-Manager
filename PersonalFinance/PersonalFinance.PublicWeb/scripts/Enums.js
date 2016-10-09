@@ -7,8 +7,8 @@ var PersonalFinance;
     (function (Models) {
         Models.Role = {
             PublicUser: "PublicUser",
-            HouseholdMember: "HouseholdMember",
-            HouseholdAdmin: "HouseholdAdmin",
+            GroupMember: "GroupMember",
+            GroupAdmin: "GroupAdmin",
             AnonymousOverPrivateApi: "AnonymousOverPrivateApi",
             SystemAdministrator: "SystemAdministrator",
         };
@@ -29,8 +29,8 @@ var PersonalFinance;
         };
         Models.EnumLabelDictionary = {
             "RolePublicUser": "PublicUser",
-            "RoleHouseholdMember": "HouseholdMember",
-            "RoleHouseholdAdmin": "HouseholdAdmin",
+            "RoleGroupMember": "GroupMember",
+            "RoleGroupAdmin": "GroupAdmin",
             "RoleAnonymousOverPrivateApi": "AnonymousOverPrivateApi",
             "RoleSystemAdministrator": "SystemAdministrator",
             "BudgetTypeSavings": "Savings",

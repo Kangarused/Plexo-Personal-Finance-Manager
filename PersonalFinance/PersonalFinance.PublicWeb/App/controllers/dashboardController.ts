@@ -1,20 +1,20 @@
 ﻿module PersonalFinance.Controllers {
     export class DashboardController {
-        static $inject = ['$scope', 'accountDataService', 'transactionDataService'];
+        static $inject = ['$scope', 'budgetDataService', 'transactionDataService'];
 
+        budget: Models.IRecentBudgetResponse;
         message: string;
-        accounts: Models.IAccount[];
         recentTransactions: Models.ITransaction[]; 
 
         constructor(
             private $scope: IScope,
-            private accountDataService: Services.IAccountDataService,
+            private budgetDataService: Services.IBudgetDataService,
             private transactionDataService: Services.ITransactionDataService
         ) {
             window["dashboard"] = this;
             $scope.vm = this;
 
-            this.loadAccounts();
+            this.loadRecentBudgets();
         }
 
         setup() {
@@ -22,10 +22,10 @@
             this.recentTransactions = [];
         }
 
-        loadAccounts() {
-            this.accountDataService.getAccounts().then(
+        loadRecentBudgets() {
+            this.budgetDataService.getRecentBudget().then(
             (response) => {
-                this.accounts = response.data;
+                this.budget = response.data;
             });
         }
     }

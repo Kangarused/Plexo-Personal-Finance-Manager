@@ -16,25 +16,29 @@ namespace PersonalFinance.PrivateWeb.Controllers
         private readonly IUserResolver _userResolver;
         private readonly IBudgetRepository _budgetRepository;
         private readonly IBudgetItemRepository _budgetItemRepository;
+        private readonly IGroupMemberRepository _groupMemberRepository;
 
         public BudgetController(
             IUserResolver userResolver,
             IBudgetRepository budgetRepository,
-            IBudgetItemRepository budgetItemRepository
+            IBudgetItemRepository budgetItemRepository,
+            IGroupMemberRepository groupMemberRepository
             )
         {
             _userResolver = userResolver;
             _budgetRepository = budgetRepository;
             _budgetItemRepository = budgetItemRepository;
+            _groupMemberRepository = groupMemberRepository;
         }
 
         [AcceptVerbs("GET")]
         public async Task<Budget> GetBudgetById(int param)
         {
-            var budget = await _budgetRepository.GetByIdAsync(param);
             var currentUser = _userResolver.GetUser();
+            var groupMembers = await _groupMemberRepository.GetGroupListForUser(currentUser.Id);
+            var budget = await _budgetRepository.GetByIdAsync(param);
 
-            if (budget.UserId == currentUser.Id)
+            if ((budget.UserId == currentUser.Id) || (groupMembers.Any(x => x.GroupId == budget.GroupId)))
             {
                 return budget;
             }
@@ -45,10 +49,11 @@ namespace PersonalFinance.PrivateWeb.Controllers
         [AcceptVerbs("GET")]
         public async Task<BudgetDetailsResponse> GetBudgetDetailsById(int param)
         {
-            var budget = await _budgetRepository.GetByIdAsync(param);
             var currentUser = _userResolver.GetUser();
+            var groupMembers = await _groupMemberRepository.GetGroupListForUser(currentUser.Id);
+            var budget = await _budgetRepository.GetByIdAsync(param);
 
-            if (budget.UserId == currentUser.Id)
+            if ((budget.UserId == currentUser.Id) || (groupMembers.Any(x => x.GroupId == budget.GroupId)))
             {
                 var budgetItems = await _budgetItemRepository.GetBudgetItemsForBudget(param);
                 return new BudgetDetailsResponse
@@ -74,9 +79,10 @@ namespace PersonalFinance.PrivateWeb.Controllers
         public async Task<List<BudgetItem>> GetBudgetItemsForBudget(int budgetId)
         {
             var currentUser = _userResolver.GetUser();
+            var groupMembers = await _groupMemberRepository.GetGroupListForUser(currentUser.Id);
             var budget = await _budgetRepository.GetByIdAsync(budgetId);
 
-            if (budget.UserId == currentUser.Id)
+            if ((budget.UserId == currentUser.Id) || (groupMembers.Any(x => x.GroupId == budget.GroupId)))
             {
                 var budgetItems = await _budgetItemRepository.GetBudgetItemsForBudget(budgetId);
                 return budgetItems;
@@ -132,17 +138,36 @@ namespace PersonalFinance.PrivateWeb.Controllers
         public async Task<ActionResponseGeneric<string>> DeleteBudgetById(Budget budget)
         {
             var currentUser = _userResolver.GetUser();
+            var groupMembers = await _groupMemberRepository.GetGroupListForUser(currentUser.Id);
+            bool allowedToDelete = true;
 
-            if (budget.UserId == currentUser.Id)
+            if ((budget.UserId == currentUser.Id) || (groupMembers.Any(x => x.GroupId == budget.GroupId)))
             {
-                await _budgetItemRepository.DeleteAsync(x => x.BudgetId == budget.Id, false);
-                await _budgetRepository.DeleteAsync(x => x.Id == budget.Id, false);
-
-                return new ActionResponseGeneric<string>
+                var firstOrDefault = groupMembers.FirstOrDefault(x => x.UserId == currentUser.Id && x.GroupId == budget.GroupId);
+                if (firstOrDefault != null && firstOrDefault.Role == Role.GroupMember.ToString())
                 {
-                    Succeed = true,
-                    Response = "Budget successfully deleted"
-                };
+                    allowedToDelete = false;
+                }
+
+                if (allowedToDelete)
+                {
+                    await _budgetItemRepository.DeleteAsync(x => x.BudgetId == budget.Id, false);
+                    await _budgetRepository.DeleteAsync(x => x.Id == budget.Id, false);
+
+                    return new ActionResponseGeneric<string>
+                    {
+                        Succeed = true,
+                        Response = "Budget successfully deleted"
+                    };
+                }
+                else
+                {
+                    return new ActionResponseGeneric<string>
+                    {
+                        Succeed = false,
+                        Response = "Group members may not delete budget items, please contact an administrator"
+                    };
+                }
             }
 
             throw new AccessViolationException("Attempted removal of a budget belonging to another user");

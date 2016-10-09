@@ -18,10 +18,7 @@
             '<a style="cursor: pointer;" ui-sref="home.bills">Bills </a>' +
             '</li>' +
             '<li>' +
-                '<a style="cursor: pointer;" ui-sref="home.accounts">Accounts </a>' +
-            '</li>' +
-            '<li>' +
-                '<a style="cursor: pointer;" ui-sref="home.households">Households </a>' +
+                '<a style="cursor: pointer;" ui-sref="home.groups">Groups </a>' +
             '</li>' +
         '</ul>' +
         '<ul class="nav navbar-nav navbar-right">' +

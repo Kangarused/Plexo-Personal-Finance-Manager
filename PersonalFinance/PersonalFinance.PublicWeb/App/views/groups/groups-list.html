@@ -1,0 +1,63 @@
+﻿<div ncy-breadcrumb></div>
+<header>
+    <h3>
+        Groups
+        <small><show-when-loading></show-when-loading></small>
+    </h3>
+    <messages-display></messages-display>
+</header>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <h4>Create Group</h4>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form name="createGroupForm" role="form" class="form-horizontal" validation-schema schema="CreateGroup" track-changes>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="control-label mandatory-field col-md-2">Name</label>
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <div class="input-group-addon input-sm">
+                                        <i class="fa fa-pencil btn-icon"></i>
+                                    </div>
+                                    <input type="text" name="name" class="form-control input-sm" message-id="nameMessage"
+                                           ng-model="vm.newGroup.name" maxlength="40" />
+                                </div>
+                                <div id="nameMessage"></div>
+                            </div>
+                            <button class="btn btn-default col-md-3" ng-click="vm.createGroup(createGroupForm)">Create Group</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>My Groups</h4>
+        <div ng-show="vm.groups.length <= 0">
+            You currently belong to no groups
+        </div>
+        <div ng-show="vm.groups.length > 0">
+            <table st-table="vm.budgets" class="table table-striped">
+                <thead class="navbar navbar-inverse">
+                    <tr>
+                        <th st-sort="name">Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in vm.groups">
+                        <td><a ui-sref="home.groups.details({groupId:row.id})">{{row.name}}</a></td>
+                        <td><a ng-click="vm.deleteBudget(row)"><i class="fa fa-trash pull-right"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<hr />

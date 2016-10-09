@@ -8,7 +8,7 @@ using T4TS;
 namespace PersonalFinance.Common.Model
 {
     [TypeScriptInterface]
-    public partial class Household
+    public partial class GroupMember
     {
     }
 }

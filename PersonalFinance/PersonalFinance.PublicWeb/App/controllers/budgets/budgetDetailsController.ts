@@ -70,6 +70,9 @@
         }
 
         calculateChartData() {
+            this.overviewChartDataset.data.length = 0;
+            this.overviewChartDataset.labels.length = 0;
+
             var budget = this.budget.allocatedAmount;
             var data = [];
             if (this.budget.type === 'Savings') {
@@ -85,7 +88,7 @@
                     budget -= item.amount;
                 }
                 data.push(budget);
-                this.overviewChartDataset.labels.push(item.name.substring(0, 10));
+                this.overviewChartDataset.labels.push(item.name.substring(0, 30));
             });
 
             this.overviewChartDataset.data.push(data);
@@ -117,7 +120,9 @@
                 (response) => {
                     this.messageService.addInfo(response.data.response);
                     this.messageService.removeInfoAfterSeconds(response.data.response, 3);
+                    this.newBudgetItem = <Models.IBudgetItem>{};
                     this.loadBudgetDetails(this.budget.id);
+
                 }, (err) => {
                     var message = "Failed to add transaction";
                     this.messageService.addError(message);

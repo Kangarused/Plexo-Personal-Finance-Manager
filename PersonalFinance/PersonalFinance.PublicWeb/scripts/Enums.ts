@@ -5,7 +5,7 @@
 
 module PersonalFinance.Models {
 
-	 export type IRole = "PublicUser" | "HouseholdMember" | "HouseholdAdmin" | "AnonymousOverPrivateApi" | "SystemAdministrator";
+	 export type IRole = "PublicUser" | "GroupMember" | "GroupAdmin" | "AnonymousOverPrivateApi" | "SystemAdministrator";
 	 export type IBudgetType = "Savings" | "Spendings";
 	 export type IBudgetItemType = "Expense" | "Income";
 	 export type IPaymentFrequency = "Daily" | "Weekly" | "Fortnightly" | "Monthly" | "Yearly";
@@ -13,8 +13,8 @@ module PersonalFinance.Models {
 
 	 export const Role = {
 		 PublicUser: "PublicUser" as IRole,
-		 HouseholdMember: "HouseholdMember" as IRole,
-		 HouseholdAdmin: "HouseholdAdmin" as IRole,
+		 GroupMember: "GroupMember" as IRole,
+		 GroupAdmin: "GroupAdmin" as IRole,
 		 AnonymousOverPrivateApi: "AnonymousOverPrivateApi" as IRole,
 		 SystemAdministrator: "SystemAdministrator" as IRole,
 	 }
@@ -35,8 +35,8 @@ module PersonalFinance.Models {
 	 }
 	export const EnumLabelDictionary = {
 		"RolePublicUser":"PublicUser",
-		"RoleHouseholdMember":"HouseholdMember",
-		"RoleHouseholdAdmin":"HouseholdAdmin",
+		"RoleGroupMember":"GroupMember",
+		"RoleGroupAdmin":"GroupAdmin",
 		"RoleAnonymousOverPrivateApi":"AnonymousOverPrivateApi",
 		"RoleSystemAdministrator":"SystemAdministrator",
 		"BudgetTypeSavings":"Savings",

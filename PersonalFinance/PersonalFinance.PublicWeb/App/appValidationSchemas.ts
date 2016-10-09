@@ -7,6 +7,12 @@
     }
 }
 
+var createGroup = {
+    name: {
+        'validations' : 'required'
+    }
+}
+
 var userAccount = {
    username: {
         'validations': 'required'
@@ -75,4 +81,5 @@ angularApplication.config(['validationSchemaProvider', validationSchemaProvider 
     validationSchemaProvider.set("AddBudget", addBudget);
     validationSchemaProvider.set("AddBudgetItem", addBudgetItem);
     validationSchemaProvider.set("AddBill", addBill);
+    validationSchemaProvider.set("CreateGroup", createGroup);
 }]);

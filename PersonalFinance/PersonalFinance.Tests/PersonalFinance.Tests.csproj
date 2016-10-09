@@ -68,8 +68,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PrivateWeb Tests\GroupsControllerTests.cs" />
     <Compile Include="PrivateWeb Tests\AccountsControllerTests.cs" />
     <Compile Include="PrivateWeb Tests\BudgetControllerTests.cs" />
+    <Compile Include="PublicWeb Tests\UserAccountControllerTests.cs" />
     <Compile Include="PrivateWeb Tests\UserAccountControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -77,9 +79,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="PublicWeb Tests\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\PersonalFinance.Common\PersonalFinance.Common.csproj">
       <Project>{8dc1367f-469a-4f07-87fc-cfb392c89655}</Project>

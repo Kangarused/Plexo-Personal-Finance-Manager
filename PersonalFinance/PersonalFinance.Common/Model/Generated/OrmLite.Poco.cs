@@ -28,30 +28,6 @@ using ServiceStack;
 
 namespace PersonalFinance.Common.Model
 {
-[Alias("Account")]
-    public partial class Account : IHasId<int> 
-    {
-        [Alias("Id")]
-        [AutoIncrement]
-        public int Id { get; set;}
-        public int? UserId { get; set;}
-        public int? HouseholdId { get; set;}
-        [Required]
-        public string Name { get; set;}
-        [Required]
-        public decimal Balance { get; set;}
-        [Required]
-        public decimal Reconciled { get; set;}
-        [Required]
-        public string CreatedBy { get; set;}
-        [Required]
-        public DateTime CreatedTime { get; set;}
-        [Required]
-        public string ModifiedBy { get; set;}
-        [Required]
-        public DateTime ModifiedTime { get; set;}
-    }
-
 [Alias("Audit")]
     public partial class Audit : IHasId<int> 
     {
@@ -100,7 +76,7 @@ namespace PersonalFinance.Common.Model
         [AutoIncrement]
         public int Id { get; set;}
         public int? UserId { get; set;}
-        public int? HouseholdId { get; set;}
+        public int? GroupId { get; set;}
         [Required]
         public string Name { get; set;}
         public string Description { get; set;}
@@ -111,18 +87,6 @@ namespace PersonalFinance.Common.Model
         public int? AnnualFrequency { get; set;}
         [Required]
         public string Status { get; set;}
-    }
-
-[Alias("BudgetItemCategories")]
-    public partial class BudgetItemCategory : IHasId<int> 
-    {
-        [Alias("Id")]
-        [AutoIncrement]
-        public int Id { get; set;}
-        [Required]
-        public int CategoryId { get; set;}
-        [Required]
-        public int BudgetItemId { get; set;}
     }
 
 [Alias("BudgetItems")]
@@ -149,7 +113,7 @@ namespace PersonalFinance.Common.Model
         [AutoIncrement]
         public int Id { get; set;}
         public int? UserId { get; set;}
-        public int? HouseholdId { get; set;}
+        public int? GroupId { get; set;}
         [Required]
         public string Name { get; set;}
         [Required]
@@ -168,19 +132,8 @@ namespace PersonalFinance.Common.Model
         public DateTime ModifiedTime { get; set;}
     }
 
-[Alias("Categories")]
-    public partial class Category : IHasId<int> 
-    {
-        [Alias("Id")]
-        [AutoIncrement]
-        public int Id { get; set;}
-        [Required]
-        public string Name { get; set;}
-        public string Description { get; set;}
-    }
-
-[Alias("HouseholdInvites")]
-    public partial class HouseholdInvite : IHasId<int> 
+[Alias("GroupInvites")]
+    public partial class GroupInvite : IHasId<int> 
     {
         [Alias("Id")]
         [AutoIncrement]
@@ -190,6 +143,8 @@ namespace PersonalFinance.Common.Model
         [Required]
         public int ToUserId { get; set;}
         [Required]
+        public int GroupId { get; set;}
+        [Required]
         public bool Pending { get; set;}
         [Required]
         public bool Accepted { get; set;}
@@ -198,8 +153,8 @@ namespace PersonalFinance.Common.Model
         public DateTime? DateAccepted { get; set;}
     }
 
-[Alias("HouseholdMembers")]
-    public partial class HouseholdMember : IHasId<int> 
+[Alias("GroupMembers")]
+    public partial class GroupMember : IHasId<int> 
     {
         [Alias("Id")]
         [AutoIncrement]
@@ -207,62 +162,19 @@ namespace PersonalFinance.Common.Model
         [Required]
         public int UserId { get; set;}
         [Required]
-        public int HouseholdId { get; set;}
+        public int GroupId { get; set;}
         [Required]
         public string Role { get; set;}
     }
 
-[Alias("Households")]
-    public partial class Household : IHasId<int> 
+[Alias("Groups")]
+    public partial class Group : IHasId<int> 
     {
         [Alias("Id")]
         [AutoIncrement]
         public int Id { get; set;}
         [Required]
         public string Name { get; set;}
-        public string Address { get; set;}
-        public string PhoneNumber { get; set;}
-    }
-
-[Alias("TransactionCategories")]
-    public partial class TransactionCategory : IHasId<int> 
-    {
-        [Alias("Id")]
-        [AutoIncrement]
-        public int Id { get; set;}
-        [Required]
-        public int CategoryId { get; set;}
-        [Required]
-        public int TransactionId { get; set;}
-    }
-
-[Alias("Transactions")]
-    public partial class Transaction : IHasId<int> 
-    {
-        [Alias("Id")]
-        [AutoIncrement]
-        public int Id { get; set;}
-        [Required]
-        public int AccountId { get; set;}
-        [Required]
-        public string Name { get; set;}
-        public string Description { get; set;}
-        [Required]
-        public decimal Amount { get; set;}
-        [Required]
-        public decimal ReconciledAmount { get; set;}
-        [Required]
-        public bool IsReconciled { get; set;}
-        [Required]
-        public DateTime TransactionDate { get; set;}
-        [Required]
-        public string CreatedBy { get; set;}
-        [Required]
-        public DateTime CreatedTime { get; set;}
-        [Required]
-        public string ModifiedBy { get; set;}
-        [Required]
-        public DateTime ModifiedTime { get; set;}
     }
 
 [Alias("UserRoles")]

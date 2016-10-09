@@ -14,6 +14,7 @@ namespace PersonalFinance.PrivateWeb.Database.Repositories
     public interface IBudgetRepository : IAbstractRepository<Budget>
     {
         Task<List<Budget>> GetBudgetsForUser(int userId);
+        Task<List<Budget>> GetBudgetsForGroup(int groupId);
         Task<Budget> GetMostRecentBudgetForUser(int userId);
     }
 
@@ -27,6 +28,14 @@ namespace PersonalFinance.PrivateWeb.Database.Repositories
         public async Task<List<Budget>> GetBudgetsForUser(int userId)
         {
             var query = Db.From<Budget>().Where(x => x.UserId == userId);
+            var results = await Db.LoadSelectAsync(query);
+
+            return results;
+        }
+
+        public async Task<List<Budget>> GetBudgetsForGroup(int groupId)
+        {
+            var query = Db.From<Budget>().Where(x => x.GroupId == groupId);
             var results = await Db.LoadSelectAsync(query);
 
             return results;

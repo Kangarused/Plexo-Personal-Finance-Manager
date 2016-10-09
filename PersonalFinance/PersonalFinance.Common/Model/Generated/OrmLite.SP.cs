@@ -6,14 +6,10 @@
 // The following connection settings were used to generate this file
 // 
 //     Connection String Name: `PersonalFinance`
-//     Provider:               ``
-//     Connection String:      `There is no connection string name called 'PersonalFinance'`
+//     Provider:               `System.Data.SqlClient`
+//     Connection String:      `Data Source=localhost;Initial Catalog=PersonalFinance;Trusted_Connection=True;`
 //     Schema:                 ``
 //     Include Views:          `True`
 
-
-// -----------------------------------------------------------------------------------------
-// Failed to load provider `` - Value cannot be null. Parameter name: providerInvariantName
-// -----------------------------------------------------------------------------------------
-
+//     Factory Name:          `SqlClientFactory`
  

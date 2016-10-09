@@ -61,6 +61,7 @@
                         (response) => {
                             this.messageService.addInfo(response.data.response);
                             this.messageService.removeInfoAfterSeconds(response.data.response, 3);
+                            this.newBill = <Models.IBill>{};
                             this.loadBills();
                         }, (err) => {
                             var message = "Failed to create budget";

@@ -17,19 +17,19 @@ namespace PersonalFinance.PublicWeb.Controllers
         }
 
         [AcceptVerbs("GET")]
-        public Task<List<Account>> GetAccounts()
+        public Task<List<Group>> GetAccounts()
         {
-            return _privateApiProvider.InvokeGetAsync<List<Account>>("Account", "GetAccounts");
+            return _privateApiProvider.InvokeGetAsync<List<Group>>("Account", "GetAccounts");
         }
 
         [AcceptVerbs("GET")]
-        public Task<Account> GetAccountById(int param)
+        public Task<Group> GetAccountById(int param)
         {
-            return _privateApiProvider.InvokeGetAsync<Account>("Account", "GetAccountById", param);
+            return _privateApiProvider.InvokeGetAsync<Group>("Account", "GetAccountById", param);
         }
 
         [AcceptVerbs("POST")]
-        public Task<ActionResponseGeneric<string>> CreateAccount(Account param)
+        public Task<ActionResponseGeneric<string>> CreateAccount(Group param)
         {
             return _privateApiProvider.InvokePostAsync<ActionResponseGeneric<string>>("Account", "CreateAccount", param);
         }

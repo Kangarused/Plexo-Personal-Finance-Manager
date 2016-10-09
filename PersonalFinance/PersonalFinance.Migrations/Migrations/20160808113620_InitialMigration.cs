@@ -48,22 +48,20 @@ namespace PersonalFinance.Migrations.Migrations
                 .WithColumn("TransactionId").AsInt32().Nullable()
                 .WithColumn("DateTime").AsDateTime().NotNullable();
 
-            Create.Table("Households")
+            Create.Table("Groups")
                 .WithId()
-                .WithColumn("Name").AsString().NotNullable()
-                .WithColumn("Address").AsString().Nullable()
-                .WithColumn("PhoneNumber").AsString().Nullable();
+                .WithColumn("Name").AsString().NotNullable();
 
-            Create.Table("HouseholdMembers")
+            Create.Table("GroupMembers")
                 .WithId()
                 .WithColumn("UserId").AsInt32().ForeignKey("Users", "Id").NotNullable()
-                .WithColumn("HouseholdId").AsInt32().ForeignKey("Households", "Id").NotNullable()
+                .WithColumn("GroupId").AsInt32().ForeignKey("Groups", "Id").NotNullable()
                 .WithColumn("Role").AsString().NotNullable();
 
             Create.Table("Budgets")
                 .WithId()
                 .WithColumn("UserId").AsInt32().ForeignKey("Users", "Id").Nullable()
-                .WithColumn("HouseholdId").AsInt32().ForeignKey("Households", "Id").Nullable()
+                .WithColumn("GroupId").AsInt32().ForeignKey("Groups", "Id").Nullable()
                 .WithColumn("Name").AsString().NotNullable()
                 .WithColumn("Type").AsString().NotNullable()
                 .WithColumn("AllocatedAmount").AsCurrency().NotNullable()
@@ -78,30 +76,10 @@ namespace PersonalFinance.Migrations.Migrations
                 .WithColumn("Description").AsMaxString().Nullable()
                 .WithColumn("Amount").AsCurrency().NotNullable();
 
-            Create.Table("Account")
-                .WithId()
-                .WithColumn("UserId").AsInt32().ForeignKey("Users", "Id").Nullable()
-                .WithColumn("HouseholdId").AsInt32().ForeignKey("Households", "Id").Nullable()
-                .WithColumn("Name").AsString().NotNullable()
-                .WithColumn("Balance").AsCurrency().NotNullable()
-                .WithColumn("Reconciled").AsCurrency().NotNullable()
-                .WithAuditInfo();
-
-            Create.Table("Transactions")
-                .WithId()
-                .WithColumn("AccountId").AsInt32().ForeignKey("Account", "Id").NotNullable()
-                .WithColumn("Name").AsString().NotNullable()
-                .WithColumn("Description").AsMaxString().Nullable()
-                .WithColumn("Amount").AsCurrency().NotNullable()
-                .WithColumn("ReconciledAmount").AsCurrency().NotNullable()
-                .WithColumn("IsReconciled").AsBoolean().WithDefaultValue(0).NotNullable()
-                .WithColumn("TransactionDate").AsDateTime().NotNullable()
-                .WithAuditInfo();
-
             Create.Table("Bill")
                 .WithId()
                 .WithColumn("UserId").AsInt32().ForeignKey("Users", "Id").Nullable()
-                .WithColumn("HouseholdId").AsInt32().ForeignKey("Households", "Id").Nullable()
+                .WithColumn("GroupId").AsInt32().ForeignKey("Groups", "Id").Nullable()
                 .WithColumn("Name").AsString().NotNullable()
                 .WithColumn("Description").AsMaxString().Nullable()
                 .WithColumn("DueDate").AsDateTime().NotNullable()
@@ -109,25 +87,11 @@ namespace PersonalFinance.Migrations.Migrations
                 .WithColumn("AnnualFrequency").AsInt32().Nullable()
                 .WithColumn("Status").AsString().NotNullable();
 
-            Create.Table("Categories")
-                .WithId()
-                .WithColumn("Name").AsString().NotNullable()
-                .WithColumn("Description").AsMaxString().Nullable();
-
-            Create.Table("BudgetItemCategories")
-                .WithId()
-                .WithColumn("CategoryId").AsInt32().ForeignKey("Categories", "Id").NotNullable()
-                .WithColumn("BudgetItemId").AsInt32().ForeignKey("BudgetItems", "Id").NotNullable();
-
-            Create.Table("TransactionCategories")
-                .WithId()
-                .WithColumn("CategoryId").AsInt32().ForeignKey("Categories", "Id").NotNullable()
-                .WithColumn("TransactionId").AsInt32().ForeignKey("Transactions", "Id").NotNullable();
-
-            Create.Table("HouseholdInvites")
+            Create.Table("GroupInvites")
                 .WithId()
                 .WithColumn("FromUserId").AsInt32().ForeignKey("Users", "Id")
                 .WithColumn("ToUserId").AsInt32().ForeignKey("Users", "Id")
+                .WithColumn("GroupId").AsInt32().ForeignKey("Groups", "Id")
                 .WithColumn("Pending").AsBoolean().WithDefaultValue(1).NotNullable()
                 .WithColumn("Accepted").AsBoolean().WithDefaultValue(0).NotNullable()
                 .WithColumn("DateSent").AsDateTime().NotNullable()
@@ -136,18 +100,13 @@ namespace PersonalFinance.Migrations.Migrations
 
         public override void Down()
         {
-            Execute.DropTableIfExists("HouseholdInvites");
-            Execute.DropTableIfExists("TransactionCategories");
-            Execute.DropTableIfExists("BudgetItemCategories");
-            Execute.DropTableIfExists("Categories");
+            Execute.DropTableIfExists("GroupInvites");
             Execute.DropTableIfExists("Bill");
             Execute.DropTableIfExists("Billing");
-            Execute.DropTableIfExists("Transactions");
-            Execute.DropTableIfExists("Account");
             Execute.DropTableIfExists("BudgetItems");
             Execute.DropTableIfExists("Budgets");
-            Execute.DropTableIfExists("HouseholdMembers");
-            Execute.DropTableIfExists("Households");
+            Execute.DropTableIfExists("GroupMembers");
+            Execute.DropTableIfExists("Groups");
             Execute.DropTableIfExists("Audit");
             Execute.DropTableIfExists("UserRoles");
             Execute.DropTableIfExists("Users");

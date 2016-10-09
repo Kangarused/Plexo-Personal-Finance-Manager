@@ -37,6 +37,17 @@ declare module PersonalFinance.Models {
         budget: PersonalFinance.Models.IBudget;
         budgetItems: PersonalFinance.Models.IBudgetItem[];
     }
+    /** Generated from PersonalFinance.Common.Dtos.CreateGroupRequest **/
+    export interface ICreateGroupRequest {
+        name: string;
+    }
+    /** Generated from PersonalFinance.Common.Dtos.GroupInviteRequest **/
+    export interface IGroupInviteRequest {
+        groupId: number;
+        toUserEmail: string;
+        inviteMessage: string;
+        inviteRole: any;
+    }
     /** Generated from PersonalFinance.Common.Dtos.LoginRequest **/
     export interface ILoginRequest {
         userName: string;
@@ -46,9 +57,6 @@ declare module PersonalFinance.Models {
     export interface IRecentBudgetResponse {
         budget: PersonalFinance.Models.IBudget;
         items: PersonalFinance.Models.IBudgetItem[];
-    }
-    /** Generated from PersonalFinance.Common.Model.Account **/
-    export interface IAccount {
     }
     /** Generated from PersonalFinance.Common.Model.Bill **/
     export interface IBill {
@@ -62,24 +70,11 @@ declare module PersonalFinance.Models {
     /** Generated from PersonalFinance.Common.Model.Category **/
     export interface ICategory {
     }
-    /** Generated from PersonalFinance.Common.Model.Account **/
-    export interface IAccount {
-        id: number;
-        userId: number;
-        householdId: number;
-        name: string;
-        balance: number;
-        reconciled: number;
-        createdBy: string;
-        createdTime: string;
-        modifiedBy: string;
-        modifiedTime: string;
-    }
     /** Generated from PersonalFinance.Common.Model.Bill **/
     export interface IBill {
         id: number;
         userId: number;
-        householdId: number;
+        groupId: number;
         name: string;
         description: string;
         dueDate: string;
@@ -100,7 +95,7 @@ declare module PersonalFinance.Models {
     export interface IBudget {
         id: number;
         userId: number;
-        householdId: number;
+        groupId: number;
         name: string;
         type: string;
         allocatedAmount: number;
@@ -110,50 +105,28 @@ declare module PersonalFinance.Models {
         modifiedBy: string;
         modifiedTime: string;
     }
-    /** Generated from PersonalFinance.Common.Model.Category **/
-    export interface ICategory {
-        id: number;
-        name: string;
-        description: string;
-    }
-    /** Generated from PersonalFinance.Common.Model.HouseholdInvite **/
-    export interface IHouseholdInvite {
+    /** Generated from PersonalFinance.Common.Model.GroupInvite **/
+    export interface IGroupInvite {
         id: number;
         fromUserId: number;
         toUserId: number;
+        groupId: number;
         pending: boolean;
         accepted: boolean;
         dateSent: string;
         dateAccepted: string;
     }
-    /** Generated from PersonalFinance.Common.Model.HouseholdMember **/
-    export interface IHouseholdMember {
+    /** Generated from PersonalFinance.Common.Model.GroupMember **/
+    export interface IGroupMember {
         id: number;
         userId: number;
-        householdId: number;
+        groupId: number;
         role: string;
     }
-    /** Generated from PersonalFinance.Common.Model.Household **/
-    export interface IHousehold {
+    /** Generated from PersonalFinance.Common.Model.Group **/
+    export interface IGroup {
         id: number;
         name: string;
-        address: string;
-        phoneNumber: string;
-    }
-    /** Generated from PersonalFinance.Common.Model.Transaction **/
-    export interface ITransaction {
-        id: number;
-        accountId: number;
-        name: string;
-        description: string;
-        amount: number;
-        reconciledAmount: number;
-        isReconciled: boolean;
-        transactionDate: string;
-        createdBy: string;
-        createdTime: string;
-        modifiedBy: string;
-        modifiedTime: string;
     }
     /** Generated from PersonalFinance.Common.Model.UserRole **/
     export interface IUserRole {
@@ -174,14 +147,14 @@ declare module PersonalFinance.Models {
         modifiedBy: string;
         modifiedTime: string;
     }
-    /** Generated from PersonalFinance.Common.Model.Household **/
-    export interface IHousehold {
+    /** Generated from PersonalFinance.Common.Model.Group **/
+    export interface IGroup {
     }
-    /** Generated from PersonalFinance.Common.Model.HouseholdInvite **/
-    export interface IHouseholdInvite {
+    /** Generated from PersonalFinance.Common.Model.GroupInvite **/
+    export interface IGroupInvite {
     }
-    /** Generated from PersonalFinance.Common.Model.HouseholdMember **/
-    export interface IHouseholdMember {
+    /** Generated from PersonalFinance.Common.Model.GroupMember **/
+    export interface IGroupMember {
     }
     /** Generated from PersonalFinance.Common.Model.PagingFilter **/
     export interface IPagingFilter {
@@ -191,6 +164,11 @@ declare module PersonalFinance.Models {
         totalItems: number;
         orderColumn: string;
         orderDirection: any;
+    }
+    /** Generated from PersonalFinance.Common.Model.PendingInvites **/
+    export interface IPendingInvites {
+        toEmail: string;
+        dateSent: string;
     }
     /** Generated from PersonalFinance.Common.Model.Transaction **/
     export interface ITransaction {
